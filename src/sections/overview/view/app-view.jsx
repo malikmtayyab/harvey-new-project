@@ -10,8 +10,12 @@ import Typography from '@mui/material/Typography';
 // import AppNewsUpdate from '../app-news-update';
 // import AppOrderTimeline from '../app-order-timeline';
 // import AppCurrentVisits from '../app-current-visits';
+/* eslint-disable */
+
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
+import StatsTile from 'src/components/StatsTile';
+/* eslint-enable */
 // import AppTrafficBySite from '../app-traffic-by-site';
 // import AppCurrentSubject from '../app-current-subject';
 // import AppConversionRates from '../app-conversion-rates';
@@ -28,7 +32,7 @@ export default function AppView() {
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Weekly Sales"
+            title="Number of Tanks"
             total={714000}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
@@ -37,7 +41,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="New Users"
+            title="Farm Tank"
             total={1352831}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
@@ -46,7 +50,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Item Orders"
+            title="Total Capacity"
             total={1723315}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
@@ -55,7 +59,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Bug Reports"
+            title="Total Users"
             total={234}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
@@ -103,6 +107,44 @@ export default function AppView() {
             }}
           />
         </Grid>
+        <Grid container xs={12}   color='white'  >
+          {/* <CircleMotion innerCircleSize={50}/> */}
+          <Grid xs={12} sm={6} md={4}
+          
+          >
+          <StatsTile 
+             title="Bug Reports"
+             total={234}
+             color="error"
+             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+          />
+          </Grid>
+          <Grid xs={12} sm={6} md={4}>
+
+<StatsTile 
+             title="Bug Reports"
+             total={234}
+             color="error"
+             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+          />
+</Grid>
+
+<Grid xs={12} sm={6} md={4}>
+
+<StatsTile 
+             title="Bug Reports"
+             total={234}
+             color="error"
+             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+          />
+          
+
+          </Grid>
+          {/* <StatsTile/> */}
+          {/* <StatsTile/> */}
+        </Grid>
+
+  
 
         {/* <Grid xs={12} md={6} lg={4}>
           <AppCurrentVisits

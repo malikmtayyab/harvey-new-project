@@ -18,9 +18,11 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import Logo from 'src/components/logo';
 import Scrollbar from 'src/components/scrollbar';
+/* eslint-disable */
 
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';
+/* eslint-enable */
 
 // ----------------------------------------------------------------------
 
