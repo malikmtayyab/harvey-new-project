@@ -11,12 +11,87 @@ const navConfig = [
     title: 'dashboard',
     path: '/',
     icon: icon('ic_analytics'),
+    type:'single',
+    
   },
-  // {
-  //   title: 'user',
-  //   path: '/user',
-  //   icon: icon('ic_user'),
-  // },
+  {
+    heading:'Tank Management',
+    title: 'Tank Farm',
+    icon: icon('ic_analytics'),
+    type:'accordian',
+    dropdown:[
+      {
+      title:'Tank Progressions',
+      path:'/',
+    },
+    {
+      title:'Tank Progressions',
+      path:'/',
+    },
+
+]
+  },
+  {
+    title: 'Tanks',
+    icon: icon('ic_analytics'),
+    type:'accordian',
+    dropdown:[
+      {
+      title:'Tank Progressions',
+      path:'/',
+    },
+    {
+      title:'Tank Progressions',
+      path:'/',
+    },
+]
+  },
+  {
+    heading:'Settings',
+    title: 'Sensors',
+    icon: icon('ic_analytics'),
+    type:'accordian',
+    dropdown:[
+      {
+      title:'Tank Progressions',
+      path:'/',
+    },
+    {
+      title:'Tank Progressions',
+      path:'/',
+    },
+]
+  },
+  {
+    title: 'Tank',
+    icon: icon('ic_analytics'),
+    type:'accordian',
+    dropdown:[
+      {
+      title:'Tank Progressions',
+      path:'/',
+    },
+    {
+      title:'Tank Progressions',
+      path:'/',
+    },
+]
+  },
+  {
+    title: 'Tank Farm',
+    icon: icon('ic_analytics'),
+    type:'accordian',
+    dropdown:[
+      {
+      title:'Tank Progressions',
+      path:'/',
+    },
+    {
+      title:'Tank Progressions',
+      path:'/',
+    },
+]
+  },
   // {
   //   title: 'product',
   //   path: '/products',
