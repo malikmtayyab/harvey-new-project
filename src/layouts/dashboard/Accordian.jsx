@@ -7,12 +7,19 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { usePathname } from 'src/routes/hooks';
+import { alpha } from '@mui/material/styles';
+
 
 export default function NavAccordion({accordionItems}) {
   console.log(accordionItems)
+  const pathname = usePathname();
+
+  
   return (
     <div style={{
-      margin:'4px'
+      margin:'4px',
+      
     }}>
       {
         accordionItems.heading?
@@ -24,6 +31,7 @@ export default function NavAccordion({accordionItems}) {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
           id="panel1-header"
+
         >
          {accordionItems.title}
      
@@ -33,7 +41,26 @@ export default function NavAccordion({accordionItems}) {
          accordionItems.dropdown.map((item)=>
          {
 
-        return   <AccordionDetails>
+        return   <AccordionDetails
+        
+        sx={{
+          minHeight: 44,
+          borderRadius: 0.75,
+          typography: 'body2',
+          color: 'text.secondary',
+          textTransform: 'capitalize',
+          fontWeight: 'fontWeightMedium',
+          ...(item.path === pathname && {
+            color: 'primary.main',
+            fontWeight: 'fontWeightSemiBold',
+            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
+            '&:hover': {
+              bgcolor: (theme) => alpha(theme.palette.primary.main, 0.16),
+            },
+          }),
+         
+        }}
+        >
        <Link 
        
        style={{

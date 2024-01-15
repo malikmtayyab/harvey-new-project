@@ -21,11 +21,11 @@ const navConfig = [
     type:'accordian',
     dropdown:[
       {
-      title:'Tank Progressions',
-      path:'/',
+      title:'All Farms',
+      path:'/all-farms',
     },
     {
-      title:'Tank Progressions',
+      title:'View Farms',
       path:'/',
     },
 
