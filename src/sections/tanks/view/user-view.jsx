@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 /* eslint-disable */
 
 import Card from '@mui/material/Card';
@@ -13,6 +13,7 @@ import TablePagination from '@mui/material/TablePagination';
 
 import { users } from 'src/_mock/user';
 
+
 import Scrollbar from 'src/components/scrollbar';
 
 import TableNoData from '../table-no-data';
@@ -22,12 +23,10 @@ import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 import TankModal from '../Modal';
-import UrlService from 'src/services/UrlService';
-import {GetRequest} from '../../../services/ApiService';
 
 // ----------------------------------------------------------------------
 
-export default function UserPage() {
+export default function TanksPage() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -39,12 +38,6 @@ export default function UserPage() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  useEffect(async () => {
-    const response = await GetRequest(UrlService.getAllFarms);
-    console.log('res', response);
-    return () => {};
-  }, []); //
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -106,9 +99,11 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">All Farms</Typography>
+        <Typography variant="h4">All Tanks</Typography>
 
-        <TankModal />
+     
+    
+    <TankModal/>
       </Stack>
 
       <Card>
@@ -130,14 +125,15 @@ export default function UserPage() {
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
                   { id: 'name', label: 'Name' },
-                  { id: 'created_at', label: 'Created At' },
-                  { id: 'updated_at', label: 'Updated At' },
-                  { id: 'filled', label: 'Filled', align: 'center' },
-                  { id: 'total_volume', label: 'Total Volume' },
+                  { id: 'category', label: 'Category', align: 'center' },
+                  { id: 'coneHeigth', label: 'Cone Height' },
                   { id: 'nextday_forecast', label: 'Nextday Forecast' },
                   { id: 'week_forecast', label: 'Week Forecast' },
                   { id: 'month_forecast', label: 'Month Forecast' },
                   { id: 'year_forecast', label: 'Year Forecast' },
+                  { id: 'temperature', label: 'Temperature' },
+                  { id: 'status', label: 'Status' },
+                  { id: 'tank_farm', label: 'Tank Farm' },
                   { id: '' },
                 ]}
               />

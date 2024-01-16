@@ -52,12 +52,13 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{company}</TableCell>
-        <TableCell>{company}</TableCell>
         <TableCell>{name}</TableCell>
         <TableCell>{role}</TableCell>
         <TableCell>{name}</TableCell>
         <TableCell>{company}</TableCell>
+        <TableCell>{company}</TableCell>
+        <TableCell>{name}</TableCell>
+        <TableCell>{name}</TableCell>
         <TableCell>{name}</TableCell>
 
 
