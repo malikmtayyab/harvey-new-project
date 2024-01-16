@@ -13,7 +13,7 @@ import TablePagination from '@mui/material/TablePagination';
 
 import { users } from 'src/_mock/user';
 
-import Iconify from 'src/components/iconify';
+
 import Scrollbar from 'src/components/scrollbar';
 
 import TableNoData from '../table-no-data';
@@ -22,6 +22,7 @@ import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
+import TankModal from '../Modal';
 
 // ----------------------------------------------------------------------
 
@@ -100,10 +101,9 @@ export default function UserPage() {
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">All Farms</Typography>
 
-        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New Farm
-        </Button>
+     
     
+    <TankModal/>
       </Stack>
 
       <Card>
@@ -126,8 +126,8 @@ export default function UserPage() {
                 headLabel={[
                   { id: 'name', label: 'Name' },
                   { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
+                  // { id: 'role', label: 'Role' },
+                  // { id: 'isVerified', label: 'Verified', align: 'center' },
                   { id: 'status', label: 'Status' },
                   { id: '' },
                 ]}

@@ -26,7 +26,9 @@ export default function NavAccordion({accordionItems}) {
         <h3>{accordionItems.heading}</h3>
         :''
       }
-   <Accordion>
+   <Accordion sx={{
+    background:'transparent'
+   }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
