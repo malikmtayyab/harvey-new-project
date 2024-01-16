@@ -15,17 +15,17 @@ const navConfig = [
     
   },
   {
-    heading:'Tank Management',
+    // heading:'Tank Management',
     title: 'Tank Farm',
     icon: icon('ic_analytics'),
     type:'accordian',
     dropdown:[
       {
-      title:'Tank Progressions',
-      path:'/',
+      title:'All Farms',
+      path:'/all-farms',
     },
     {
-      title:'Tank Progressions',
+      title:'View Farms',
       path:'/',
     },
 
@@ -47,7 +47,7 @@ const navConfig = [
 ]
   },
   {
-    heading:'Settings',
+    // heading:'Settings',
     title: 'Sensors',
     icon: icon('ic_analytics'),
     type:'accordian',
