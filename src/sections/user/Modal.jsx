@@ -8,6 +8,7 @@ import Iconify from 'src/components/iconify/iconify';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
 import LoadingButton from '@mui/lab/LoadingButton';
+import CategoryDropdown from './CategoryDropdown';
 
 const style = {
   position: 'absolute',
@@ -15,7 +16,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height:350,
+  height:420,
   borderRadius:1,
   bgcolor: 'background.paper',
   border: '2px solid #000',
@@ -72,6 +73,17 @@ export default function TankModal() {
           }}
          
         />
+       <Typography
+          sx={{
+            textAlign:'start',
+            fontSize:'16px',
+            fontWeight:'bold',
+            marginTop:2
+          }}
+          >
+           Categories
+          </Typography>
+        <CategoryDropdown/>
         <div style={{
             display:'flex',
             marginTop:20

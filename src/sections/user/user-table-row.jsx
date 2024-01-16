@@ -53,6 +53,14 @@ export default function UserTableRow({
         </TableCell>
 
         <TableCell>{company}</TableCell>
+        <TableCell>{company}</TableCell>
+        <TableCell>{name}</TableCell>
+        <TableCell>{role}</TableCell>
+        <TableCell>{name}</TableCell>
+        <TableCell>{company}</TableCell>
+        <TableCell>{name}</TableCell>
+
+
 
         {/* <TableCell>{role}</TableCell> */}
 
@@ -84,10 +92,10 @@ export default function UserTableRow({
           Edit
         </MenuItem>
 
-        <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
+        {/* <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
           <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
           Delete
-        </MenuItem>
+        </MenuItem> */}
       </Popover>
     </>
   );

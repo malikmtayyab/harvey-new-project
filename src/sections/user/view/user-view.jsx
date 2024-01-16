@@ -125,10 +125,14 @@ export default function UserPage() {
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
                   { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  // { id: 'role', label: 'Role' },
-                  // { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'created_at', label: 'Created At' },
+                  { id: 'updated_at', label: 'Updated At' },
+                  { id: 'filled', label: 'Filled', align: 'center' },
+                  { id: 'total_volume', label: 'Total Volume' },
+                  { id: 'nextday_forecast', label: 'Nextday Forecast' },
+                  { id: 'week_forecast', label: 'Week Forecast' },
+                  { id: 'month_forecast', label: 'Month Forecast' },
+                  { id: 'year_forecast', label: 'Year Forecast' },
                   { id: '' },
                 ]}
               />
