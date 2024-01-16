@@ -37,11 +37,11 @@ const navConfig = [
     type:'accordian',
     dropdown:[
       {
-      title:'Tank Progressions',
-      path:'/',
+      title:'All Tanks',
+      path:'/all-tanks',
     },
     {
-      title:'Tank Progressions',
+      title:'View Tanks',
       path:'/',
     },
 ]
