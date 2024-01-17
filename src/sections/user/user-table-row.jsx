@@ -11,7 +11,6 @@ import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
-import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
@@ -19,11 +18,14 @@ import Iconify from 'src/components/iconify';
 export default function UserTableRow({
   selected,
   name,
-  avatarUrl,
-  company,
-  role,
-  isVerified,
-  status,
+  creatTime,
+  updateTime,
+  filled,
+  totalVolumn,
+  nextDay,
+  week,
+  month,
+  year,
   handleClick,
 }) {
   const [open, setOpen] = useState(null);
@@ -52,23 +54,18 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{company}</TableCell>
-        <TableCell>{company}</TableCell>
-        <TableCell>{name}</TableCell>
-        <TableCell>{role}</TableCell>
-        <TableCell>{name}</TableCell>
-        <TableCell>{company}</TableCell>
-        <TableCell>{name}</TableCell>
-
-
+        <TableCell>{creatTime}</TableCell>
+        <TableCell>{updateTime}</TableCell>
+        <TableCell>{filled}</TableCell>
+        <TableCell>{totalVolumn}</TableCell>
+        <TableCell>{nextDay}</TableCell>
+        <TableCell>{week}</TableCell>
+        <TableCell>{month}</TableCell>
+        <TableCell>{year}</TableCell>
 
         {/* <TableCell>{role}</TableCell> */}
 
         {/* <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell> */}
-
-        <TableCell>
-          <Label color={(status === 'banned' && 'error') || 'success'}>{status}</Label>
-        </TableCell>
 
         <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
@@ -102,12 +99,15 @@ export default function UserTableRow({
 }
 
 UserTableRow.propTypes = {
-  avatarUrl: PropTypes.any,
-  company: PropTypes.any,
-  handleClick: PropTypes.func,
-  isVerified: PropTypes.any,
-  name: PropTypes.any,
-  role: PropTypes.any,
   selected: PropTypes.any,
-  status: PropTypes.string,
+  name: PropTypes.any,
+  creatTime: PropTypes.any,
+  updateTime: PropTypes.any,
+  filled: PropTypes.any,
+  totalVolumn: PropTypes.any,
+  nextDay: PropTypes.any,
+  week: PropTypes.any,
+  month: PropTypes.any,
+  year: PropTypes.any,
+  handleClick: PropTypes.func,
 };

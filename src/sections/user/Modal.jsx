@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography';
 import Iconify from 'src/components/iconify/iconify';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import LoadingButton from '@mui/lab/LoadingButton';
-import CategoryDropdown from './CategoryDropdown';
+import PropTypes from 'prop-types';
+// import CategoryDropdown from './CategoryDropdown';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 import { PostRequest } from '../../services/ApiService';
@@ -19,8 +20,8 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height:420,
-  borderRadius:1,
+  height: 350,
+  borderRadius: 1,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -28,7 +29,7 @@ const style = {
   textAlign: 'center',
 };
 
-export default function TankModal() {
+export default function TankModal({ refreshTableData }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,15 +55,12 @@ export default function TankModal() {
   const handleAddFarmClick = async () => {
     const data = preparePayload();
     const res = await PostRequest(UrlService.addTankFarms, data);
-    console.log('res', res);
-    toast.success('Tank Farm Added!');
-    handleClose();
-  };
-  const handleEditFarmClick = async () => {
-    const data = preparePayload();
-    const res = await PostRequest(UrlService.addTankFarms, data);
-    console.log('res', res);
-    toast.success('Tank Farm Added!');
+    if (res.status) {
+      toast.success('Tank Farm Added!');
+      refreshTableData();
+    } else {
+      toast.error('Error Adding Farm');
+    }
     handleClose();
   };
   return (
@@ -101,44 +99,44 @@ export default function TankModal() {
             Add Farm
           </Typography>
           <OutlinedInput
-          value={tankName}
-          onChange={(e) => setTankName(e.target.value)}
-          placeholder="Tank Name"
-          sx={{
-            marginTop:1,
-            width:'100%'
-          }}
-         
-        />
-       <Typography
-          sx={{
-            textAlign:'start',
-            fontSize:'16px',
-            fontWeight:'bold',
-            marginTop:2
-          }}
+            value={tankName}
+            onChange={(e) => setTankName(e.target.value)}
+            placeholder="Tank Name"
+            sx={{
+              marginTop: 1,
+              width: '100%',
+            }}
+          />
+          {/* <Typography
+            sx={{
+              textAlign: 'start',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              marginTop: 2,
+            }}
           >
-           Categories
-          </Typography>
-        <CategoryDropdown/>
-        <div style={{
-            display:'flex',
-            marginTop:20
-        }}>
-
-<LoadingButton
-        fullWidth
-        size="large"
-        type="submit"
-        variant="outlined"
-        color="inherit"
-        sx={{
-            margin:1
-        }}
-        onClick={handleClose}
-      >
-       Cancel
-      </LoadingButton>
+            Categories
+          </Typography> */}
+          {/* <CategoryDropdown /> */}
+          <div
+            style={{
+              display: 'flex',
+              marginTop: 20,
+            }}
+          >
+            <LoadingButton
+              fullWidth
+              size="large"
+              type="submit"
+              variant="outlined"
+              color="inherit"
+              sx={{
+                margin: 1,
+              }}
+              onClick={handleClose}
+            >
+              Cancel
+            </LoadingButton>
 
             <LoadingButton
               fullWidth
@@ -160,3 +158,6 @@ export default function TankModal() {
     </div>
   );
 }
+Modal.propTypes = {
+  refreshTableData: PropTypes.func,
+};
