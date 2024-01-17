@@ -26,7 +26,7 @@ const navConfig = [
     },
     {
       title:'View Farms',
-      path:'/',
+      path:'/view-farms',
     },
 
 ]
