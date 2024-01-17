@@ -16,7 +16,6 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
-  selected,
   name,
   creatTime,
   updateTime,
@@ -26,7 +25,6 @@ export default function UserTableRow({
   week,
   month,
   year,
-  handleClick,
 }) {
   const [open, setOpen] = useState(null);
 
@@ -40,12 +38,15 @@ export default function UserTableRow({
 
   return (
     <>
-      <TableRow hover tabIndex={-1} role="checkbox" selected={selected}>
-        <TableCell padding="checkbox">
-          <Checkbox disableRipple checked={selected} onChange={handleClick} />
-        </TableCell>
-
-        <TableCell component="th" scope="row" padding="none">
+      <TableRow hover tabIndex={-1}>
+        <TableCell
+          component="th"
+          scope="row"
+          padding="none"
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
           <Stack direction="row" alignItems="center" spacing={2}>
             {/* <Avatar alt={name} src={avatarUrl} /> */}
             <Typography variant="subtitle2" noWrap>
@@ -54,14 +55,62 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{creatTime}</TableCell>
-        <TableCell>{updateTime}</TableCell>
-        <TableCell>{filled}</TableCell>
-        <TableCell>{totalVolumn}</TableCell>
-        <TableCell>{nextDay}</TableCell>
-        <TableCell>{week}</TableCell>
-        <TableCell>{month}</TableCell>
-        <TableCell>{year}</TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {creatTime}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {updateTime}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {filled}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {totalVolumn}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {nextDay}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {week}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {month}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {year}
+        </TableCell>
 
         {/* <TableCell>{role}</TableCell> */}
 
@@ -99,7 +148,6 @@ export default function UserTableRow({
 }
 
 UserTableRow.propTypes = {
-  selected: PropTypes.any,
   name: PropTypes.any,
   creatTime: PropTypes.any,
   updateTime: PropTypes.any,
@@ -109,5 +157,4 @@ UserTableRow.propTypes = {
   week: PropTypes.any,
   month: PropTypes.any,
   year: PropTypes.any,
-  handleClick: PropTypes.func,
 };

@@ -44,7 +44,6 @@ export default function UserPage() {
 
   useEffect(async () => {
     await getTableData();
-    return () => {};
   }, []); //
 
   const getTableData = async () => {
@@ -135,15 +134,15 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'created_at', label: 'Created At' },
-                  { id: 'updated_at', label: 'Updated At' },
-                  { id: 'filled', label: 'Filled', align: 'center' },
-                  { id: 'total_volume', label: 'Total Volume' },
-                  { id: 'nextday_forecast', label: 'Nextday Forecast' },
-                  { id: 'week_forecast', label: 'Week Forecast' },
-                  { id: 'month_forecast', label: 'Month Forecast' },
-                  { id: 'year_forecast', label: 'Year Forecast' },
+                  { id: 'name', label: 'Name', align: 'left' },
+                  { id: 'created_at', label: 'Created At', align: 'left' },
+                  { id: 'updated_at', label: 'Updated At', align: 'left' },
+                  { id: 'filled', label: 'Filled', align: 'left' },
+                  { id: 'total_volume', label: 'Total Volume', align: 'left' },
+                  { id: 'nextday_forecast', label: 'Nextday Forecast', align: 'left' },
+                  { id: 'week_forecast', label: 'Week Forecast', align: 'left' },
+                  { id: 'month_forecast', label: 'Month Forecast', align: 'left' },
+                  { id: 'year_forecast', label: 'Year Forecast', align: 'left' },
                   { id: '' },
                 ]}
               />
