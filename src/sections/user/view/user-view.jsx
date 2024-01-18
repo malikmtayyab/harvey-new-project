@@ -47,8 +47,12 @@ export default function UserPage() {
   }, []); //
 
   const getTableData = async () => {
-    const response = await GetRequest(UrlService.getAllFarms);
-    setTableData(response.data);
+    try {
+      const response = await GetRequest(UrlService.getAllFarms);
+      setTableData(response.data);
+    } catch (err) {
+      toast.error('Error Getting Farms');
+    }
   };
 
   const handleSort = (event, id) => {

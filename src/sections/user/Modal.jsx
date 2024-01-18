@@ -53,12 +53,14 @@ export default function TankModal({ refreshTableData }) {
     return obj;
   };
   const handleAddFarmClick = async () => {
-    const data = preparePayload();
-    const res = await PostRequest(UrlService.addTankFarms, data);
-    if (res.status) {
-      toast.success('Tank Farm Added!');
-      refreshTableData();
-    } else {
+    try {
+      const data = preparePayload();
+      const res = await PostRequest(UrlService.addTankFarms, data);
+      if (res.status) {
+        toast.success('Tank Farm Added!');
+        refreshTableData();
+      }
+    } catch (err) {
       toast.error('Error Adding Farm');
     }
     handleClose();

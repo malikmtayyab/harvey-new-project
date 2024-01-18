@@ -46,8 +46,12 @@ export default function TanksPage() {
   }, []); //
 
   const getTableData = async () => {
-    const response = await GetRequest(UrlService.getAllTanks);
-    setTableData(response.data);
+    try {
+      const response = await GetRequest(UrlService.getAllTanks);
+      setTableData(response.data);
+    } catch (err) {
+      toast.error('Error Getting Tanks');
+    }
   };
 
   const handleSort = (event, id) => {
