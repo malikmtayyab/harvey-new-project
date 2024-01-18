@@ -35,7 +35,7 @@ export default function TankModal() {
   return (
     <div>
       <Button  onClick={handleOpen} variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New Farm
+          New Tank
         </Button>
       <Modal
         keepMounted
@@ -47,7 +47,7 @@ export default function TankModal() {
       >
         <Box sx={style}>
           <Typography id="keep-mounted-modal-title" variant="h4" component="h2">
-           Add Farm
+           Add Tank
           </Typography>
           <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
            Fill in the tank name and click on add button in order to add the tank.
@@ -61,7 +61,7 @@ export default function TankModal() {
             marginTop:2
           }}
           >
-            Add Farm
+            Add Tank
           </Typography>
           <OutlinedInput
           value={tankName}
@@ -114,7 +114,7 @@ export default function TankModal() {
         }}
         // onClick={handleClick}
       >
-       Add Farm
+       Add Tank
       </LoadingButton>
   
         </div>

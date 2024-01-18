@@ -35,6 +35,8 @@ export default function NavAccordion({accordionItems}) {
           id="panel1-header"
 
         >
+
+          
          {accordionItems.title}
      
         </AccordionSummary>
