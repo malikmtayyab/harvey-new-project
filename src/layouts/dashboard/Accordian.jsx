@@ -12,7 +12,6 @@ import { alpha } from '@mui/material/styles';
 
 
 export default function NavAccordion({accordionItems}) {
-  console.log(accordionItems)
   const pathname = usePathname();
 
   

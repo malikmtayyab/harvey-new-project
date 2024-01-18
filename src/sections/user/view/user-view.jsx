@@ -42,8 +42,8 @@ export default function UserPage() {
 
   const [tableData, setTableData] = useState([]);
 
-  useEffect(async () => {
-    await getTableData();
+  useEffect(() => {
+    getTableData();
   }, []); //
 
   const getTableData = async () => {
