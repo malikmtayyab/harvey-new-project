@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 /* eslint-disable */
 
 import Card from '@mui/material/Card';
@@ -11,8 +11,7 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
-
+// import { users } from 'src/_mock/user';
 
 import Scrollbar from 'src/components/scrollbar';
 
@@ -23,6 +22,8 @@ import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 import TankModal from '../Modal';
+import UrlService from 'src/services/UrlService';
+import { GetRequest } from '../../../services/ApiService';
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +39,16 @@ export default function TanksPage() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(async () => {
+    await getTableData();
+  }, []); //
+
+  const getTableData = async () => {
+    const response = await GetRequest(UrlService.getAllTanks);
+    setTableData(response.data);
+  };
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -49,7 +60,7 @@ export default function TanksPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = users.map((n) => n.name);
+      const newSelecteds = tableData.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -89,7 +100,7 @@ export default function TanksPage() {
   };
 
   const dataFiltered = applyFilter({
-    inputData: users,
+    inputData: tableData,
     comparator: getComparator(order, orderBy),
     filterName,
   });
@@ -101,9 +112,7 @@ export default function TanksPage() {
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">All Tanks</Typography>
 
-     
-    
-    <TankModal/>
+        <TankModal />
       </Stack>
 
       <Card>
@@ -119,21 +128,20 @@ export default function TanksPage() {
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={users.length}
+                rowCount={tableData.length}
                 numSelected={selected.length}
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'category', label: 'Category', align: 'center' },
-                  { id: 'coneHeigth', label: 'Cone Height' },
-                  { id: 'nextday_forecast', label: 'Nextday Forecast' },
-                  { id: 'week_forecast', label: 'Week Forecast' },
-                  { id: 'month_forecast', label: 'Month Forecast' },
-                  { id: 'year_forecast', label: 'Year Forecast' },
-                  { id: 'temperature', label: 'Temperature' },
-                  { id: 'status', label: 'Status' },
-                  { id: 'tank_farm', label: 'Tank Farm' },
+                  { id: 'name', label: 'Name', align: 'left' },
+                  { id: 'category', label: 'Category', align: 'left' },
+                  { id: 'coneHeigth', label: 'Cone Height', align: 'left' },
+                  { id: 'nextday_forecast', label: 'Nextday Forecast', align: 'left' },
+                  { id: 'week_forecast', label: 'Week Forecast', align: 'left' },
+                  { id: 'month_forecast', label: 'Month Forecast', align: 'left' },
+                  { id: 'year_forecast', label: 'Year Forecast', align: 'left' },
+                  { id: 'temperature', label: 'Temperature', align: 'left' },
+                  { id: 'status', label: 'Status', align: 'left' },
                   { id: '' },
                 ]}
               />
@@ -144,11 +152,14 @@ export default function TanksPage() {
                     <UserTableRow
                       key={row.id}
                       name={row.name}
-                      role={row.role}
+                      category={row.category}
+                      coneHeigth={row.coneHeigth}
+                      forecastNextDay={row.forecastNextDay}
+                      forecastWeek={row.forecastWeek}
+                      forecastMonth={row.forecastMonth}
+                      forecastYear={row.forecastYear}
+                      temperatur={row.temperatur}
                       status={row.status}
-                      company={row.company}
-                      avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
@@ -156,7 +167,7 @@ export default function TanksPage() {
 
                 <TableEmptyRows
                   height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, users.length)}
+                  emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
                 />
 
                 {notFound && <TableNoData query={filterName} />}
@@ -168,7 +179,7 @@ export default function TanksPage() {
         <TablePagination
           page={page}
           component="div"
-          count={users.length}
+          count={tableData.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
           rowsPerPageOptions={[5, 10, 25]}
