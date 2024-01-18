@@ -612,6 +612,19 @@
   resolved "https://registry.npmjs.org/@swc/types/-/types-0.1.5.tgz"
   integrity sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==
 
+"@tabler/icons-react@^2.46.0":
+  "integrity" "sha512-X8MRxuslIOFqMjAo+GvUZDpjlOwNYNJTuOsHXf/NBvVI6ygqUf0FUNsDLLA5fQ6k6KtRwxMlgGB+eR8ZG1UP0g=="
+  "resolved" "https://registry.npmjs.org/@tabler/icons-react/-/icons-react-2.46.0.tgz"
+  "version" "2.46.0"
+  dependencies:
+    "@tabler/icons" "2.46.0"
+    "prop-types" "^15.7.2"
+
+"@tabler/icons@2.46.0":
+  "integrity" "sha512-Q5G8Pj5IO+Uhc6pszpu5/hGYY018JwEzzvmuqr+gKJtfIvAHA3umpwUilMRLEy89p+WCP+YsDhicMhfBCCv1qA=="
+  "resolved" "https://registry.npmjs.org/@tabler/icons/-/icons-2.46.0.tgz"
+  "version" "2.46.0"
+
 "@types/json-schema@^7.0.12":
   version "7.0.13"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.13.tgz"

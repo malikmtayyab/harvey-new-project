@@ -34,9 +34,24 @@ export default function NavAccordion({accordionItems}) {
           id="panel1-header"
 
         >
+<div style={{
+  display:'flex',
+  alignContent:'center',
+  alignItems:'center',
 
-          
+}}>
+
+          <div style={{
+            marginRight:8,
+            paddingTop:5
+          }}>
+           {accordionItems.icon}
+          </div>
+         <div>
+
          {accordionItems.title}
+</div>
+          </div>
      
         </AccordionSummary>
         {
