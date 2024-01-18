@@ -1,5 +1,6 @@
+/* eslint-disable */
+import { IconBuildingCottage, IconStack } from '@tabler/icons-react';
 import SvgColor from 'src/components/svg-color';
-
 // ----------------------------------------------------------------------
 
 const icon = (name) => (
@@ -17,7 +18,7 @@ const navConfig = [
   {
     // heading:'Tank Management',
     title: 'Tank Farm',
-    icon: icon('ic_analytics'),
+    icon: <IconBuildingCottage size={'20'}/>,
     type:'accordian',
     dropdown:[
       {
@@ -33,7 +34,7 @@ const navConfig = [
   },
   {
     title: 'Tanks',
-    icon: icon('ic_analytics'),
+    icon: <IconStack size={'20'}/>,
     type:'accordian',
     dropdown:[
       {
@@ -49,7 +50,7 @@ const navConfig = [
   {
     // heading:'Settings',
     title: 'Sensors',
-    icon: icon('ic_analytics'),
+    icon: <IconBuildingCottage/>,
     type:'accordian',
     dropdown:[
       {
@@ -64,7 +65,7 @@ const navConfig = [
   },
   {
     title: 'Tank',
-    icon: icon('ic_analytics'),
+    icon: <IconBuildingCottage/>,
     type:'accordian',
     dropdown:[
       {
@@ -79,7 +80,7 @@ const navConfig = [
   },
   {
     title: 'Tank Farm',
-    icon: icon('ic_analytics'),
+    icon: <IconBuildingCottage/>,
     type:'accordian',
     dropdown:[
       {
