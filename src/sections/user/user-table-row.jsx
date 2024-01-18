@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 // import Avatar from '@mui/material/Avatar';
@@ -47,12 +48,14 @@ export default function UserTableRow({
             paddingLeft: 5,
           }}
         >
-          <Stack direction="row" alignItems="center" spacing={2}>
-            {/* <Avatar alt={name} src={avatarUrl} /> */}
-            <Typography variant="subtitle2" noWrap>
-              {name}
-            </Typography>
-          </Stack>
+          <Link to="/view-farms?id=12345">
+            <Stack direction="row" alignItems="center" spacing={2}>
+              {/* <Avatar alt={name} src={avatarUrl} /> */}
+              <Typography variant="subtitle2" noWrap>
+                {name}
+              </Typography>
+            </Stack>
+          </Link>
         </TableCell>
 
         <TableCell
