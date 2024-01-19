@@ -25,7 +25,7 @@ const style = {
   boxShadow: 24,
   p: 4,
   textAlign: 'center',
-  overflow: 'scrolk',
+  overflow: 'scrol',
 };
 
 export default function TankModal() {
@@ -58,12 +58,13 @@ export default function TankModal() {
     longitude: 0,
     location: '',
     fill_depth: '',
+    diameter:0,
     tank_farm: '', // Assuming it's a string for the dropdown value
   });
 
   const categoryOptions = [
-    { value: 'rectangle', label: 'Rectangle' },
-    { value: 'van', label: 'Van' },
+    { value: 'rectangle', label: 'Rectangle' , src:'/assets/tanks-img/rectangle.jpg'},
+    { value: 'horizontal_cylinder', label: 'Horizontal Cylender', src:'/assets/tanks-img/horizontal_cylinder.jpg' },
    
   ];
 
@@ -87,7 +88,7 @@ export default function TankModal() {
       placeholder: 'Enter Length',
       type: 'number',
       value: formData.length,
-      property:['rectangle']
+      property:['rectangle','horizontal_cylinder']
     },
     {
       name: 'height',
@@ -107,11 +108,19 @@ export default function TankModal() {
 
     },
     {
+      name: 'diameter',
+      placeholder: 'Enter diameter',
+      type: 'number',
+      value: formData.diameter,
+      property:['horizontal_cylinder']
+
+    },
+    {
       name: 'fill depth',
       placeholder: 'Enter depth',
       type: 'number',
       value: formData.fill_depth,
-      property:['rectangle']
+      property:['rectangle','horizontal_cylinder']
 
     },
     {
@@ -171,6 +180,7 @@ export default function TankModal() {
   const [tankName, setTankName] = React.useState('');
   return (
     <div>
+   
       <Button
         onClick={handleOpen}
         variant="contained"
@@ -279,7 +289,20 @@ export default function TankModal() {
               }
             })}
 
-            <div></div>
+</div>
+<div 
+ style={{
+  display: 'grid',
+  
+  gridTemplateColumns: 'auto auto', // Two columns with unspecified sizes
+  alignItems: 'center',
+  alignContent: 'center',
+  gap: '10px',
+  marginTop:5
+  
+}}
+>
+
 
             <LoadingButton
               fullWidth
@@ -287,9 +310,7 @@ export default function TankModal() {
               type="submit"
               variant="outlined"
               color="inherit"
-              sx={{
-                margin: 1,
-              }}
+           
               onClick={handleClose}
             >
               Cancel
@@ -301,14 +322,12 @@ export default function TankModal() {
               type="submit"
               variant="contained"
               color="inherit"
-              sx={{
-                margin: 1,
-              }}
+           
               // onClick={handleClick}
             >
               Add Tank
             </LoadingButton>
-          </div>
+            </div>
         </Box>
       </Modal>
     </div>
