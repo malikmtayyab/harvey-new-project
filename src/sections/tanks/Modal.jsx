@@ -9,6 +9,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 
 import LoadingButton from '@mui/lab/LoadingButton';
 import CategoryDropdown from './CategoryDropdown';
+import Tooltip from '@mui/material/Tooltip';
+
 
 const style = {
   position: 'absolute',
@@ -29,9 +31,24 @@ const style = {
 export default function TankModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () =>{
 
-  const formData = {
+    setFormData({
+      name: '',
+      category: '',
+      length: 0,
+      height: 0,
+      width: 0,
+      latitude: 0,
+      longitude: 0,
+      location: '',
+      fill_depth: '',
+      tank_farm: '', // Assuming it's a string for the dropdown value
+    })
+    setOpen(false);
+  }
+
+  const [formData,setFormData] =React.useState({
     name: '',
     category: '',
     length: 0,
@@ -40,8 +57,15 @@ export default function TankModal() {
     latitude: 0,
     longitude: 0,
     location: '',
+    fill_depth: '',
     tank_farm: '', // Assuming it's a string for the dropdown value
-  };
+  });
+
+  const categoryOptions = [
+    { value: 'rectangle', label: 'Rectangle' },
+    { value: 'van', label: 'Van' },
+   
+  ];
 
   const formFields = [
     {
@@ -52,8 +76,10 @@ export default function TankModal() {
     },
     {
       name: 'category',
+      id:'category',
       placeholder: 'Enter Category',
-      type: 'text',
+      type: 'select',
+      options:categoryOptions,
       value: formData.category,
     },
     {
@@ -61,46 +87,87 @@ export default function TankModal() {
       placeholder: 'Enter Length',
       type: 'number',
       value: formData.length,
+      property:['rectangle']
     },
     {
       name: 'height',
       placeholder: 'Enter Height',
       type: 'number',
       value: formData.height,
+      property:['rectangle']
+
     },
     {
       name: 'width',
       placeholder: 'Enter Width',
       type: 'number',
       value: formData.width,
+      property:['rectangle'],
+      
+
+    },
+    {
+      name: 'fill depth',
+      placeholder: 'Enter depth',
+      type: 'number',
+      value: formData.fill_depth,
+      property:['rectangle']
+
     },
     {
       name: 'latitude',
       placeholder: 'Enter Latitude',
       type: 'number',
       value: formData.latitude,
+      property:[]
+
     },
     {
       name: 'longitude',
       placeholder: 'Enter Longitude',
       type: 'number',
       value: formData.longitude,
+      property:[]
+
     },
     {
       name: 'location',
       placeholder: 'Enter Location',
       type: 'text',
       value: formData.location,
+      property:[]
+
     },
     {
       name: 'Tank Farm',
+      id:'tank_farm',
       placeholder: 'Select Tank Farm',
       type: 'select', // Assuming tank_farm is a dropdown
       value: formData.tank_farm,
-      options: ['Option 1', 'Option 2', 'Option 3'], // Add your dropdown options here
+      options:categoryOptions, // Add your dropdown options here
     },
   ];
 
+
+  const handleCloseCategory = (option,name) => {
+    
+  
+    if(name==='category')
+    {
+      setFormData({
+        ...formData,
+        [name]:option.value
+      })
+    }
+  
+   
+    // setOpen(null);
+  };
+
+  React.useEffect(()=>
+  {
+    
+  },[formData.category])
   const [tankName, setTankName] = React.useState('');
   return (
     <div>
@@ -152,7 +219,7 @@ export default function TankModal() {
                     >
                       {item.name}
                     </Typography>
-                    <CategoryDropdown />
+                    <CategoryDropdown categoryOptions={item.options} name={item.id} handleClose={handleCloseCategory}/>
                     <div
                       style={{
                         display: 'flex',
@@ -160,7 +227,7 @@ export default function TankModal() {
                       }}
                     ></div>
                   </div>
-                ) : (
+                ) : item.name==='name'? (
                   <div>
                     <Typography
                       sx={{
@@ -184,7 +251,31 @@ export default function TankModal() {
                       }}
                     />
                   </div>
-                );
+                ):item.property.includes(formData.category)?  <div>
+                <Typography
+                  sx={{
+                    textAlign: 'start',
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    marginTop: 2,
+                  }}
+                >
+                  <Tooltip title={<><img src='https://cdn1.byjus.com/wp-content/uploads/2022/10/Rectangle-1.png'/></>}  arrow>
+                  {item.name}
+                  </Tooltip>
+                </Typography>
+                <OutlinedInput
+                  value={item.value}
+                  // onChange={(e) => setTankName(e.target.value)}
+                  placeholder={item.placeholder}
+                  type={item.type}
+                  sx={{
+                    marginTop: 1,
+                    width: '100%',
+                    height: '42px',
+                  }}
+                />
+              </div>:'';
               }
             })}
 

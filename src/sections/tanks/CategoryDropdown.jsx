@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from 'react';
 
 import Menu from '@mui/material/Menu';
@@ -23,7 +24,7 @@ const SORT_OPTIONS = [
   { value: 'kelly', label: 'Kelly' },
 ];
 
-export default function CategoryDropdown() {
+export default function CategoryDropdown({categoryOptions,name,handleClose}) {
   const [open, setOpen] = useState(null);
 
   const [selected,setSelected]=useState(SORT_OPTIONS[0])
@@ -31,13 +32,14 @@ export default function CategoryDropdown() {
     setOpen(event.currentTarget);
   };
 
-  const handleClose = (option) => {
+
+  const closeCall = (option) => {
     
     
     setSelected(option)
     setOpen(null);
+    handleClose(option,name)
   };
-
 
   return (
     <div 
@@ -73,7 +75,7 @@ export default function CategoryDropdown() {
       <Menu
         open={!!open}
         anchorEl={open}
-        onClose={handleClose}
+        onClose={closeCall}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         slotProps={{
@@ -90,12 +92,14 @@ export default function CategoryDropdown() {
           },
         }}
         >
-        {SORT_OPTIONS.map((option) => (
+        {categoryOptions && categoryOptions.map((option) => (
           <MenuItem sx={{
             zIndex:'100'
-          }} key={option.value}  onClick={()=>handleClose(option)}>
+          }} key={option.value}  onClick={()=>closeCall(option)}>
             {option.label}
+    
           </MenuItem>
+          
         ))}
       </Menu>
 
