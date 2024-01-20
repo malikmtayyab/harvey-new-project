@@ -1,5 +1,6 @@
 export default {
     getAllFarms: 'tankFarms',
     addTankFarms: 'tankFarms',
-    getAllTanks: 'tanks'
+    getAllTanks: 'tanks',
+    addTank: 'tanks'
 }

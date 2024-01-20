@@ -7,8 +7,14 @@ import Typography from '@mui/material/Typography';
 import Iconify from 'src/components/iconify/iconify';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
+import PropTypes from 'prop-types';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CategoryDropdown from './CategoryDropdown';
+import Tooltip from '@mui/material/Tooltip';
+import { PostRequest } from '../../services/ApiService';
+import UrlService from 'src/services/UrlService';
+import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 const style = {
   position: 'absolute',
@@ -23,84 +29,173 @@ const style = {
   boxShadow: 24,
   p: 4,
   textAlign: 'center',
-  overflow: 'scrolk',
+  overflow: 'scrol',
 };
 
-export default function TankModal() {
+export default function TankModal({ refreshTableData }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setFormData({
+      name: '',
+      category: '',
+      length: '',
+      height: '',
+      width: '',
+      latitude: '',
+      longitude: '',
+      location: '',
+      filledDepth: '',
+      tank_farm: '', // Assuming it's a string for the dropdown value
+    });
+    setOpen(false);
+  };
 
-  const formData = {
+  const [formData, setFormData] = React.useState({
     name: '',
     category: '',
-    length: 0,
-    height: 0,
-    width: 0,
-    latitude: 0,
-    longitude: 0,
+    length: '',
+    height: '',
+    width: '',
+    latitude: '',
+    longitude: '',
     location: '',
+    filledDepth: '',
+    diameter: '',
     tank_farm: '', // Assuming it's a string for the dropdown value
-  };
+  });
+
+  const categoryOptions = [
+    { value: 'rectangle', label: 'Rectangle', src: '/assets/tanks-img/rectangle.jpg' },
+    {
+      value: 'horizontal_cylinder',
+      label: 'Horizontal Cylender',
+      src: '/assets/tanks-img/horizontal_cylinder.jpg',
+    },
+  ];
 
   const formFields = [
     {
-      name: 'name',
+      name: 'Name',
+      id: 'name',
       placeholder: 'Enter Name',
       type: 'text',
       value: formData.name, // Assuming formData is your state object
     },
     {
-      name: 'category',
+      name: 'Category',
+      id: 'category',
       placeholder: 'Enter Category',
-      type: 'text',
+      type: 'select',
+      options: categoryOptions,
       value: formData.category,
     },
     {
-      name: 'length',
+      name: 'Length',
+      id: 'length',
       placeholder: 'Enter Length',
       type: 'number',
       value: formData.length,
+      property: ['rectangle', 'horizontal_cylinder'],
     },
     {
-      name: 'height',
+      name: 'Height',
+      id: 'height',
       placeholder: 'Enter Height',
       type: 'number',
       value: formData.height,
+      property: ['rectangle'],
     },
     {
-      name: 'width',
+      name: 'Width',
+      id: 'width',
       placeholder: 'Enter Width',
       type: 'number',
       value: formData.width,
+      property: ['rectangle'],
     },
     {
-      name: 'latitude',
+      name: 'Diameter',
+      id: 'diameter',
+      placeholder: 'Enter diameter',
+      type: 'number',
+      value: formData.diameter,
+      property: ['horizontal_cylinder'],
+    },
+    {
+      name: 'Fill Depth',
+      id: 'filledDepth',
+      placeholder: 'Enter depth',
+      type: 'number',
+      value: formData.filledDepth,
+      property: ['rectangle', 'horizontal_cylinder'],
+    },
+    {
+      name: 'Latitude',
+      id: 'latitude',
       placeholder: 'Enter Latitude',
       type: 'number',
       value: formData.latitude,
+      property: [],
     },
     {
-      name: 'longitude',
+      name: 'Longitude',
+      id: 'longitude',
       placeholder: 'Enter Longitude',
       type: 'number',
       value: formData.longitude,
+      property: [],
     },
     {
-      name: 'location',
+      name: 'Location',
+      id: 'location',
       placeholder: 'Enter Location',
       type: 'text',
       value: formData.location,
+      property: [],
     },
     {
       name: 'Tank Farm',
+      id: 'tank_farm',
       placeholder: 'Select Tank Farm',
       type: 'select', // Assuming tank_farm is a dropdown
       value: formData.tank_farm,
-      options: ['Option 1', 'Option 2', 'Option 3'], // Add your dropdown options here
+      options: categoryOptions, // Add your dropdown options here
     },
   ];
 
+  const handleCloseCategory = (option, name) => {
+    setFormData({
+      ...formData,
+      [name]: option.value,
+    });
+
+    // setOpen(null);
+  };
+
+  const handleFormdata = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.id]: event.target.value,
+    });
+
+    // setOpen(null);
+  };
+
+  const handleAddTankClick = async () => {
+    try {
+      const res = await PostRequest(`${UrlService.addTank}/${formData.tank_farm}`, formData);
+      if (res.status) {
+        toast.success('Tank Added!');
+        refreshTableData();
+      }
+    } catch (err) {
+      toast.error('Error Adding Tank');
+    }
+    handleClose();
+  };
+
+  React.useEffect(() => {}, [formData.category]);
   const [tankName, setTankName] = React.useState('');
   return (
     <div>
@@ -134,7 +229,6 @@ export default function TankModal() {
               alignItems: 'center',
               alignContent: 'center',
               gap: '10px',
-              
             }}
           >
             {formFields.map((item, index) => {
@@ -152,7 +246,11 @@ export default function TankModal() {
                     >
                       {item.name}
                     </Typography>
-                    <CategoryDropdown />
+                    <CategoryDropdown
+                      categoryOptions={item.options}
+                      name={item.id}
+                      handleClose={handleCloseCategory}
+                    />
                     <div
                       style={{
                         display: 'flex',
@@ -160,7 +258,7 @@ export default function TankModal() {
                       }}
                     ></div>
                   </div>
-                ) : (
+                ) : item.id === 'name' ? (
                   <div>
                     <Typography
                       sx={{
@@ -173,8 +271,9 @@ export default function TankModal() {
                       {item.name}
                     </Typography>
                     <OutlinedInput
+                      id={item.id}
                       value={item.value}
-                      // onChange={(e) => setTankName(e.target.value)}
+                      onChange={(event) => handleFormdata(event)}
                       placeholder={item.placeholder}
                       type={item.type}
                       sx={{
@@ -184,21 +283,63 @@ export default function TankModal() {
                       }}
                     />
                   </div>
+                ) : item.property?.includes(formData.category) ? (
+                  <div>
+                    <Typography
+                      sx={{
+                        textAlign: 'start',
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        marginTop: 2,
+                      }}
+                    >
+                      <Tooltip
+                        title={
+                          <>
+                            <img src="https://cdn1.byjus.com/wp-content/uploads/2022/10/Rectangle-1.png" />
+                          </>
+                        }
+                        arrow
+                      >
+                        {item.name}
+                      </Tooltip>
+                    </Typography>
+                    <OutlinedInput
+                      id={item.id}
+                      value={item.value}
+                      onChange={(event) => handleFormdata(event)}
+                      placeholder={item.placeholder}
+                      type={item.type}
+                      sx={{
+                        marginTop: 1,
+                        width: '100%',
+                        height: '42px',
+                      }}
+                    />
+                  </div>
+                ) : (
+                  ''
                 );
               }
             })}
+          </div>
+          <div
+            style={{
+              display: 'grid',
 
-            <div></div>
-
+              gridTemplateColumns: 'auto auto', // Two columns with unspecified sizes
+              alignItems: 'center',
+              alignContent: 'center',
+              gap: '10px',
+              marginTop: 5,
+            }}
+          >
             <LoadingButton
               fullWidth
               size="large"
               type="submit"
               variant="outlined"
               color="inherit"
-              sx={{
-                margin: 1,
-              }}
               onClick={handleClose}
             >
               Cancel
@@ -210,16 +351,17 @@ export default function TankModal() {
               type="submit"
               variant="contained"
               color="inherit"
-              sx={{
-                margin: 1,
-              }}
-              // onClick={handleClick}
+              onClick={handleAddTankClick}
             >
               Add Tank
             </LoadingButton>
           </div>
         </Box>
       </Modal>
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 }
+Modal.propTypes = {
+  refreshTableData: PropTypes.func,
+};

@@ -48,7 +48,7 @@ export default function UserTableRow({
             paddingLeft: 5,
           }}
         >
-          <Link to="/view-farms?id=12345">
+          <Link to="/view-farms?id=12345" style={{ textDecoration: 'none', color: 'black' }}>
             <Stack direction="row" alignItems="center" spacing={2}>
               {/* <Avatar alt={name} src={avatarUrl} /> */}
               <Typography variant="subtitle2" noWrap>

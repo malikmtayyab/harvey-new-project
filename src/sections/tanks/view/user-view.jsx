@@ -116,7 +116,7 @@ export default function TanksPage() {
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">All Tanks</Typography>
 
-        <TankModal />
+        <TankModal refreshTableData={getTableData} />
       </Stack>
 
       <Card>
