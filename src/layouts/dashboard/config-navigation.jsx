@@ -47,52 +47,52 @@ const navConfig = [
     },
 ]
   },
-  {
-    // heading:'Settings',
-    title: 'Sensors',
-    icon: <IconBuildingCottage/>,
-    type:'accordian',
-    dropdown:[
-      {
-      title:'Tank Progressions',
-      path:'/',
-    },
-    {
-      title:'Tank Progressions',
-      path:'/',
-    },
-]
-  },
-  {
-    title: 'Tank',
-    icon: <IconBuildingCottage/>,
-    type:'accordian',
-    dropdown:[
-      {
-      title:'Tank Progressions',
-      path:'/',
-    },
-    {
-      title:'Tank Progressions',
-      path:'/',
-    },
-]
-  },
-  {
-    title: 'Tank Farm',
-    icon: <IconBuildingCottage/>,
-    type:'accordian',
-    dropdown:[
-      {
-      title:'Tank Progressions',
-      path:'/',
-    },
-    {
-      title:'Tank Progressions',
-      path:'/',
-    },
-]
-  },
+//   {
+//     // heading:'Settings',
+//     title: 'Sensors',
+//     icon: <IconBuildingCottage/>,
+//     type:'accordian',
+//     dropdown:[
+//       {
+//       title:'Tank Progressions',
+//       path:'/',
+//     },
+//     {
+//       title:'Tank Progressions',
+//       path:'/',
+//     },
+// ]
+//   },
+//   {
+//     title: 'Tank',
+//     icon: <IconBuildingCottage/>,
+//     type:'accordian',
+//     dropdown:[
+//       {
+//       title:'Tank Progressions',
+//       path:'/',
+//     },
+//     {
+//       title:'Tank Progressions',
+//       path:'/',
+//     },
+// ]
+//   },
+//   {
+//     title: 'Tank Farm',
+//     icon: <IconBuildingCottage/>,
+//     type:'accordian',
+//     dropdown:[
+//       {
+//       title:'Tank Progressions',
+//       path:'/',
+//     },
+//     {
+//       title:'Tank Progressions',
+//       path:'/',
+//     },
+// ]
+//   },
   // {
   //   title: 'product',
   //   path: '/products',

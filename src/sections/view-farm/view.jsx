@@ -13,8 +13,8 @@ const FullScreenControl = () => {
         className="leaflet-control-fullscreen-button leaflet-bar-part leaflet-bar-part-top-and-bottom "
         href="#"
         style={{
-          marginTop:80,
-          marginLeft:10
+          marginTop: 80,
+          marginLeft: 10,
         }}
         title="Toggle Fullscreen"
         role="button"
@@ -40,14 +40,18 @@ export default function ViewFarm() {
     <div
       style={{
         width: 'full',
-        height: '100%',
+        height: '85vh',
       }}
     >
-      <h3>Map showing tank farms</h3>
-      <MapContainer center={center} zoom={12} style={{ height: '100%', width: '100%', borderRadius: 4 }}>
+      {/* <h3>Map showing tank farms</h3> */}
+      <MapContainer
+        center={center}
+        zoom={12}
+        style={{ height: '100%', width: '100%', borderRadius: 4 }}
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; OpenStreetMap contributors'
+          attribution="&copy; OpenStreetMap contributors"
         />
         {markers.map((marker, index) => (
           <Marker key={index} position={marker.position}>
@@ -56,6 +60,7 @@ export default function ViewFarm() {
         ))}
         <FullScreenControl />
       </MapContainer>
+         
     </div>
   );
 }
