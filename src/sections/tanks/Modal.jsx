@@ -54,6 +54,7 @@ export default function TankModal({ refreshTableData }) {
   const [formData, setFormData] = React.useState({
     name: '',
     category: '',
+    volume: '',
     length: '',
     height: '',
     width: '',
@@ -72,6 +73,12 @@ export default function TankModal({ refreshTableData }) {
       label: 'Horizontal Cylender',
       src: '/assets/tanks-img/horizontal_cylinder.jpg',
     },
+    {
+      value: 'no_dimensions',
+      label: 'No Dimentions',
+      src: '',
+    },
+
   ];
 
   const formFields = [
@@ -91,12 +98,26 @@ export default function TankModal({ refreshTableData }) {
       value: formData.category,
     },
     {
+      name: 'Volume',
+      id: 'volume',
+      placeholder: 'Enter Volume',
+      type: 'number',
+      value: formData.volume,
+      property: ['no_dimensions'],
+    },
+
+    {
       name: 'Length',
       id: 'length',
       placeholder: 'Enter Length',
       type: 'number',
       value: formData.length,
       property: ['rectangle', 'horizontal_cylinder'],
+    },
+    {
+      name: 'picture',
+      id: 'picture',
+      value: formData.category
     },
     {
       name: 'Height',
@@ -164,6 +185,7 @@ export default function TankModal({ refreshTableData }) {
     },
   ];
 
+
   const handleCloseCategory = (option, name) => {
     setFormData({
       ...formData,
@@ -195,7 +217,7 @@ export default function TankModal({ refreshTableData }) {
     handleClose();
   };
 
-  React.useEffect(() => {}, [formData.category]);
+  React.useEffect(() => { }, [formData.category]);
   const [tankName, setTankName] = React.useState('');
   return (
     <div>
@@ -283,43 +305,56 @@ export default function TankModal({ refreshTableData }) {
                       }}
                     />
                   </div>
-                ) : item.property?.includes(formData.category) ? (
-                  <div>
-                    <Typography
-                      sx={{
-                        textAlign: 'start',
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                        marginTop: 2,
-                      }}
-                    >
-                      <Tooltip
-                        title={
-                          <>
-                            <img src="https://cdn1.byjus.com/wp-content/uploads/2022/10/Rectangle-1.png" />
-                          </>
-                        }
-                        arrow
-                      >
-                        {item.name}
-                      </Tooltip>
-                    </Typography>
-                    <OutlinedInput
-                      id={item.id}
-                      value={item.value}
-                      onChange={(event) => handleFormdata(event)}
-                      placeholder={item.placeholder}
-                      type={item.type}
-                      sx={{
-                        marginTop: 1,
-                        width: '100%',
-                        height: '42px',
-                      }}
+                ) : item.id === 'picture' && formData.category && formData.category !== 'no_dimensions' ?
+
+                  <div >
+                    <img
+                      src={
+                        categoryOptions.find(option => option.value === formData.category)?.src ||
+                        '/assets/tanks-img/default.jpg'
+                      }
+                      alt="Tank"
+                      height={120}
+
                     />
-                  </div>
-                ) : (
-                  ''
-                );
+
+                  </div> : item.property?.includes(formData.category) ? (
+                    <div>
+                      <Typography
+                        sx={{
+                          textAlign: 'start',
+                          fontSize: '16px',
+                          fontWeight: 'bold',
+                          marginTop: 2,
+                        }}
+                      >
+                        <Tooltip
+                          title={
+                            <>
+                              <img src="https://cdn1.byjus.com/wp-content/uploads/2022/10/Rectangle-1.png" />
+                            </>
+                          }
+                          arrow
+                        >
+                          {item.name}
+                        </Tooltip>
+                      </Typography>
+                      <OutlinedInput
+                        id={item.id}
+                        value={item.value}
+                        onChange={(event) => handleFormdata(event)}
+                        placeholder={item.placeholder}
+                        type={item.type}
+                        sx={{
+                          marginTop: 1,
+                          width: '100%',
+                          height: '42px',
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    ''
+                  );
               }
             })}
           </div>

@@ -83,19 +83,11 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
         }}
       >
 
-{
-  name==='category'?
+        {
+          name === 'category' ?
 
-          categoryOptions &&
-          categoryOptions.map((option) => (
-            <Tooltip
-              title={
-                <>
-                  <img src={option.src} height={120} width={200}/>
-                </>
-              }
-              arrow
-            >
+            categoryOptions &&
+            categoryOptions.map((option) => (
               <MenuItem
                 sx={{
                   zIndex: '100',
@@ -114,11 +106,10 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
                 {option.label}
                 {/* </Tooltip> */}
               </MenuItem>
-            </Tooltip>
-          ))
-          :
-          SORT_OPTIONS.map((option) => (
-         
+            ))
+            :
+            SORT_OPTIONS.map((option) => (
+
               <MenuItem
                 sx={{
                   zIndex: '100',
@@ -126,13 +117,13 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
                 key={option.value}
                 onClick={() => closeCall(option)}
               >
-              
+
                 {option.label}
-             
+
               </MenuItem>
-          ))
-            
-          }
+            ))
+
+        }
       </Menu>
     </div>
   );

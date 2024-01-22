@@ -33,7 +33,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Number of Tanks"
-            total={714}
+            total={10}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
           />
@@ -42,7 +42,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Farm Tank"
-            total={13}
+            total={2}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
           />
@@ -51,7 +51,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Total Capacity (Litres)"
-            total={150000}
+            total={1000}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
           />
@@ -60,7 +60,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Total Users"
-            total={234}
+            total={10}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
           />
@@ -115,6 +115,7 @@ export default function AppView() {
               total={234}
               color="error"
               icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+              level={10}
             />
           </Grid>
           <Grid xs={12} sm={6} md={4}>
@@ -123,6 +124,7 @@ export default function AppView() {
               total={234}
               color="error"
               icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+              level={20}
             />
           </Grid>
 
@@ -132,6 +134,7 @@ export default function AppView() {
               total={234}
               color="error"
               icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+              level={30}
             />
           </Grid>
           {/* <StatsTile/> */}
