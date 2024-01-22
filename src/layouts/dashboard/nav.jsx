@@ -22,6 +22,7 @@ import Scrollbar from 'src/components/scrollbar';
 
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';
+import Accordion from './Accordian';
 /* eslint-enable */
 
 // ----------------------------------------------------------------------
@@ -66,6 +67,8 @@ export default function Nav({ openNav, onCloseNav }) {
   const renderMenu = (
     <Stack component="nav" spacing={0.5} sx={{ px: 2 }}>
       {navConfig.map((item) => (
+      item.type==='accordian'?
+      <Accordion accordionItems={item}/>:
         <NavItem key={item.title} item={item} />
       ))}
     </Stack>

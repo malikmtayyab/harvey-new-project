@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+/* eslint-disable */
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -10,9 +11,8 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
+// import { users } from 'src/_mock/user';
 
-import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
 import TableNoData from '../table-no-data';
@@ -21,6 +21,9 @@ import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
+import TankModal from '../Modal';
+import UrlService from 'src/services/UrlService';
+import { GetRequest } from '../../../services/ApiService';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +40,21 @@ export default function UserPage() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    getTableData();
+  }, []); //
+
+  const getTableData = async () => {
+    try {
+      const response = await GetRequest(UrlService.getAllFarms);
+      setTableData(response.data);
+    } catch (err) {
+      toast.error('Error Getting Farms');
+    }
+  };
+
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
     if (id !== '') {
@@ -47,7 +65,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = users.map((n) => n.name);
+      const newSelecteds = tableData.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -87,7 +105,7 @@ export default function UserPage() {
   };
 
   const dataFiltered = applyFilter({
-    inputData: users,
+    inputData: tableData,
     comparator: getComparator(order, orderBy),
     filterName,
   });
@@ -97,11 +115,9 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">Users</Typography>
+        <Typography variant="h4">All Farms</Typography>
 
-        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New User
-        </Button>
+        <TankModal refreshTableData={getTableData} />
       </Stack>
 
       <Card>
@@ -117,16 +133,20 @@ export default function UserPage() {
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={users.length}
+                rowCount={tableData.length}
                 numSelected={selected.length}
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'name', label: 'Name', align: 'left' },
+                  { id: 'created_at', label: 'Created At', align: 'left' },
+                  { id: 'updated_at', label: 'Updated At', align: 'left' },
+                  { id: 'filled', label: 'Filled', align: 'left' },
+                  { id: 'total_volume', label: 'Total Volume', align: 'left' },
+                  { id: 'nextday_forecast', label: 'Nextday Forecast', align: 'left' },
+                  { id: 'week_forecast', label: 'Week Forecast', align: 'left' },
+                  { id: 'month_forecast', label: 'Month Forecast', align: 'left' },
+                  { id: 'year_forecast', label: 'Year Forecast', align: 'left' },
                   { id: '' },
                 ]}
               />
@@ -137,11 +157,14 @@ export default function UserPage() {
                     <UserTableRow
                       key={row.id}
                       name={row.name}
-                      role={row.role}
-                      status={row.status}
-                      company={row.company}
-                      avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
+                      creatTime={row.createTime}
+                      updateTime={row.updateTime}
+                      filled={row.totalFilled}
+                      totalVolumn={row.totalVolume}
+                      nextDay={row.forecastNextDay}
+                      week={row.forecastWeek}
+                      month={row.forecastMonth}
+                      year={row.forecastYear}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
@@ -149,7 +172,7 @@ export default function UserPage() {
 
                 <TableEmptyRows
                   height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, users.length)}
+                  emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
                 />
 
                 {notFound && <TableNoData query={filterName} />}
@@ -161,7 +184,7 @@ export default function UserPage() {
         <TablePagination
           page={page}
           component="div"
-          count={users.length}
+          count={tableData.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
           rowsPerPageOptions={[5, 10, 25]}

@@ -33,7 +33,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Number of Tanks"
-            total={714000}
+            total={10}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
           />
@@ -42,7 +42,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Farm Tank"
-            total={1352831}
+            total={2}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
           />
@@ -50,8 +50,8 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Total Capacity"
-            total={1723315}
+            title="Total Capacity (Litres)"
+            total={1000}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
           />
@@ -60,7 +60,7 @@ export default function AppView() {
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
             title="Total Users"
-            total={234}
+            total={10}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
           />
@@ -68,8 +68,8 @@ export default function AppView() {
 
         <Grid xs={12} md={12} lg={12}>
           <AppWebsiteVisits
-            title="Website Visits"
-            subheader="(+43%) than last year"
+            title="Capacity History"
+            subheader=""
             chart={{
               labels: [
                 '01/01/2003',
@@ -85,20 +85,20 @@ export default function AppView() {
                 '11/01/2003',
               ],
               series: [
+                // {
+                //   name: 'Team A',
+                //   type: 'column',
+                //   fill: 'solid',
+                //   data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                // },
                 {
-                  name: 'Team A',
-                  type: 'column',
-                  fill: 'solid',
-                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
-                },
-                {
-                  name: 'Team B',
+                  name: 'Farm 1',
                   type: 'area',
                   fill: 'gradient',
                   data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
                 },
                 {
-                  name: 'Team C',
+                  name: 'Farm 2',
                   type: 'line',
                   fill: 'solid',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
@@ -107,44 +107,39 @@ export default function AppView() {
             }}
           />
         </Grid>
-        <Grid container xs={12}   color='white'  >
+        <Grid container xs={12} color="white">
           {/* <CircleMotion innerCircleSize={50}/> */}
-          <Grid xs={12} sm={6} md={4}
-          
-          >
-          <StatsTile 
-             title="Bug Reports"
-             total={234}
-             color="error"
-             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-          />
+          <Grid xs={12} sm={6} md={4}>
+            <StatsTile
+              title="Bug Reports"
+              total={234}
+              color="error"
+              icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+              level={10}
+            />
           </Grid>
           <Grid xs={12} sm={6} md={4}>
+            <StatsTile
+              title="Bug Reports"
+              total={234}
+              color="error"
+              icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+              level={20}
+            />
+          </Grid>
 
-<StatsTile 
-             title="Bug Reports"
-             total={234}
-             color="error"
-             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-          />
-</Grid>
-
-<Grid xs={12} sm={6} md={4}>
-
-<StatsTile 
-             title="Bug Reports"
-             total={234}
-             color="error"
-             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-          />
-          
-
+          <Grid xs={12} sm={6} md={4}>
+            <StatsTile
+              title="Bug Reports"
+              total={234}
+              color="error"
+              icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+              level={30}
+            />
           </Grid>
           {/* <StatsTile/> */}
           {/* <StatsTile/> */}
         </Grid>
-
-  
 
         {/* <Grid xs={12} md={6} lg={4}>
           <AppCurrentVisits
@@ -172,7 +167,7 @@ export default function AppView() {
                 { label: 'Canada', value: 470 },
                 { label: 'France', value: 540 },
                 { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
+                { label: 'South Korea', valuape: 690 },
                 { label: 'Netherlands', value: 1100 },
                 { label: 'United States', value: 1200 },
                 { label: 'United Kingdom', value: 1380 },
@@ -202,7 +197,7 @@ export default function AppView() {
               id: faker.string.uuid(),
               title: faker.person.jobTitle(),
               description: faker.commerce.productDescription(),
-              image: `/assets/images/covers/cover_${index + 1}.jpg`,
+              image: /assets/images/covers/cover_${index + 1}.jpg,
               postedAt: faker.date.recent(),
             }))}
           />
@@ -220,7 +215,7 @@ export default function AppView() {
                 'New order placed #XF-2356',
                 'New order placed #XF-2346',
               ][index],
-              type: `order${index + 1}`,
+              type: order${index + 1},
               time: faker.date.past(),
             }))}
           />

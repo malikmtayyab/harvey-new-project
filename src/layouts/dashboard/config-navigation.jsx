@@ -1,5 +1,6 @@
+/* eslint-disable */
+import { IconBuildingCottage, IconStack } from '@tabler/icons-react';
 import SvgColor from 'src/components/svg-color';
-
 // ----------------------------------------------------------------------
 
 const icon = (name) => (
@@ -11,11 +12,84 @@ const navConfig = [
     title: 'dashboard',
     path: '/',
     icon: icon('ic_analytics'),
+    type: 'single',
+  },
+  {
+    // heading:'Tank Management',
+    title: 'Tank Farm',
+    icon: <IconBuildingCottage size={'20'} />,
+    type: 'accordian',
+    dropdown: [
+      {
+        title: 'All Farms',
+        path: '/all-farms',
+      },
+      {
+        title: 'View Farms',
+        path: '/view-farms',
+      },
+    ],
+  },
+  {
+    title: 'Tanks',
+    icon: <IconStack size={'20'} />,
+    type: 'accordian',
+    dropdown: [
+      {
+        title: 'All Tanks',
+        path: '/all-tanks',
+      },
+      {
+        title: 'View Tanks',
+        path: '/',
+      },
+    ],
+  },
+  {
+    // heading:'Settings',
+    title: 'Sensors',
+    icon: <IconBuildingCottage />,
+    type: 'accordian',
+    dropdown: [
+      {
+        title: 'Tank Progressions',
+        path: '/',
+      },
+      {
+        title: 'Tank Progressions',
+        path: '/',
+      },
+    ],
   },
   // {
-  //   title: 'user',
-  //   path: '/user',
-  //   icon: icon('ic_user'),
+  //   title: 'Tank',
+  //   icon: <IconBuildingCottage />,
+  //   type: 'accordian',
+  //   dropdown: [
+  //     {
+  //       title: 'Tank Progressions',
+  //       path: '/',
+  //     },
+  //     {
+  //       title: 'Tank Progressions',
+  //       path: '/',
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'Tank Farm',
+  //   icon: <IconBuildingCottage />,
+  //   type: 'accordian',
+  //   dropdown: [
+  //     {
+  //       title: 'Tank Progressions',
+  //       path: '/',
+  //     },
+  //     {
+  //       title: 'Tank Progressions',
+  //       path: '/',
+  //     },
+  //   ],
   // },
   // {
   //   title: 'product',

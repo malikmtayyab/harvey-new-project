@@ -1,30 +1,31 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import TableRow from '@mui/material/TableRow';
-import Checkbox from '@mui/material/Checkbox';
+// import Checkbox from '@mui/material/Checkbox';
 import MenuItem from '@mui/material/MenuItem';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
-import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
-  selected,
   name,
-  avatarUrl,
-  company,
-  role,
-  isVerified,
-  status,
-  handleClick,
+  creatTime,
+  updateTime,
+  filled,
+  totalVolumn,
+  nextDay,
+  week,
+  month,
+  year,
 }) {
   const [open, setOpen] = useState(null);
 
@@ -38,29 +39,85 @@ export default function UserTableRow({
 
   return (
     <>
-      <TableRow hover tabIndex={-1} role="checkbox" selected={selected}>
-        <TableCell padding="checkbox">
-          <Checkbox disableRipple checked={selected} onChange={handleClick} />
+      <TableRow hover tabIndex={-1}>
+        <TableCell
+          component="th"
+          scope="row"
+          padding="none"
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          <Link to="/view-farms?id=12345" style={{ textDecoration: 'none', color: 'black' }}>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              {/* <Avatar alt={name} src={avatarUrl} /> */}
+              <Typography variant="subtitle2" noWrap>
+                {name}
+              </Typography>
+            </Stack>
+          </Link>
         </TableCell>
 
-        <TableCell component="th" scope="row" padding="none">
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Avatar alt={name} src={avatarUrl} />
-            <Typography variant="subtitle2" noWrap>
-              {name}
-            </Typography>
-          </Stack>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {creatTime}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {updateTime}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {filled}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {totalVolumn}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {nextDay}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {week}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {month}
+        </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {year}
         </TableCell>
 
-        <TableCell>{company}</TableCell>
+        {/* <TableCell>{role}</TableCell> */}
 
-        <TableCell>{role}</TableCell>
-
-        <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell>
-
-        <TableCell>
-          <Label color={(status === 'banned' && 'error') || 'success'}>{status}</Label>
-        </TableCell>
+        {/* <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell> */}
 
         <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
@@ -84,22 +141,23 @@ export default function UserTableRow({
           Edit
         </MenuItem>
 
-        <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
+        {/* <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
           <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
           Delete
-        </MenuItem>
+        </MenuItem> */}
       </Popover>
     </>
   );
 }
 
 UserTableRow.propTypes = {
-  avatarUrl: PropTypes.any,
-  company: PropTypes.any,
-  handleClick: PropTypes.func,
-  isVerified: PropTypes.any,
   name: PropTypes.any,
-  role: PropTypes.any,
-  selected: PropTypes.any,
-  status: PropTypes.string,
+  creatTime: PropTypes.any,
+  updateTime: PropTypes.any,
+  filled: PropTypes.any,
+  totalVolumn: PropTypes.any,
+  nextDay: PropTypes.any,
+  week: PropTypes.any,
+  month: PropTypes.any,
+  year: PropTypes.any,
 };
