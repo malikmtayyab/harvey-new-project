@@ -1,4 +1,5 @@
 // import { faker } from '@faker-js/faker';
+import { useEffect } from 'react';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -15,6 +16,8 @@ import Typography from '@mui/material/Typography';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
 import StatsTile from 'src/components/StatsTile';
+import {GetRequest} from '../../../services/ApiService'
+import UrlService from '../../../services/UrlService'
 /* eslint-enable */
 // import AppTrafficBySite from '../app-traffic-by-site';
 // import AppCurrentSubject from '../app-current-subject';
@@ -23,6 +26,15 @@ import StatsTile from 'src/components/StatsTile';
 // ----------------------------------------------------------------------
 
 export default function AppView() {
+
+  const getChartData= async()=>{
+    const res=await GetRequest()
+  }
+
+  useEffect(() => {
+    getChartData();
+  }, [])
+
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>

@@ -2,24 +2,24 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AppWebsiteVisits from '../overview/app-website-visits';
-import { Grid } from '@mui/material';
+// import { Grid } from '@mui/material';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '70vw',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
-export default function ChartView({name}) {
+export default function ChartView({ name }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -34,7 +34,7 @@ export default function ChartView({name}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <Grid xs={12} md={12} lg={12}>
+          {/* <Grid xs={12} md={12} lg={12}> */}
           <AppWebsiteVisits
             title="Capacity History"
             subheader=""
@@ -74,7 +74,7 @@ export default function ChartView({name}) {
               ],
             }}
           />
-        </Grid>
+          {/* </Grid> */}
         </Box>
       </Modal>
     </div>

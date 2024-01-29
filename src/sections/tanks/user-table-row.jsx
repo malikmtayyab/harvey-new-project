@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 // import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
@@ -113,7 +114,12 @@ export default function UserTableRow({
             paddingLeft: 5,
           }}
         >
-          {status}
+          <Button
+            variant="outlined"
+            color={status === 'NORMAL' ? 'success' : 'error'}
+          >
+            {status}
+          </Button>
         </TableCell>
 
         {/* <TableCell>{role}</TableCell> */}
