@@ -54,8 +54,8 @@ export default function UserTableRow({
           <Stack direction="row" alignItems="center" spacing={2}>
             {/* <Avatar alt={name} src={avatarUrl} /> */}
             <Typography variant="subtitle2" noWrap>
-              <ChartView name={name}/>
-              
+              <ChartView name={name} />
+
             </Typography>
           </Stack>
         </TableCell>
@@ -116,7 +116,7 @@ export default function UserTableRow({
         >
           <Button
             variant="outlined"
-            color={status === 'NORMAL' ? 'success' : 'error'}
+            color={status === 'NORMAL' ? 'success' : status === 'WARNING' ? 'warning' : 'error'}
           >
             {status}
           </Button>
