@@ -8,4 +8,4 @@ export const initOptions = {
     KeycloakResponseType: 'code',
 }
 const kc = new Keycloak(initOptions);
-export default kc
+export default kc

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+/*eslint-disable*/
 
 import Stack from '@mui/material/Stack';
 // import Avatar from '@mui/material/Avatar';
@@ -13,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 
 // import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
+import ChartView from './ChartView';
 
 // ----------------------------------------------------------------------
 
@@ -51,7 +53,8 @@ export default function UserTableRow({
           <Stack direction="row" alignItems="center" spacing={2}>
             {/* <Avatar alt={name} src={avatarUrl} /> */}
             <Typography variant="subtitle2" noWrap>
-              {name}
+              <ChartView name={name}/>
+              
             </Typography>
           </Stack>
         </TableCell>
