@@ -25,10 +25,10 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
       }}
       {...other}
     >
-  <Logo sx={{  ml: 4, opacity:'50%'}} />
+      <Logo sx={{ ml: 4, opacity: '50%' }} />
 
       <Stack spacing={0.5}>
-        <Typography variant="h4">{fShortenNumber(total)}</Typography>
+        <Typography variant="h4">{total > 1000 ? fShortenNumber(total) : total}</Typography>
 
         <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
           {title}
