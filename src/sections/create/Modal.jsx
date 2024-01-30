@@ -19,13 +19,11 @@ import UrlService from 'src/services/UrlService';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 const SORT_OPTIONS = [
-  { value: 'daily', label: 'Daily' },
-  { value: 'weekly', label: 'Weekly' },
-  { value: 'monthly', label: 'Monthly' },
-  { value: 'six_weeks', label: 'Six Weeks' },
-  { value: 'annually', label: 'Annually' },
-  { value: 'future_daily', label: 'Future Daily Consumption' },
-  { value: 'future_annual', label: 'Future Annual Consumption' },
+  { value: 'user', label: 'User' },
+  { value: 'manager', label: 'Manager' },
+  { value: 'admin', label: 'Administrator' },
+  { value: 'system', label: 'System Administrator' },
+ 
 ];
 
 const style = {
@@ -163,7 +161,7 @@ export default function TankModal({ refreshTableData }) {
 
   const [selected,setSelected]=useState(SORT_OPTIONS[0])
   const handleDropdownOpen = (event) => {
-    setOpen(event.currentTarget);
+    setOpenDropdown(event.currentTarget);
   };
 
   const handleDropdownClose = (option) => {
@@ -175,7 +173,7 @@ export default function TankModal({ refreshTableData }) {
 
       
     }
-    setOpen(null);
+    setOpenDropdown(null);
   };
 
   
@@ -247,14 +245,24 @@ export default function TankModal({ refreshTableData }) {
 
 <div 
     style={{
-      display:'flex',
-      width:'22%',
+      // display:'flex',
+      width:'100%',
       marginLeft:'auto',
       marginBottom:'1%',
       justifyContent:'end',
       
     }}
     >
+       <Typography
+                      sx={{
+                        textAlign: 'start',
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        marginTop: 2,
+                      }}
+                    >
+                     Role
+                    </Typography>
       <Button
         disableRipple
         color="inherit"
@@ -264,6 +272,7 @@ export default function TankModal({ refreshTableData }) {
           width:'100%',
           border:'1px solid black',
           padding:1,
+          marginTop:1,
           display:'flex',
           justifyContent:'space-between',
           border:'1px solid #d4d6d5'

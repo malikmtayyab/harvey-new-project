@@ -114,7 +114,7 @@ export default function CreatePage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">All Tanks</Typography>
+        <Typography variant="h4">All Users</Typography>
 
         <TankModal refreshTableData={getTableData} />
       </Stack>
@@ -137,13 +137,13 @@ export default function CreatePage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name', align: 'left' },
-                  { id: 'category', label: 'Category', align: 'left' },
-                  { id: 'coneHeigth', label: 'Cone Height', align: 'left' },
-                  { id: 'nextday_forecast', label: 'Nextday Forecast', align: 'left' },
-                  { id: 'week_forecast', label: 'Week Forecast', align: 'left' },
-                  { id: 'month_forecast', label: 'Month Forecast', align: 'left' },
-                  { id: 'year_forecast', label: 'Year Forecast', align: 'left' },
+                  { id: 'username', label: 'Username', align: 'left' },
+                  { id: 'firstname', label: 'First Name', align: 'left' },
+                  { id: 'lastname', label: 'Last Name', align: 'left' },
+                  { id: 'email', label: 'Email', align: 'left' },
+                  { id: 'authority', label: 'Authority', align: 'left' },
+                  { id: 'phonenumber1', label: 'Phone Number 1', align: 'left' },
+                  { id: 'phonenumber2', label: 'Phone Number 2', align: 'left' },
                   { id: 'temperature', label: 'Temperature', align: 'left' },
                   { id: 'status', label: 'Status', align: 'left' },
                   { id: '' },
