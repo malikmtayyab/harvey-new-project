@@ -45,6 +45,7 @@ const navConfig = [
       },
     ],
   },
+  
   {
     // heading:'Settings',
     title: 'Sensors',
@@ -60,6 +61,12 @@ const navConfig = [
         path: '/',
       },
     ],
+  },
+  {
+    title: 'Create',
+    path: '/create',
+    icon: icon('ic_user'),
+    type: 'single',
   },
   // {
   //   title: 'Tank',
