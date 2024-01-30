@@ -21,7 +21,10 @@ const SORT_OPTIONS = [
   { value: 'daily', label: 'Daily' },
   { value: 'weekly', label: 'Weekly' },
   { value: 'monthly', label: 'Monthly' },
-  { value: 'annually', label: 'Annually' }
+  { value: 'six_weeks', label: 'Six Weeks' },
+  { value: 'annually', label: 'Annually' },
+  { value: 'future_daily', label: 'Future Daily Consumption' },
+  { value: 'future_annual', label: 'Future Annual Consumption' },
 ];
 export default function AppWebsiteVisits({ title, subheader, chart, ...other }) {
   const { labels, colors, series, options } = chart;
@@ -84,7 +87,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
          <div 
     style={{
       display:'flex',
-      width:'15%',
+      width:'22%',
       marginLeft:'auto',
       marginBottom:'1%',
       justifyContent:'end',
