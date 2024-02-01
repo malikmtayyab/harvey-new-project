@@ -29,6 +29,10 @@ export default function App() {
       } else {
         console.info("Authenticated");
         localStorage.setItem("token", kc.token)
+        var roles = kc.tokenParsed.realm_access.roles;
+   
+        localStorage.setItem('roles',roles)
+
         setAuthentication(true)
         kc.onTokenExpired = () => {
           console.log('token expired')

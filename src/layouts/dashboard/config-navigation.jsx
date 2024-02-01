@@ -13,6 +13,7 @@ const navConfig = [
     path: '/',
     icon: icon('ic_analytics'),
     type: 'single',
+    role:['user','manager','admin','system']
   },
   {
     // heading:'Tank Management',
@@ -29,6 +30,8 @@ const navConfig = [
         path: '/view-farms',
       },
     ],
+    role:['user','manager','admin','system']
+
   },
   {
     title: 'Tanks',
@@ -44,6 +47,8 @@ const navConfig = [
         path: '/',
       },
     ],
+    role:['user','manager','admin','system']
+
   },
   
   {
@@ -61,12 +66,16 @@ const navConfig = [
         path: '/',
       },
     ],
+    role:['user','manager','admin','system']
+
   },
   {
     title: 'Create',
     path: '/create',
     icon: icon('ic_user'),
     type: 'single',
+    role:['manager','admin','system']
+
   },
   // {
   //   title: 'Tank',

@@ -31,6 +31,7 @@ export default function Nav({ openNav, onCloseNav }) {
   const pathname = usePathname();
 
   const upLg = useResponsive('up', 'lg');
+  const role=localStorage.getItem('roles')
 
   useEffect(() => {
     if (openNav) {
@@ -67,10 +68,14 @@ export default function Nav({ openNav, onCloseNav }) {
   const renderMenu = (
     <Stack component="nav" spacing={0.5} sx={{ px: 2 }}>
       {navConfig.map((item) => (
-      item.type==='accordian'?
-      <Accordion accordionItems={item}/>:
-        <NavItem key={item.title} item={item} />
-      ))}
+        item.role.includes(role)
+        &&(
+
+          item.type==='accordian'?
+          <Accordion accordionItems={item}/>:
+          <NavItem key={item.title} item={item} />
+          )
+          ))}
     </Stack>
   );
 

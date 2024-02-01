@@ -19,10 +19,10 @@ import UrlService from 'src/services/UrlService';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 const SORT_OPTIONS = [
-  { value: 'user', label: 'User' },
-  { value: 'manager', label: 'Manager' },
-  { value: 'admin', label: 'Administrator' },
-  { value: 'system', label: 'System Administrator' },
+  { value: 'user', label: 'User' ,role:['manager','admin','system']},
+  { value: 'manager', label: 'Manager',role:['admin','system'] },
+  { value: 'admin', label: 'Administrator' ,role:['system']},
+  { value: 'system', label: 'System Administrator' ,role:[] },
  
 ];
 
@@ -45,6 +45,7 @@ const style = {
 export default function TankModal({ refreshTableData }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
+  const role=localStorage.getItem('roles')
   const handleClose = () => {
     setFormData({
       name: '',
@@ -310,6 +311,7 @@ export default function TankModal({ refreshTableData }) {
         }}
         >
         {SORT_OPTIONS.map((option) => (
+          option.role.includes(role )&&
           <MenuItem sx={{
             zIndex:'100'
           }} key={option.value}  onClick={()=>handleDropdownClose(option)}>
