@@ -73,7 +73,7 @@ export default function Nav({ openNav, onCloseNav }) {
 
           item.type==='accordian'?
           <Accordion accordionItems={item}/>:
-          <NavItem key={item.title} item={item} />
+          <NavItem key={item.title} item={item} roles={item.role} authenticatedRole={role} />
           )
           ))}
     </Stack>
@@ -143,15 +143,16 @@ Nav.propTypes = {
 
 // ----------------------------------------------------------------------
 
-function NavItem({ item }) {
+function NavItem({ item,roles,authenticatedRole }) {
   const pathname = usePathname();
 
   const active = item.path === pathname;
 
+  
   return (
     <ListItemButton
       component={RouterLink}
-      href={item.path}
+      href={roles.includes(authenticatedRole)?item.path:'/404'}
       sx={{
         minHeight: 44,
         borderRadius: 0.75,
@@ -180,4 +181,6 @@ function NavItem({ item }) {
 
 NavItem.propTypes = {
   item: PropTypes.object,
+  roles:PropTypes.array,
+  authenticatedRole:PropTypes.string
 };

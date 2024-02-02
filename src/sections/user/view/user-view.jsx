@@ -120,7 +120,7 @@ export default function UserPage() {
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">All Farms</Typography>
 { role!='user' && role!='manager' &&
-        <TankModal refreshTableData={getTableData} />
+        <TankModal refreshTableData={getTableData}  />
 }
       </Stack>
 
