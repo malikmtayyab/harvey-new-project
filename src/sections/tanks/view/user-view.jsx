@@ -110,13 +110,17 @@ export default function TanksPage() {
   });
 
   const notFound = !dataFiltered.length && !!filterName;
+  const role=localStorage.getItem('roles')
 
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">All Tanks</Typography>
 
+{
+role!='user' &&
         <TankModal refreshTableData={getTableData} />
+}
       </Stack>
 
       <Card>

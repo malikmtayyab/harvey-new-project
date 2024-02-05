@@ -31,6 +31,7 @@ export default function Nav({ openNav, onCloseNav }) {
   const pathname = usePathname();
 
   const upLg = useResponsive('up', 'lg');
+  const role=localStorage.getItem('roles')
 
   useEffect(() => {
     if (openNav) {
@@ -67,10 +68,14 @@ export default function Nav({ openNav, onCloseNav }) {
   const renderMenu = (
     <Stack component="nav" spacing={0.5} sx={{ px: 2 }}>
       {navConfig.map((item) => (
-      item.type==='accordian'?
-      <Accordion accordionItems={item}/>:
-        <NavItem key={item.title} item={item} />
-      ))}
+        item.role.includes(role)
+        &&(
+
+          item.type==='accordian'?
+          <Accordion accordionItems={item}/>:
+          <NavItem key={item.title} item={item} roles={item.role} authenticatedRole={role} />
+          )
+          ))}
     </Stack>
   );
 
@@ -138,15 +143,16 @@ Nav.propTypes = {
 
 // ----------------------------------------------------------------------
 
-function NavItem({ item }) {
+function NavItem({ item,roles,authenticatedRole }) {
   const pathname = usePathname();
 
   const active = item.path === pathname;
 
+  
   return (
     <ListItemButton
       component={RouterLink}
-      href={item.path}
+      href={roles.includes(authenticatedRole)?item.path:'/404'}
       sx={{
         minHeight: 44,
         borderRadius: 0.75,
@@ -175,4 +181,6 @@ function NavItem({ item }) {
 
 NavItem.propTypes = {
   item: PropTypes.object,
+  roles:PropTypes.array,
+  authenticatedRole:PropTypes.string
 };

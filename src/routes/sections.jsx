@@ -16,6 +16,8 @@ export const ViewFarms=lazy(()=>import('src/pages/view-farms'))
 // ----------------------------------------------------------------------
 
 export default function Router() {
+
+  const role=localStorage.getItem('roles')
   const routes = useRoutes([
     {
       element: (
@@ -32,7 +34,7 @@ export default function Router() {
         { path: 'all-tanks', element: <TankPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
-        { path: 'create', element: <CreatePage /> },
+        { path: 'create', element: role!=='user'? <CreatePage />:<Page404/> },
       ],
     },
     {
