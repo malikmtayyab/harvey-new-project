@@ -112,16 +112,16 @@ export default function UserPage() {
 
   const notFound = !dataFiltered.length && !!filterName;
 
-  const role=localStorage.getItem('roles')
+  const role = localStorage.getItem('roles')
 
 
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">All Farms</Typography>
-{ role!='user' && role!='manager' &&
-        <TankModal refreshTableData={getTableData}  />
-}
+        {role != 'user' && role != 'manager' &&
+          <TankModal refreshTableData={getTableData} />
+        }
       </Stack>
 
       <Card>
@@ -160,6 +160,7 @@ export default function UserPage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
+                      id={row.id}
                       name={row.name}
                       creatTime={row.createTime}
                       updateTime={row.updateTime}

@@ -17,6 +17,7 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
+  id,
   name,
   creatTime,
   updateTime,
@@ -48,7 +49,7 @@ export default function UserTableRow({
             paddingLeft: 5,
           }}
         >
-          <Link to="/view-farms?id=12345" style={{ textDecoration: 'none', color: 'black' }}>
+          <Link to={`/view-farms?id=${id}`} style={{ textDecoration: 'none', color: 'black' }}>
             <Stack direction="row" alignItems="center" spacing={2}>
               {/* <Avatar alt={name} src={avatarUrl} /> */}
               <Typography variant="subtitle2" noWrap>
@@ -119,11 +120,11 @@ export default function UserTableRow({
 
         {/* <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell> */}
 
-        <TableCell align="right">
+        {/* <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
-        </TableCell>
+        </TableCell> */}
       </TableRow>
 
       <Popover
@@ -151,6 +152,7 @@ export default function UserTableRow({
 }
 
 UserTableRow.propTypes = {
+  id: PropTypes.any,
   name: PropTypes.any,
   creatTime: PropTypes.any,
   updateTime: PropTypes.any,
