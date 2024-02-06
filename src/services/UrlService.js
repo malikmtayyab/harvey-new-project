@@ -4,5 +4,6 @@ export default {
     getAllTanks: 'tanks',
     addTank: 'tanks',
     getDashboardData: 'tanks/dashboard',
-    getAllUsers:'users'
+    getAllUsers:'users',
+    addUser:'users'
 }

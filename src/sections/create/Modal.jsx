@@ -140,11 +140,25 @@ export default function TankModal({ refreshTableData }) {
     // setOpen(null);
   };
 
-  const handleAddTankClick = async () => {
+  const handleUserAddkClick = async () => {
     try {
-      const res = await PostRequest(`${UrlService.addTank}/${formData.tank_farm}`, formData);
+      const data=
+      {
+        "username": "string",
+        "email": "string",
+        "createTime": "2024-02-06T19:59:00.277Z",
+        "updateTime": "2024-02-06T19:59:00.277Z",
+        "firstname": "string",
+        "lastname": "string",
+        "phonenumber1": "string",
+        "phonenumber2": "string",
+        "authority": "manager",
+        "active": "string",
+        "emailAlias": "string"
+      }
+      const res = await PostRequest(`${UrlService.addUser}`, formData);
       if (res.status) {
-        toast.success('Tank Added!');
+        toast.success('User Added!');
         refreshTableData();
       }
     } catch (err) {
@@ -351,7 +365,7 @@ export default function TankModal({ refreshTableData }) {
               type="submit"
               variant="contained"
               color="inherit"
-              onClick={handleAddTankClick}
+              onClick={handleUserAddkClick}
             >
               Add User
             </LoadingButton>
