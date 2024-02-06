@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CategoryDropdown from './CategoryDropdown';
 import Tooltip from '@mui/material/Tooltip';
-import { PostRequest } from '../../services/ApiService';
+import { GetRequest, PostRequest } from '../../services/ApiService';
 import UrlService from 'src/services/UrlService';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
@@ -64,6 +64,7 @@ export default function TankModal({ refreshTableData }) {
     filledDepth: '',
     diameter: '',
     tank_farm: '', // Assuming it's a string for the dropdown value
+    user_id:'',
   });
 
   const categoryOptions = [
@@ -80,6 +81,8 @@ export default function TankModal({ refreshTableData }) {
     },
 
   ];
+
+  const [users,setUsers]=React.useState()
 
   const formFields = [
     {
@@ -183,13 +186,24 @@ export default function TankModal({ refreshTableData }) {
       value: formData.tank_farm,
       options: categoryOptions, // Add your dropdown options here
     },
+    {
+      name:'Select user',
+      id:'user_id',
+      placeholder:'Select User',
+      type:'select',
+      value:formData.user_id,
+      options:users
+    }
   ];
+
+ 
 
 
   const handleCloseCategory = (option, name) => {
+    
     setFormData({
       ...formData,
-      [name]: option.value,
+      [name]: name==='user_id'?option.id: option.value,
     });
 
     // setOpen(null);
@@ -217,7 +231,20 @@ export default function TankModal({ refreshTableData }) {
     handleClose();
   };
 
-  React.useEffect(() => { }, [formData.category]);
+  const getAllUsers=async()=>
+  {
+    const userData=await GetRequest(UrlService.getAllUsers)
+    console.log(userData.data);
+    setUsers(userData.data)
+  }
+  React.useEffect(()=>{
+      getAllUsers()
+  },[])
+  React.useEffect(() => { 
+
+    console.log('user ',users)
+
+  }, [formData.category, users]);
   const [tankName, setTankName] = React.useState('');
   return (
     <div>

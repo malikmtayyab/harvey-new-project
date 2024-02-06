@@ -60,7 +60,7 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
         }}
       >
         <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-          {selected.label}
+          {name==='user_id'? selected.username: selected.label}
         </Typography>
 
         <Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />
@@ -84,7 +84,7 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
       >
 
         {
-          name === 'category' ?
+          name === 'category' || name==='user_id'?
 
             categoryOptions &&
             categoryOptions.map((option) => (
@@ -92,7 +92,7 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
                 sx={{
                   zIndex: '100',
                 }}
-                key={option.value}
+                key={name==='user_id'?option.id: option.value}
                 onClick={() => closeCall(option)}
               >
                 {/* <Tooltip
@@ -103,7 +103,7 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
                 }
                 arrow
               > */}
-                {option.label}
+                {name==='user_id'?option.username:option.label}
                 {/* </Tooltip> */}
               </MenuItem>
             ))
