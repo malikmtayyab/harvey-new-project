@@ -42,33 +42,33 @@ const navConfig = [
         title: 'All Tanks',
         path: '/all-tanks',
       },
-      {
-        title: 'View Tanks',
-        path: '/',
-      },
+      // {
+      //   title: 'View Tanks',
+      //   path: '/',
+      // },
     ],
     role:['user','manager','admin','system']
 
   },
   
-  {
-    // heading:'Settings',
-    title: 'Sensors',
-    icon: <IconBuildingCottage />,
-    type: 'accordian',
-    dropdown: [
-      {
-        title: 'Tank Progressions',
-        path: '/',
-      },
-      {
-        title: 'Tank Progressions',
-        path: '/',
-      },
-    ],
-    role:['user','manager','admin','system']
+  // {
+  //   // heading:'Settings',
+  //   title: 'Sensors',
+  //   icon: <IconBuildingCottage />,
+  //   type: 'accordian',
+  //   dropdown: [
+  //     {
+  //       title: 'Tank Progressions',
+  //       path: '/',
+  //     },
+  //     {
+  //       title: 'Tank Progressions',
+  //       path: '/',
+  //     },
+  //   ],
+  //   role:['user','manager','admin','system']
 
-  },
+  // },
   {
     title: 'Create',
     path: '/create',
