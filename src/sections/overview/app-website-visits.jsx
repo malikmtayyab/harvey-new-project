@@ -36,7 +36,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, tankFarms,ge
   const [openTankFarms, setOpenTankFarms] = useState(null);
 
   const [selected,setSelected]=useState(SORT_OPTIONS[0])
-  const [selectedFarm,setSelectedFarm]=useState(tankFarms.length>0 ?tankFarms[0]:null)
+  const [selectedFarm,setSelectedFarm]=useState(tankFarms && tankFarms.length>0 ?tankFarms[0]:null)
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
@@ -213,7 +213,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, tankFarms,ge
       
         <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
           {
-            selectedFarm.name
+            selectedFarm? selectedFarm.name:''
           }
         </Typography>
 
@@ -242,7 +242,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, tankFarms,ge
           },
         }}
         >
-        {tankFarms.length>0 && tankFarms.map((option) => (
+        {tankFarms && tankFarms.length>0 && tankFarms.map((option) => (
           <MenuItem sx={{
             zIndex:'100'
           }} key={option.id}  onClick={()=>handleTankFarmClose(option)}>
