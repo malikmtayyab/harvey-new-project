@@ -29,11 +29,29 @@ export default function AppView() {
   const [dashboardData, setDashboardData] = useState()
   const [tankFarms, setTankFarms] = useState(null)
   const [tanks, setTanks] = useState([])
+  const [tankFarmsStats, setTankFarmsStats] = useState(null)
+  const [tankFarmsStatsLabels, setTankFarmsStatsLabels] = useState(null)
+
 
   const getDashboardData = async () => {
     const farms = await GetRequest(UrlService.getAllFarms)
+    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily`)
     const res = await GetRequest(UrlService.getDashboardData)
+    await tankData(farms.data[0].id)
     setTankFarms(farms?.data)
+    // setTankFarmsStats(farmStats)
+
+
+    const dataArray = []
+    const dataArray2 = []
+    // Create an array to store total volumes
+    farmStats.data.map(obj => dataArray.push(obj.totalVolume));
+    farmStats.data.map(obj => dataArray2.push(obj.dayOfYear));
+    //  farmStats.data.map(obj=>obj.)
+    setTankFarmsStats(dataArray)
+    setTankFarmsStatsLabels(dataArray2)
+    console.log(dataArray);
+
     setDashboardData(res)
   }
 
@@ -42,6 +60,17 @@ export default function AppView() {
     setTanks(res?.data)
   }
 
+
+  const getTankFormData = async (id, filter) => {
+    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${id}/${filter}`)
+    const dataArray = []
+    const dataArray2 = []
+    // Create an array to store total volumes
+    farmStats.data.map(obj => dataArray.push(obj.totalVolume));
+    farmStats.data.map(obj => dataArray2.push(obj.dayOfYear));
+    //  farmStats.data.map(obj=>obj.)
+    setTankFarmsStats(dataArray)
+  }
   useEffect(() => {
     getDashboardData();
   }, [])
@@ -95,20 +124,9 @@ export default function AppView() {
               title="Capacity History"
               subheader=""
               tankFarms={tankFarms}
+              getTankFormData={getTankFormData}
               chart={{
-                labels: [
-                  '01/01/2003',
-                  '02/01/2003',
-                  '03/01/2003',
-                  '04/01/2003',
-                  '05/01/2003',
-                  '06/01/2003',
-                  '07/01/2003',
-                  '08/01/2003',
-                  '09/01/2003',
-                  '10/01/2003',
-                  '11/01/2003',
-                ],
+                labels: tankFarmsStatsLabels,
                 series: [
                   // {
                   //   name: 'Team A',
@@ -120,14 +138,14 @@ export default function AppView() {
                     name: 'Farm 1',
                     type: 'area',
                     fill: 'gradient',
-                    data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                    data: tankFarmsStats,
                   },
-                  {
-                    name: 'Farm 2',
-                    type: 'line',
-                    fill: 'solid',
-                    data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
-                  },
+                  // {
+                  //   name: 'Farm 2',
+                  //   type: 'line',
+                  //   fill: 'solid',
+                  //   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
+                  // },
                 ],
               }}
             />

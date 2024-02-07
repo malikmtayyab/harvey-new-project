@@ -47,7 +47,7 @@ export default function CreatePage() {
 
   const getTableData = async () => {
     try {
-      const response = await GetRequest(UrlService.getAllTanks);
+      const response = await GetRequest(UrlService.getAllUsers);
       setTableData(response.data);
     } catch (err) {
       toast.error('Error Getting Tanks');
@@ -120,11 +120,11 @@ export default function CreatePage() {
       </Stack>
 
       <Card>
-        <UserTableToolbar
+        {/* <UserTableToolbar
           numSelected={selected.length}
           filterName={filterName}
           onFilterName={handleFilterByName}
-        />
+        /> */}
 
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
@@ -142,11 +142,11 @@ export default function CreatePage() {
                   { id: 'lastname', label: 'Last Name', align: 'left' },
                   { id: 'email', label: 'Email', align: 'left' },
                   { id: 'authority', label: 'Authority', align: 'left' },
-                  { id: 'phonenumber1', label: 'Phone Number 1', align: 'left' },
-                  { id: 'phonenumber2', label: 'Phone Number 2', align: 'left' },
-                  { id: 'temperature', label: 'Temperature', align: 'left' },
-                  { id: 'status', label: 'Status', align: 'left' },
-                  { id: '' },
+                  { id: 'phonenumber1', label: 'Phone Number', align: 'left' },
+                  // { id: 'phonenumber2', label: 'Phone Number 2', align: 'left' },
+                  // { id: 'temperature', label: 'Temperature', align: 'left' },
+                  // { id: 'status', label: 'Status', align: 'left' },
+                  // { id: '' },
                 ]}
               />
               <TableBody>
@@ -155,17 +155,17 @@ export default function CreatePage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
-                      name={row.name}
-                      category={row.category}
-                      coneHeigth={row.coneHeigth}
-                      forecastNextDay={row.forecastNextDay}
-                      forecastWeek={row.forecastWeek}
-                      forecastMonth={row.forecastMonth}
-                      forecastYear={row.forecastYear}
-                      temperatur={row.temperatur}
-                      status={row.status}
-                      selected={selected.indexOf(row.name) !== -1}
-                      handleClick={(event) => handleClick(event, row.name)}
+                      name={row.username}
+                      category={row.firstname}
+                      coneHeigth={row.lastname}
+                      forecastNextDay={row.email}
+                      forecastWeek={row.authority}
+                      forecastMonth={row.phonenumber1}
+                      // forecastYear={row.phonenumber2}
+                      // temperatur={row.temperatur}
+                      // status={row.status}
+                      // selected={selected.indexOf(row.name) !== -1}
+                      // handleClick={(event) => handleClick(event, row.name)}
                     />
                   ))}
 

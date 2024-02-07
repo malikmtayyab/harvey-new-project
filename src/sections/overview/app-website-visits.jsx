@@ -21,12 +21,13 @@ const SORT_OPTIONS = [
   { value: 'daily', label: 'Daily' },
   { value: 'weekly', label: 'Weekly' },
   { value: 'monthly', label: 'Monthly' },
-  { value: 'six_weeks', label: 'Six Weeks' },
-  { value: 'annually', label: 'Annually' },
-  { value: 'future_daily', label: 'Future Daily Consumption' },
-  { value: 'future_annual', label: 'Future Annual Consumption' },
+  // { value: 'anually', label: 'Anually' },
+  // { value: 'six_weeks', label: 'Six Weeks' },
+  // { value: 'annually', label: 'Annually' },
+  // { value: 'future_daily', label: 'Future Daily Consumption' },
+  // { value: 'future_annual', label: 'Future Annual Consumption' },
 ];
-export default function AppWebsiteVisits({ handleTankData, title, subheader, chart, tankFarms, ...other }) {
+export default function AppWebsiteVisits({ handleTankData, title, subheader, chart, tankFarms, getTankFormData, ...other }) {
   const { labels, colors, series, options } = chart;
 
 
@@ -35,7 +36,7 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
   const [openTankFarms, setOpenTankFarms] = useState(null);
 
   const [selected, setSelected] = useState(SORT_OPTIONS[0])
-  const [selectedFarm, setSelectedFarm] = useState(tankFarms.length > 0 ? tankFarms[0] : null)
+  const [selectedFarm, setSelectedFarm] = useState(tankFarms && tankFarms.length > 0 ? tankFarms[0] : null)
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
@@ -44,17 +45,19 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
     setOpenTankFarms(event.currentTarget);
   };
 
-  useEffect(() => {
-    handleTankData(selectedFarm.id)
-  }, [selectedFarm])
+  // useEffect(() => {
+  //   handleTankData(selectedFarm?.id)
+  // }, [selectedFarm])
 
 
   const handleTankFarmClose = (option) => {
 
-    if (option.id) {
+    if (option?.id) {
+
+      getTankFormData(option?.id, selected.value)
 
       setSelectedFarm(option)
-
+      handleTankData(option?.id)
 
     }
     setOpenTankFarms(null);
@@ -63,6 +66,8 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
 
     if (option.label) {
 
+
+      getTankFormData(selectedFarm?.id, option.value)
       setSelected(option)
 
 
@@ -99,17 +104,14 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
     ...options,
   });
 
+
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
       <Box sx={{ p: 3, pb: 1 }}>
 
-        <div style={{
-          //  display:'flex',
-          //  width:'40%'
-
-        }}>
+        <div >
 
           <div
             style={{
@@ -213,7 +215,7 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
 
               <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
                 {
-                  selectedFarm.name
+                  selectedFarm ? selectedFarm.name : ''
                 }
               </Typography>
 
@@ -242,7 +244,7 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
                 },
               }}
             >
-              {tankFarms.length > 0 && tankFarms.map((option) => (
+              {tankFarms && tankFarms.length > 0 && tankFarms.map((option) => (
                 <MenuItem sx={{
                   zIndex: '100'
                 }} key={option.id} onClick={() => handleTankFarmClose(option)}>

@@ -142,31 +142,61 @@ export default function TankModal({ refreshTableData }) {
 
   const handleUserAddkClick = async () => {
     try {
+
+      // for (const key in formData) {
+      //   if (Object.hasOwnProperty.call(formData, key)) {
+      //     const value = formData[key];
+      //     if (!value) {
+      //       toast.error(`${key} is empty or null.`);
+      //       console.log('empty');
+      //       return 0;
+      //       // Do something here if a key is empty
+      //     } 
+      //   }
+      // }
+      
+      const now = new Date();
+    const createDateTime = now.toISOString();
       const data=
       {
-        "username": "name1",
-        "email": "name1@gmail.com",
-        "createTime": "2024-02-06T19:59:00.277Z",
-        "updateTime": "2024-02-06T19:59:00.277Z",
-        "firstname": "name1",
-        "lastname": "name1",
-        "phonenumber1": "string",
-        "phonenumber2": "string",
-        "authority": "manager",
+        "username": formData.username,
+        "email": formData.email,
+        "createTime": createDateTime,
+        "updateTime": createDateTime,
+        "firstname": formData.first_name,
+        "lastname": formData.last_name,
+        "phonenumber1": formData.phone_number1,
+        "phonenumber2": formData.phone_number2,
+        "authority": selected.value,
         "active": "1",
-        "rawPassword":"9817298",
-        "password":"9817298",
+        "rawPassword":formData.password,
+        "password":formData.password,
         "emailAlias": "string"
       }
       const res = await PostRequest(`${UrlService.addUser}`, data);
       if (res.status) {
         toast.success('User Added!');
         refreshTableData();
+        setFormData({
+          name: '',
+          category: '',
+          length: '',
+          height: '',
+          width: '',
+          latitude: '',
+          longitude: '',
+          location: '',
+          filledDepth: '',
+          tank_farm: '', // Assuming it's a string for the dropdown value
+        })
+        setSelected(SORT_OPTIONS[0])
+        handleClose();
       }
     } catch (err) {
-      toast.error('Error Adding Tank');
+      handleClose();
+      console.log(err);
+      toast.error('Error Adding User');
     }
-    handleClose();
   };
 
   React.useEffect(() => { }, [formData.category]);
