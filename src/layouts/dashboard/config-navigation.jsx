@@ -25,10 +25,10 @@ const navConfig = [
         title: 'All Farms',
         path: '/all-farms',
       },
-      {
-        title: 'View Farms',
-        path: '/view-farms',
-      },
+      // {
+      //   title: 'View Farms',
+      //   path: '/view-farms',
+      // },
     ],
     role:['user','manager','admin','system']
 

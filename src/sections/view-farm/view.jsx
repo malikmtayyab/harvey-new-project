@@ -66,14 +66,17 @@ const [markers,setMarkers]=useState()
           attribution="&copy; OpenStreetMap contributors"
         />
         {markers && markers.length>0 && markers.map((marker, index) => (
-          <Marker key={index} position={[marker.latitude, marker.longitude]}>
-            <Popup>  
-              
-<h5>
+          
 
-  Contents: {marker.content}
-</h5>
-<h5>
+            marker.latitude && marker.longitude?
+            <Marker key={index} position={[marker.latitude, marker.longitude]}>
+            <Popup>  
+            
+            <h5>
+            
+            Contents: {marker.content}
+            </h5>
+            <h5>
 
   Volume: {marker.volume}
 </h5>
@@ -87,13 +90,14 @@ const [markers,setMarkers]=useState()
   Longitude: {marker.longitude}
 </h5>
               
-            
-            </Popup>
-          </Marker>
-        ))}
-        <FullScreenControl />
+              
+              </Popup>
+              </Marker>
+            :''
+          ))}
+          <FullScreenControl />
       </MapContainer>
-    
+      
     </div>
   );
 }
