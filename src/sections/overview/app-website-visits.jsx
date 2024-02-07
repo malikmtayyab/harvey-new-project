@@ -21,12 +21,13 @@ const SORT_OPTIONS = [
   { value: 'daily', label: 'Daily' },
   { value: 'weekly', label: 'Weekly' },
   { value: 'monthly', label: 'Monthly' },
-  { value: 'six_weeks', label: 'Six Weeks' },
-  { value: 'annually', label: 'Annually' },
-  { value: 'future_daily', label: 'Future Daily Consumption' },
-  { value: 'future_annual', label: 'Future Annual Consumption' },
+  // { value: 'anually', label: 'Anually' },
+  // { value: 'six_weeks', label: 'Six Weeks' },
+  // { value: 'annually', label: 'Annually' },
+  // { value: 'future_daily', label: 'Future Daily Consumption' },
+  // { value: 'future_annual', label: 'Future Annual Consumption' },
 ];
-export default function AppWebsiteVisits({ title, subheader, chart, tankFarms, ...other }) {
+export default function AppWebsiteVisits({ title, subheader, chart, tankFarms,getTankFormData, ...other }) {
   const { labels, colors, series, options } = chart;
 
  
@@ -50,6 +51,8 @@ export default function AppWebsiteVisits({ title, subheader, chart, tankFarms, .
     if(option.id)
     {
 
+      getTankFormData(option.id,selected.value)
+
       setSelectedFarm(option)
 
       
@@ -61,6 +64,8 @@ export default function AppWebsiteVisits({ title, subheader, chart, tankFarms, .
     if(option.label)
     {
 
+
+      getTankFormData(selectedFarm.id,option.value)
       setSelected(option)
 
       
@@ -96,6 +101,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, tankFarms, .
     },
     ...options,
   });
+  
 
   return (
     <Card {...other}>
@@ -103,11 +109,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, tankFarms, .
 
       <Box sx={{ p: 3, pb: 1 }}>
 
-        <div style={{
-        //  display:'flex',
-        //  width:'40%'
-         
-        }}>
+        <div >
           
          <div 
     style={{

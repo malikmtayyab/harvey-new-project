@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 /* eslint-disable */
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -6,7 +6,14 @@ import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 import 'leaflet-fullscreen/dist/Leaflet.fullscreen';
 
 const FullScreenControl = () => {
+
+
   const map = useMap();
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('id');
+   
+  }, []);
   return (
     <div className="leaflet-control-fullscreen leaflet-bar leaflet-control">
       <a
