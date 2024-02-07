@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 
-const CircleMotion = ({innerCircleSize}) => {
+const CircleMotion = ({ innerCircleSize }) => {
   // const [innerCircleSize, setInnerCircleSize] = useState(0);
 
   const updateInnerCircleSize = (value) => {
@@ -22,12 +22,12 @@ const CircleMotion = ({innerCircleSize}) => {
     borderRadius: '50%',
     overflow: 'hidden',
     boxShadow: 'inset 0 0 12px rgba(0, 0, 0, 0.3)',
-    textAlign:'center',
+    textAlign: 'center',
     background: 'radial-gradient(circle at 65% 15%, white 0.5px, rgb(0, 255, 255,0.0) 3%, rgb(0,0,139,0.6) 60%, aqua 100%)',
 
-  
 
-    
+
+
   };
 
   const innerCircleStyle = {
@@ -39,7 +39,7 @@ const CircleMotion = ({innerCircleSize}) => {
     bottom: '0',
     transition: 'height 0.3s',
     background: 'radial-gradient(circle at 35% 10%, white 1px, aqua 3%, darkblue 80%, aqua 5%)',
-    zIndex:'50%'
+    zIndex: '50%'
   };
 
   const aboveInnerCircleStyle = {
@@ -54,27 +54,27 @@ const CircleMotion = ({innerCircleSize}) => {
 
   return (
     <div>
-  
+
 
       <div style={mainCircleStyle} id="mainCircle">
         <div style={{
-          display:'flex',
-          alignItems:'center',
-          height:'100%',
-          color:'white',
-          textShadow: '0 0 3px aqua, 0 0 5px darkblue', 
-          fontWeight:'bold',
-          zIndex:'100',
-          position:'absolute',
-          left:'35%',
-          fontSize:'16px'
-          
+          display: 'flex',
+          alignItems: 'center',
+          height: '100%',
+          color: 'white',
+          textShadow: '0 0 3px aqua, 0 0 5px darkblue',
+          fontWeight: 'bold',
+          zIndex: '100',
+          position: 'absolute',
+          left: '35%',
+          fontSize: '16px'
+
         }}>
-          {innerCircleSize}%
-          </div>
+          {Math.floor(innerCircleSize)}%
+        </div>
         <div style={aboveInnerCircleStyle}></div>
         <div style={innerCircleStyle}>
-        
+
         </div>
       </div>
     </div>

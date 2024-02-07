@@ -64,7 +64,7 @@ export default function TankModal({ refreshTableData }) {
     filledDepth: '',
     diameter: '',
     tank_farm: '', // Assuming it's a string for the dropdown value
-    user_id:'',
+    user_id: '',
   });
 
   const categoryOptions = [
@@ -82,7 +82,8 @@ export default function TankModal({ refreshTableData }) {
 
   ];
 
-  const [users,setUsers]=React.useState()
+  const [users, setUsers] = React.useState()
+  const [tankFarms, setTankFarms] = React.useState()
 
   const formFields = [
     {
@@ -184,26 +185,26 @@ export default function TankModal({ refreshTableData }) {
       placeholder: 'Select Tank Farm',
       type: 'select', // Assuming tank_farm is a dropdown
       value: formData.tank_farm,
-      options: categoryOptions, // Add your dropdown options here
+      options: tankFarms, // Add your dropdown options here
     },
     {
-      name:'Select user',
-      id:'user_id',
-      placeholder:'Select User',
-      type:'select',
-      value:formData.user_id,
-      options:users
+      name: 'Select user',
+      id: 'user_id',
+      placeholder: 'Select User',
+      type: 'select',
+      value: formData.user_id,
+      options: users
     }
   ];
 
- 
+
 
 
   const handleCloseCategory = (option, name) => {
-    
+
     setFormData({
       ...formData,
-      [name]: name==='user_id'?option.id: option.value,
+      [name]: name === 'user_id' || name === 'tank_farm' ? option.id : option.value,
     });
 
     // setOpen(null);
@@ -231,18 +232,19 @@ export default function TankModal({ refreshTableData }) {
     handleClose();
   };
 
-  const getAllUsers=async()=>
-  {
-    const userData=await GetRequest(UrlService.getAllUsers)
-    console.log(userData.data);
+  const getAllUsers = async () => {
+    const userData = await GetRequest(UrlService.getAllUsers)
     setUsers(userData.data)
   }
-  React.useEffect(()=>{
-      getAllUsers()
-  },[])
-  React.useEffect(() => { 
-
-    console.log('user ',users)
+  const getTankFarms = async () => {
+    const farms = await GetRequest(UrlService.getAllFarms)
+    setTankFarms(farms?.data)
+  }
+  React.useEffect(() => {
+    getAllUsers()
+    getTankFarms()
+  }, [])
+  React.useEffect(() => {
 
   }, [formData.category, users]);
   const [tankName, setTankName] = React.useState('');

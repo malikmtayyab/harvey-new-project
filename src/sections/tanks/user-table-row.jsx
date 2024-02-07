@@ -126,11 +126,11 @@ export default function UserTableRow({
 
         {/* <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell> */}
 
-        <TableCell align="right">
+        {/* <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
-        </TableCell>
+        </TableCell> */}
       </TableRow>
 
       <Popover
@@ -148,10 +148,6 @@ export default function UserTableRow({
           Edit
         </MenuItem>
 
-        {/* <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
-          <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
-          Delete
-        </MenuItem> */}
       </Popover>
     </>
   );

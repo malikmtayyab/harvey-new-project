@@ -6,5 +6,6 @@ export default {
     getDashboardData: 'tanks/dashboard',
     getDataByTankFarm:'tankFarms/tankFarmStatistics',
     getAllUsers:'users',
-    addUser:'users'
+    addUser:'users',
+    getTankFarmsTanks:'tanks/byTankFarm'
 }

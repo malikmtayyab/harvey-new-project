@@ -28,12 +28,18 @@ import UrlService from '../../../services/UrlService'
 export default function AppView() {
   const [dashboardData, setDashboardData] = useState()
   const [tankFarms, setTankFarms] = useState(null)
+  const [tanks, setTanks] = useState([])
 
   const getDashboardData = async () => {
-    const farms=await GetRequest(UrlService.getAllFarms)
+    const farms = await GetRequest(UrlService.getAllFarms)
     const res = await GetRequest(UrlService.getDashboardData)
-    setTankFarms(farms.data)
+    setTankFarms(farms?.data)
     setDashboardData(res)
+  }
+
+  const tankData = async (id) => {
+    const res = await GetRequest(`${UrlService.getTankFarmsTanks}/${id}`)
+    setTanks(res?.data)
   }
 
   useEffect(() => {
@@ -85,6 +91,7 @@ export default function AppView() {
 
           <Grid xs={12} md={12} lg={12}>
             <AppWebsiteVisits
+              handleTankData={tankData}
               title="Capacity History"
               subheader=""
               tankFarms={tankFarms}
@@ -125,38 +132,23 @@ export default function AppView() {
               }}
             />
           </Grid>
-          <Grid container xs={12} color="white">
-            {/* <CircleMotion innerCircleSize={50}/> */}
-            <Grid xs={12} sm={6} md={4}>
-              <StatsTile
-                title="Bug Reports"
-                total={234}
-                color="error"
-                icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-                level={10}
-              />
-            </Grid>
-            <Grid xs={12} sm={6} md={4}>
-              <StatsTile
-                title="Bug Reports"
-                total={234}
-                color="error"
-                icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-                level={20}
-              />
-            </Grid>
-
-            <Grid xs={12} sm={6} md={4}>
-              <StatsTile
-                title="Bug Reports"
-                total={234}
-                color="error"
-                icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-                level={30}
-              />
-            </Grid>
-            {/* <StatsTile/> */}
-            {/* <StatsTile/> */}
+          <Grid container xs={12} color="white" >
+            {
+              tanks?.map((tank) => {
+                return (
+                  <Grid xs={12} sm={6} md={4}>
+                    <StatsTile
+                      tank={tank}
+                      title="Bug Reports"
+                      total={234}
+                      color="error"
+                      icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+                      level={10}
+                    />
+                  </Grid>
+                )
+              })
+            }
           </Grid>
 
           {/* <Grid xs={12} md={6} lg={4}>

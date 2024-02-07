@@ -10,7 +10,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 // ----------------------------------------------------------------------
 
-export default function StatsTile({ title, total, icon, color = 'primary', sx, level, ...other }) {
+export default function StatsTile({ tank, title, total, icon, color = 'primary', sx, level, ...other }) {
   return (
     <Card
       style={{
@@ -24,7 +24,7 @@ export default function StatsTile({ title, total, icon, color = 'primary', sx, l
           marginBottom: 10,
         }}
       >
-        <CircleMotion innerCircleSize={level} />
+        <CircleMotion innerCircleSize={(tank?.filledDepth / tank?.heigth) * 100} />
       </div>
       <Grid container xs={12}>
         <Grid xs={6}>
@@ -38,11 +38,11 @@ export default function StatsTile({ title, total, icon, color = 'primary', sx, l
                 Tank Level
               </Typography>
             </p>
-            <p>
+            {/* <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
                 Update
               </Typography>
-            </p>
+            </p> */}
 
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
@@ -89,42 +89,42 @@ export default function StatsTile({ title, total, icon, color = 'primary', sx, l
           >
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                20 Ltrs
+                {tank?.volume?.toFixed(2)}
               </Typography>
             </p>
-            <p>
+            {/* <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
                 up
               </Typography>
-            </p>
+            </p> */}
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                up
+                {tank?.volumeFilled < tank.previousVolumeFilled ? 'DOWN' : 'UP'}
               </Typography>
             </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                47.5%
+                {(tank?.volumeFilled - tank?.previousVolumeFilled)?.toFixed(2)}
               </Typography>
             </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                up
+                {tank?.content?.toUpperCase()}
               </Typography>
             </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                10 Liters
+                {tank?.volume.toFixed(2)}
               </Typography>
             </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Normal
+                {tank?.status}
               </Typography>
             </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Degree Celcius
+                {tank?.temperatur ? tank?.temperatur : 0}
               </Typography>
             </p>{' '}
           </div>
