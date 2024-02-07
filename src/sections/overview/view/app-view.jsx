@@ -27,9 +27,12 @@ import UrlService from '../../../services/UrlService'
 
 export default function AppView() {
   const [dashboardData, setDashboardData] = useState()
+  const [tankFarms, setTankFarms] = useState(null)
 
   const getDashboardData = async () => {
+    const farms=await GetRequest(UrlService.getAllFarms)
     const res = await GetRequest(UrlService.getDashboardData)
+    setTankFarms(farms.data)
     setDashboardData(res)
   }
 
@@ -84,6 +87,7 @@ export default function AppView() {
             <AppWebsiteVisits
               title="Capacity History"
               subheader=""
+              tankFarms={tankFarms}
               chart={{
                 labels: [
                   '01/01/2003',

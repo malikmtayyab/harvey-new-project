@@ -26,17 +26,36 @@ const SORT_OPTIONS = [
   { value: 'future_daily', label: 'Future Daily Consumption' },
   { value: 'future_annual', label: 'Future Annual Consumption' },
 ];
-export default function AppWebsiteVisits({ title, subheader, chart, ...other }) {
+export default function AppWebsiteVisits({ title, subheader, chart, tankFarms, ...other }) {
   const { labels, colors, series, options } = chart;
 
+ 
 
   const [open, setOpen] = useState(null);
+  const [openTankFarms, setOpenTankFarms] = useState(null);
 
   const [selected,setSelected]=useState(SORT_OPTIONS[0])
+  const [selectedFarm,setSelectedFarm]=useState(tankFarms.length>0 ?tankFarms[0]:null)
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
 
+  const handleTankFarmOpen = (event) => {
+    setOpenTankFarms(event.currentTarget);
+  };
+
+  
+  const handleTankFarmClose = (option) => {
+    
+    if(option.id)
+    {
+
+      setSelectedFarm(option)
+
+      
+    }
+    setOpenTankFarms(null);
+  };
   const handleClose = (option) => {
     
     if(option.label)
@@ -84,6 +103,12 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
 
       <Box sx={{ p: 3, pb: 1 }}>
 
+        <div style={{
+        //  display:'flex',
+        //  width:'40%'
+         
+        }}>
+          
          <div 
     style={{
       display:'flex',
@@ -94,6 +119,8 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
       
     }}
     >
+
+   
       <Button
         disableRipple
         color="inherit"
@@ -118,6 +145,9 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
 
             <Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />
           </Button>
+
+
+
       <Menu
         open={!!open}
         anchorEl={open}
@@ -147,6 +177,81 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
           </MenuItem>
         ))}
       </Menu>
+
+
+    </div>
+
+
+    <div 
+    style={{
+      display:'flex',
+      width:'22%',
+      marginLeft:'auto',
+      marginBottom:'1%',
+      justifyContent:'end',
+      
+    }}
+    >
+    
+      <Button
+        disableRipple
+        color="inherit"
+        onClick={handleTankFarmOpen}
+    
+        sx={{
+          width:'100%',
+          border:'1px solid black',
+          padding:1,
+          display:'flex',
+          justifyContent:'space-between',
+          border:'1px solid #d4d6d5'
+          
+        }}
+        >
+      
+        <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
+          {
+            selectedFarm.name
+          }
+        </Typography>
+
+            <Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />
+          </Button>
+
+
+          <Menu
+        open={!!openTankFarms}
+        anchorEl={openTankFarms}
+        onClose={handleTankFarmClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+        slotProps={{
+          paper: {
+            sx: {
+              
+              [`& .${listClasses.root}`]: {
+                p: 0,
+              },
+              width:'20vw',
+         
+              
+            },
+            
+          },
+        }}
+        >
+        {tankFarms.length>0 && tankFarms.map((option) => (
+          <MenuItem sx={{
+            zIndex:'100'
+          }} key={option.id}  onClick={()=>handleTankFarmClose(option)}>
+            {option.name}
+          </MenuItem>
+        ))}
+      </Menu>
+
+
+    </div>
+
 
     </div>
 

@@ -144,19 +144,21 @@ export default function TankModal({ refreshTableData }) {
     try {
       const data=
       {
-        "username": "string",
-        "email": "string",
+        "username": "name1",
+        "email": "name1@gmail.com",
         "createTime": "2024-02-06T19:59:00.277Z",
         "updateTime": "2024-02-06T19:59:00.277Z",
-        "firstname": "string",
-        "lastname": "string",
+        "firstname": "name1",
+        "lastname": "name1",
         "phonenumber1": "string",
         "phonenumber2": "string",
         "authority": "manager",
-        "active": "string",
+        "active": "1",
+        "rawPassword":"9817298",
+        "password":"9817298",
         "emailAlias": "string"
       }
-      const res = await PostRequest(`${UrlService.addUser}`, formData);
+      const res = await PostRequest(`${UrlService.addUser}`, data);
       if (res.status) {
         toast.success('User Added!');
         refreshTableData();
