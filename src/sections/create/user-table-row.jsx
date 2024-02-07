@@ -95,7 +95,7 @@ export default function UserTableRow({
         >
           {forecastMonth}
         </TableCell>
-        <TableCell
+        {/* <TableCell
           sx={{
             paddingLeft: 5,
           }}
@@ -120,17 +120,17 @@ export default function UserTableRow({
           >
             {status}
           </Button>
-        </TableCell>
+        </TableCell> */}
 
         {/* <TableCell>{role}</TableCell> */}
 
         {/* <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell> */}
 
-        <TableCell align="right">
+        {/* <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
-        </TableCell>
+        </TableCell> */}
       </TableRow>
 
       <Popover
