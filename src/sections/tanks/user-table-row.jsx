@@ -20,6 +20,7 @@ import ChartView from './ChartView';
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
+  id,
   name,
   category,
   coneHeigth,
@@ -54,7 +55,7 @@ export default function UserTableRow({
           <Stack direction="row" alignItems="center" spacing={2}>
             {/* <Avatar alt={name} src={avatarUrl} /> */}
             <Typography variant="subtitle2" noWrap>
-              <ChartView name={name} />
+              <ChartView name={name} id={id}/>
 
             </Typography>
           </Stack>

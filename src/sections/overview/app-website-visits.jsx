@@ -67,7 +67,12 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
     if (option.label) {
 
 
-      getTankFormData(selectedFarm?.id, option.value)
+      if(tankFarms && tankFarms.length>0)
+      {
+
+        getTankFormData(selectedFarm?.id, option.value)
+      }
+      
       setSelected(option)
 
 
@@ -185,6 +190,9 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
 
           </div>
 
+{
+
+tankFarms && tankFarms.length>0 &&
 
           <div
             style={{
@@ -256,7 +264,7 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
 
           </div>
 
-
+              }
         </div>
 
         <Chart

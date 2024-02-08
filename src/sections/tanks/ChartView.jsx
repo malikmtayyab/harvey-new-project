@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AppWebsiteVisits from '../overview/app-website-visits';
+import { GetRequest } from 'src/services/ApiService';
+import UrlService from 'src/services/UrlService';
 // import { Grid } from '@mui/material';
 
 const style = {
@@ -19,10 +21,21 @@ const style = {
   p: 4,
 };
 
-export default function ChartView({ name }) {
+export default function ChartView({ name, id }) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () =>{ 
+    setOpen(true)
+    getTanksStats()
+  };
   const handleClose = () => setOpen(false);
+
+
+  const getTanksStats=async()=>
+  {
+    const tanksStats=await GetRequest(`${UrlService.getTanksStats}/${id}/daily`)
+  }
+
+
 
   return (
     <div>

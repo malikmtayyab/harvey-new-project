@@ -71,6 +71,8 @@ export default function AppView() {
     //  farmStats.data.map(obj=>obj.)
     setTankFarmsStats(dataArray)
   }
+
+  
   useEffect(() => {
     getDashboardData();
   }, [])

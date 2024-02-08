@@ -159,6 +159,7 @@ export default function TanksPage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
+                      id={row.id}
                       name={row.name}
                       category={row.category}
                       coneHeigth={row.coneHeigth}
