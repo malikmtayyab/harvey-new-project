@@ -27,7 +27,7 @@ const SORT_OPTIONS = [
   // { value: 'future_daily', label: 'Future Daily Consumption' },
   // { value: 'future_annual', label: 'Future Annual Consumption' },
 ];
-export default function AppWebsiteVisits({ handleTankData, title, subheader, chart, tankFarms, getTankFormData, ...other }) {
+export default function AppWebsiteVisits({ handleTankData, title, subheader, chart, tankFarms, getTankFormData,getTanksData, ...other }) {
   const { labels, colors, series, options } = chart;
 
 
@@ -71,6 +71,10 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
       {
 
         getTankFormData(selectedFarm?.id, option.value)
+      }
+      else
+      {
+        getTanksData(option.value)
       }
       
       setSelected(option)

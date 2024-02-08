@@ -1,3 +1,4 @@
+
 // import { faker } from '@faker-js/faker';
 import { useState, useEffect } from 'react';
 
@@ -33,9 +34,34 @@ export default function AppView() {
   const [tankFarmsStatsLabels, setTankFarmsStatsLabels] = useState(null)
 
 
+  function getStartEndDate(frequency) {
+    const currentDate = new Date();
+    let startDate = null;
+    let endDate = null;
+
+    if (frequency === 'daily') {
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
+        endDate = currentDate;
+    } else if (frequency === 'weekly') {
+        const dayOfWeek = currentDate.getDay();
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - dayOfWeek, 0, 0, 0);
+        endDate = currentDate;
+    } else if (frequency === 'monthly') {
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1, 0, 0, 0);
+        endDate = currentDate;
+    }
+
+    return {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString()
+    };
+}
+
   const getDashboardData = async () => {
     const farms = await GetRequest(UrlService.getAllFarms)
-    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily`)
+
+    const { startDate, endDate } = getStartEndDate('daily');
+    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily?startDate=${startDate}&endDate=${endDate}`)
     const res = await GetRequest(UrlService.getDashboardData)
     await tankData(farms.data[0].id)
     setTankFarms(farms?.data)
@@ -62,7 +88,8 @@ export default function AppView() {
 
 
   const getTankFormData = async (id, filter) => {
-    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${id}/${filter}`)
+    const { startDate, endDate } = getStartEndDate(filter);
+    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${id}/${filter}?startDate=${startDate}&endDate=${endDate}`)
     const dataArray = []
     const dataArray2 = []
     // Create an array to store total volumes
@@ -152,24 +179,21 @@ export default function AppView() {
               }}
             />
           </Grid>
-          <Grid container xs={12} color="white" >
-            {
-              tanks?.map((tank) => {
-                return (
-                  <Grid xs={12} sm={6} md={4}>
-                    <StatsTile
-                      tank={tank}
-                      title="Bug Reports"
-                      total={234}
-                      color="error"
-                      icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-                      level={10}
-                    />
-                  </Grid>
-                )
-              })
-            }
-          </Grid>
+          <Grid container xs={12} color="white">
+  {tanks?.map((tank) => (
+    <Grid xs={12} sm={6} md={4}>
+      <StatsTile
+        tank={tank}
+        title="Bug Reports"
+        total={234}
+        color="error"
+        icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+        level={10}
+      />
+    </Grid>
+  ))}
+</Grid>
+
 
           {/* <Grid xs={12} md={6} lg={4}>
               <AppCurrentVisits

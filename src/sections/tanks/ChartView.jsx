@@ -29,10 +29,37 @@ export default function ChartView({ name, id }) {
   };
   const handleClose = () => setOpen(false);
 
+  const [tanksData,setTanksData]=React.useState()
 
-  const getTanksStats=async()=>
+  function getStartEndDate(frequency) {
+    let currentDate = new Date();
+    let startDate = null;
+    let endDate = null;
+
+    if (frequency === 'daily') {
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
+        endDate = currentDate;
+    } else if (frequency === 'weekly') {
+        let dayOfWeek = currentDate.getDay();
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - dayOfWeek, 0, 0, 0);
+        endDate = currentDate;
+    } else if (frequency === 'monthly') {
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1, 0, 0, 0);
+        endDate = currentDate;
+    }
+
+    return {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString()
+    };
+}
+
+  const getTanksStats=async(filter='daily')=>
   {
-    const tanksStats=await GetRequest(`${UrlService.getTanksStats}/${id}/daily`)
+    let { startDate, endDate } = getStartEndDate(filter);
+
+    const tanksStats=await GetRequest(`${UrlService.getTanksStats}/${id}/${filter}?startDate=${startDate}&endDate=${endDate}`)
+    setTanksData(tanksStats.data)
   }
 
 
@@ -51,6 +78,7 @@ export default function ChartView({ name, id }) {
           <AppWebsiteVisits
             title="Capacity History"
             subheader=""
+            getTanksData={getTanksStats}
             chart={{
               labels: [
                 '01/01/2003',
