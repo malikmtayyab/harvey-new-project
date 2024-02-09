@@ -8,6 +8,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import { fShortenNumber } from 'src/utils/format-number';
+import tankIcon from '../../assets/water-tank.png';
+import farmTank from '../../assets/oil-tank.png'
+import increase from '../../assets/charts.png'
+import group from '../../assets/group.png'
+
 
 // ----------------------------------------------------------------------
 
@@ -21,11 +26,12 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         px: 3,
         py: 5,
         borderRadius: 2,
+        gap:8,
         ...sx,
       }}
       {...other}
     >
-      <Logo sx={{ ml: 4, opacity: '50%' }} />
+      <img src={title==='Number of Tanks'?tankIcon:title==='Farm Tank'?farmTank:title==='Total Capacity (Litres)'?increase:group} alt=""  style={{width:'25px',height:'25px'}}/>
 
       <Stack spacing={0.5}>
         <Typography variant="h4">{total > 1000 ? fShortenNumber(total) : total}</Typography>

@@ -13,7 +13,7 @@ const navConfig = [
     path: '/',
     icon: icon('ic_analytics'),
     type: 'single',
-    role:['user','manager','admin','system']
+    role:['admin','system']
   },
   {
     // heading:'Tank Management',
@@ -30,7 +30,7 @@ const navConfig = [
       //   path: '/view-farms',
       // },
     ],
-    role:['user','manager','admin','system']
+    role:['admin','system']
 
   },
   {

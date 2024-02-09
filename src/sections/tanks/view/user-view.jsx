@@ -118,7 +118,7 @@ export default function TanksPage() {
         <Typography variant="h4">All Tanks</Typography>
 
         {
-          role != 'user' &&
+          role != 'user' && role!=='manager' &&
           <TankModal refreshTableData={getTableData} />
         }
       </Stack>

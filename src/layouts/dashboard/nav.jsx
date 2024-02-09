@@ -23,6 +23,7 @@ import Scrollbar from 'src/components/scrollbar';
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';
 import Accordion from './Accordian';
+import logo from '../../assets/fleemoo.png'
 /* eslint-enable */
 
 // ----------------------------------------------------------------------
@@ -90,7 +91,8 @@ export default function Nav({ openNav, onCloseNav }) {
         },
       }}
     >
-      <Logo sx={{ mt: 3, ml: 4,mb: 4 }} />
+      <img src={logo} alt="Logo" sx={{ mt: 3, ml: 4,mb: 4 }} style={{width:'150px', marginLeft:'60px',marginBottom:'30px'}}/>
+      {/* <Logo sx={{ mt: 3, ml: 4,mb: 4 }} /> */}
 
       {/* {renderAccount} */}
 
