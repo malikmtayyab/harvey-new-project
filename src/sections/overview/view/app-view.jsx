@@ -47,9 +47,13 @@ export default function AppView() {
         startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - dayOfWeek, 0, 0, 0);
         endDate = currentDate;
     } else if (frequency === 'monthly') {
-        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1, 0, 0, 0);
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 30, 0, 0, 0);
         endDate = currentDate;
     }
+    else if (frequency === 'yearly') {
+      startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 365, 0, 0, 0);
+      endDate = currentDate;
+  }
 
     return {
         startDate: startDate.toISOString(),
@@ -71,7 +75,7 @@ export default function AppView() {
     const dataArray = []
     const dataArray2 = []
     // Create an array to store total volumes
-    farmStats.data.map(obj => dataArray.push(obj.totalVolume));
+    farmStats.data.map(obj => dataArray.push(Math.round(obj.totalVolume)));
     farmStats.data.map(obj => dataArray2.push(obj.dayOfYear));
     //  farmStats.data.map(obj=>obj.)
     setTankFarmsStats(dataArray)
@@ -93,8 +97,9 @@ export default function AppView() {
     const dataArray = []
     const dataArray2 = []
     // Create an array to store total volumes
-    farmStats.data.map(obj => dataArray.push(obj.totalVolume));
-    farmStats.data.map(obj => dataArray2.push(obj.dayOfYear));
+    farmStats.data.map(obj => dataArray.push(Math.round(obj.totalVolume)));
+    farmStats.data.map(obj => dataArray2.push(JSON.stringify(filter==='daily'? obj.dayOfYear:filter==='weekly'?obj.week:filter==='monthly'?obj.month:obj.year)));
+    setTankFarmsStatsLabels(dataArray2)
     //  farmStats.data.map(obj=>obj.)
     setTankFarmsStats(dataArray)
   }
