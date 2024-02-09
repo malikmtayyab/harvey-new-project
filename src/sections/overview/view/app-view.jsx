@@ -1,5 +1,7 @@
 
 // import { faker } from '@faker-js/faker';
+/*eslint-disable*/
+
 import { useState, useEffect } from 'react';
 
 import Container from '@mui/material/Container';
@@ -33,6 +35,8 @@ export default function AppView() {
   const [tankFarmsStats, setTankFarmsStats] = useState(null)
   const [tankFarmsStatsLabels, setTankFarmsStatsLabels] = useState(null)
 
+  const [True,setTrue]=useState(true)
+
 
   function getStartEndDate(frequency) {
     const currentDate = new Date();
@@ -61,29 +65,7 @@ export default function AppView() {
     };
 }
 
-  const getDashboardData = async () => {
-    const farms = await GetRequest(UrlService.getAllFarms)
 
-    const { startDate, endDate } = getStartEndDate('daily');
-    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily?startDate=${startDate}&endDate=${endDate}`)
-    const res = await GetRequest(UrlService.getDashboardData)
-    await tankData(farms.data[0].id)
-    setTankFarms(farms?.data)
-    // setTankFarmsStats(farmStats)
-
-
-    const dataArray = []
-    const dataArray2 = []
-    // Create an array to store total volumes
-    farmStats.data.map(obj => dataArray.push(Math.round(obj.totalVolume)));
-    farmStats.data.map(obj => dataArray2.push(obj.dayOfYear));
-    //  farmStats.data.map(obj=>obj.)
-    setTankFarmsStats(dataArray)
-    setTankFarmsStatsLabels(dataArray2)
-    console.log(dataArray);
-
-    setDashboardData(res)
-  }
 
   const tankData = async (id) => {
     const res = await GetRequest(`${UrlService.getTankFarmsTanks}/${id}`)
@@ -98,7 +80,20 @@ export default function AppView() {
     const dataArray2 = []
     // Create an array to store total volumes
     farmStats.data.map(obj => dataArray.push(Math.round(obj.totalVolume)));
-    farmStats.data.map(obj => dataArray2.push(JSON.stringify(filter==='daily'? obj.dayOfYear:filter==='weekly'?obj.week:filter==='monthly'?obj.month:obj.year)));
+
+    farmStats.data.map(obj => {
+      let value;
+      if (filter === 'daily') {
+        value = obj.dayOfYear;
+      } else if (filter === 'weekly') {
+        value = obj.week;
+      } else if (filter === 'monthly') {
+        value = obj.month;
+      } else {
+        value = obj.year;
+      }
+    return  dataArray2.push(JSON.stringify(value));
+    });
     setTankFarmsStatsLabels(dataArray2)
     //  farmStats.data.map(obj=>obj.)
     setTankFarmsStats(dataArray)
@@ -106,6 +101,30 @@ export default function AppView() {
 
   
   useEffect(() => {
+
+    const getDashboardData = async () => {
+      const farms = await GetRequest(UrlService.getAllFarms)
+  
+      const { startDate, endDate } = getStartEndDate('daily');
+      const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily?startDate=${startDate}&endDate=${endDate}`)
+      const res = await GetRequest(UrlService.getDashboardData)
+      await tankData(farms.data[0].id)
+      setTankFarms(farms?.data)
+      // setTankFarmsStats(farmStats)
+  
+  
+      const dataArray = []
+      const dataArray2 = []
+      // Create an array to store total volumes
+      farmStats.data.map(obj => dataArray.push(Math.round(obj.totalVolume)));
+      farmStats.data.map(obj => dataArray2.push(obj.dayOfYear));
+      //  farmStats.data.map(obj=>obj.)
+      setTankFarmsStats(dataArray)
+      setTankFarmsStatsLabels(dataArray2)
+      console.log(dataArray);
+  
+      setDashboardData(res)
+    }
     getDashboardData();
   }, [])
 
