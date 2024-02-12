@@ -35,7 +35,7 @@ export default function AppView() {
   const [tankFarmsStats, setTankFarmsStats] = useState(null)
   const [tankFarmsStatsLabels, setTankFarmsStatsLabels] = useState(null)
 
-  const [True,setTrue]=useState(true)
+  // const [True,setTrue]=useState(true)
 
 
   function getStartEndDate(frequency) {

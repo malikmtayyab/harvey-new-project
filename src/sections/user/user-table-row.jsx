@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import MenuItem from '@mui/material/MenuItem';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+// import IconButton from '@mui/material/IconButton';
 
 import Iconify from 'src/components/iconify';
 
@@ -30,9 +30,9 @@ export default function UserTableRow({
 }) {
   const [open, setOpen] = useState(null);
 
-  const handleOpenMenu = (event) => {
-    setOpen(event.currentTarget);
-  };
+  // const handleOpenMenu = (event) => {
+  //   setOpen(event.currentTarget);
+  // };
 
   const handleCloseMenu = () => {
     setOpen(null);
