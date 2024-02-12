@@ -8,6 +8,9 @@ import Router from 'src/routes/sections';
 import ThemeProvider from 'src/theme';
 import { useEffect, useState } from 'react';
 import kc, { initOptions } from './services/Keycloack';
+import { useTranslation } from 'react-i18next';
+import initializeI18n from './components/i18/i18n';; // Import i18n initialization function
+
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +34,17 @@ export default function App() {
         localStorage.setItem("token", kc.token)
         var roles = kc.tokenParsed.realm_access.roles;
    
+        const locale=kc.tokenParsed.locale
+        if(locale!==undefined)
+        {
+          initializeI18n(locale);
+        }
+        else
+        {
+          initializeI18n("en");
+        }
         localStorage.setItem('roles',roles)
+
 
         setAuthentication(true)
         kc.onTokenExpired = () => {

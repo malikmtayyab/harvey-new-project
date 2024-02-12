@@ -18,6 +18,7 @@ import AppWidgetSummary from '../app-widget-summary';
 import StatsTile from 'src/components/StatsTile';
 import { GetRequest } from '../../../services/ApiService';
 import UrlService from '../../../services/UrlService';
+import { useTranslation } from 'react-i18next';
 /* eslint-enable */
 // import AppTrafficBySite from '../app-traffic-by-site';
 // import AppCurrentSubject from '../app-current-subject';
@@ -162,8 +163,11 @@ export default function AppView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const { t, i18n } = useTranslation();
+
   return (
     <Container maxWidth="xl">
+        <h1>{t('Welcome to my app')}</h1>
       <Typography variant="h4" sx={{ mb: 5 }}>
         Hi, Welcome back 👋
       </Typography>
