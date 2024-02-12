@@ -91,7 +91,7 @@ export default function Nav({ openNav, onCloseNav }) {
         },
       }}
     >
-      <img src={logo} alt="Logo" sx={{ mt: 3, ml: 4,mb: 4 }} style={{width:'150px', marginLeft:'60px',marginBottom:'30px'}}/>
+      <img src={logo} alt="Logo" style={{width:'150px', marginLeft:'60px',marginBottom:'30px'}}/>
       {/* <Logo sx={{ mt: 3, ml: 4,mb: 4 }} /> */}
 
       {/* {renderAccount} */}
