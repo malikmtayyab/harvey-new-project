@@ -1,4 +1,3 @@
-
 // import { faker } from '@faker-js/faker';
 import { useState, useEffect } from 'react';
 
@@ -17,8 +16,8 @@ import Typography from '@mui/material/Typography';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
 import StatsTile from 'src/components/StatsTile';
-import { GetRequest } from '../../../services/ApiService'
-import UrlService from '../../../services/UrlService'
+import { GetRequest } from '../../../services/ApiService';
+import UrlService from '../../../services/UrlService';
 /* eslint-enable */
 // import AppTrafficBySite from '../app-traffic-by-site';
 // import AppCurrentSubject from '../app-current-subject';
@@ -27,12 +26,11 @@ import UrlService from '../../../services/UrlService'
 // ----------------------------------------------------------------------
 
 export default function AppView() {
-  const [dashboardData, setDashboardData] = useState()
-  const [tankFarms, setTankFarms] = useState(null)
-  const [tanks, setTanks] = useState([])
-  const [tankFarmsStats, setTankFarmsStats] = useState(null)
-  const [tankFarmsStatsLabels, setTankFarmsStatsLabels] = useState(null)
-
+  const [dashboardData, setDashboardData] = useState();
+  const [tankFarms, setTankFarms] = useState(null);
+  const [tanks, setTanks] = useState([]);
+  const [tankFarmsStats, setTankFarmsStats] = useState(null);
+  const [tankFarmsStatsLabels, setTankFarmsStatsLabels] = useState(null);
 
   function getStartEndDate(frequency) {
     const currentDate = new Date();
@@ -40,81 +38,136 @@ export default function AppView() {
     let endDate = null;
 
     if (frequency === 'daily') {
-        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0);
-        endDate = currentDate;
-    } else if (frequency === 'weekly') {
-        const dayOfWeek = currentDate.getDay();
-        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - dayOfWeek, 0, 0, 0);
-        endDate = currentDate;
-    } else if (frequency === 'monthly') {
-        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 30, 0, 0, 0);
-        endDate = currentDate;
-    }
-    else if (frequency === 'yearly') {
-      startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 365, 0, 0, 0);
+      startDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate(),
+        0,
+        0,
+        0
+      );
       endDate = currentDate;
-  }
+    } else if (frequency === 'weekly') {
+      const dayOfWeek = currentDate.getDay();
+      startDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() - dayOfWeek,
+        0,
+        0,
+        0
+      );
+      endDate = currentDate;
+    } else if (frequency === 'monthly') {
+      startDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() - 30,
+        0,
+        0,
+        0
+      );
+      endDate = currentDate;
+    } else if (frequency === 'yearly') {
+      startDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() - 365,
+        0,
+        0,
+        0
+      );
+      endDate = currentDate;
+    }
 
     return {
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString()
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
     };
-}
+  }
 
   const getDashboardData = async () => {
-    const farms = await GetRequest(UrlService.getAllFarms)
+    const farms = await GetRequest(UrlService.getAllFarms);
 
     const { startDate, endDate } = getStartEndDate('daily');
-    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily?startDate=${startDate}&endDate=${endDate}`)
-    const res = await GetRequest(UrlService.getDashboardData)
-    await tankData(farms.data[0].id)
-    setTankFarms(farms?.data)
+    const farmStats = await GetRequest(
+      `${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily?startDate=${startDate}&endDate=${endDate}`
+    );
+    const res = await GetRequest(UrlService.getDashboardData);
+    await tankData(farms.data[0].id);
+    setTankFarms(farms?.data);
     // setTankFarmsStats(farmStats)
 
-
-    const dataArray = []
-    const dataArray2 = []
+    const dataArray = [];
+    const dataArray2 = [];
     // Create an array to store total volumes
-    farmStats.data.map(obj => dataArray.push(Math.round(obj.totalVolume)));
-    farmStats.data.map(obj => dataArray2.push(obj.dayOfYear));
+    farmStats.data.map((obj) => dataArray.push(Math.round(obj.totalVolume)));
+    farmStats.data.map((obj) => dataArray2.push(obj.dayOfYear));
     //  farmStats.data.map(obj=>obj.)
-    setTankFarmsStats(dataArray)
-    setTankFarmsStatsLabels(dataArray2)
+    setTankFarmsStats(dataArray);
+    setTankFarmsStatsLabels(dataArray2);
     console.log(dataArray);
 
-    setDashboardData(res)
-  }
+    setDashboardData(res);
+  };
 
   const tankData = async (id) => {
-    const res = await GetRequest(`${UrlService.getTankFarmsTanks}/${id}`)
-    setTanks(res?.data)
-  }
-
+    const res = await GetRequest(`${UrlService.getTankFarmsTanks}/${id}`);
+    setTanks(res?.data);
+  };
 
   const getTankFormData = async (id, filter) => {
     const { startDate, endDate } = getStartEndDate(filter);
-    const farmStats = await GetRequest(`${UrlService.getDataByTankFarm}/${id}/${filter}?startDate=${startDate}&endDate=${endDate}`)
-    const dataArray = []
-    const dataArray2 = []
+    const farmStats = await GetRequest(
+      `${UrlService.getDataByTankFarm}/${id}/${filter}?startDate=${startDate}&endDate=${endDate}`
+    );
+    const dataArray = [];
+    const dataArray2 = [];
     // Create an array to store total volumes
-    farmStats.data.map(obj => dataArray.push(Math.round(obj.totalVolume)));
-    farmStats.data.map(obj => dataArray2.push(JSON.stringify(filter==='daily'? obj.dayOfYear:filter==='weekly'?obj.week:filter==='monthly'?obj.month:obj.year)));
-    setTankFarmsStatsLabels(dataArray2)
+    farmStats.data.map((obj) => dataArray.push(Math.round(obj.totalVolume)));
+    farmStats.data.map(
+      (obj) => {
+        let value;
+        if (filter === 'daily') {
+          value = obj.dayOfYear;
+        } else if (filter === 'weekly') {
+          value = obj.weeku;
+        } else if (filter === 'monthly') {
+          value = obj.month;
+        } else {
+          value = obj.year;
+        }
+        dataArray2.push(JSON.stringify(value));
+        return null;
+      }
+      // dataArray2.push(
+      //   JSON.stringify(
+      //     filter === 'daily'
+      //       ? obj.dayOfYear
+      //       : filter === 'weekly'
+      //       ? obj.week
+      //       : filter === 'monthly'
+      //       ? obj.month
+      //       : obj.year
+      //   )
+      // )
+    );
+    setTankFarmsStatsLabels(dataArray2);
     //  farmStats.data.map(obj=>obj.)
-    setTankFarmsStats(dataArray)
-  }
+    setTankFarmsStats(dataArray);
+  };
 
-  
   useEffect(() => {
     getDashboardData();
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
         Hi, Welcome back 👋
       </Typography>
-      {dashboardData?.data &&
+      {dashboardData?.data && (
         <Grid container spacing={3}>
           <Grid xs={12} sm={6} md={3}>
             <AppWidgetSummary
@@ -185,20 +238,19 @@ export default function AppView() {
             />
           </Grid>
           <Grid container xs={12} color="white">
-  {tanks?.map((tank) => (
-    <Grid xs={12} sm={6} md={4}>
-      <StatsTile
-        tank={tank}
-        title="Bug Reports"
-        total={234}
-        color="error"
-        icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-        level={10}
-      />
-    </Grid>
-  ))}
-</Grid>
-
+            {tanks?.map((tank) => (
+              <Grid xs={12} sm={6} md={4}>
+                <StatsTile
+                  tank={tank}
+                  title="Bug Reports"
+                  total={234}
+                  color="error"
+                  icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+                  level={10}
+                />
+              </Grid>
+            ))}
+          </Grid>
 
           {/* <Grid xs={12} md={6} lg={4}>
               <AppCurrentVisits
@@ -321,8 +373,7 @@ export default function AppView() {
               />
             </Grid> */}
         </Grid>
-      }
-
+      )}
     </Container>
   );
 }
