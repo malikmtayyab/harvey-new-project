@@ -16,6 +16,7 @@ import Button from '@mui/material/Button';
 // import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import ChartView from './ChartView';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,7 @@ export default function UserTableRow({
   temperatur,
   status,
 }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(null);
 
   const handleOpenMenu = (event) => {
@@ -55,8 +57,7 @@ export default function UserTableRow({
           <Stack direction="row" alignItems="center" spacing={2}>
             {/* <Avatar alt={name} src={avatarUrl} /> */}
             <Typography variant="subtitle2" noWrap>
-              <ChartView name={name} id={id}/>
-
+              <ChartView name={name} id={id} />
             </Typography>
           </Stack>
         </TableCell>
@@ -119,7 +120,7 @@ export default function UserTableRow({
             variant="outlined"
             color={status === 'NORMAL' ? 'success' : status === 'WARNING' ? 'warning' : 'error'}
           >
-            {status}
+            {t(status)}
           </Button>
         </TableCell>
 
@@ -148,7 +149,6 @@ export default function UserTableRow({
           <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
           Edit
         </MenuItem>
-
       </Popover>
     </>
   );

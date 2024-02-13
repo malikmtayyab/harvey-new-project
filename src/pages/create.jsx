@@ -6,7 +6,7 @@ export default function TankPage() {
   return (
     <>
       <Helmet>
-        <title> Tanks | Minimal UI </title>
+        <title> Tanks </title>
       </Helmet>
 
       <CreatePage />

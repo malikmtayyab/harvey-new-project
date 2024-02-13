@@ -24,10 +24,12 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 import TankModal from '../Modal';
 import UrlService from 'src/services/UrlService';
 import { GetRequest } from '../../../services/ApiService';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
 export default function TanksPage() {
+  const { t } = useTranslation();
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -110,17 +112,14 @@ export default function TanksPage() {
   });
 
   const notFound = !dataFiltered.length && !!filterName;
-  const role = localStorage.getItem('roles')
+  const role = localStorage.getItem('roles');
 
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">All Tanks</Typography>
+        <Typography variant="h4">{t('All Tanks')}</Typography>
 
-        {
-          role != 'user' && role!=='manager' &&
-          <TankModal refreshTableData={getTableData} />
-        }
+        {role != 'user' && role !== 'manager' && <TankModal refreshTableData={getTableData} />}
       </Stack>
 
       <Card>

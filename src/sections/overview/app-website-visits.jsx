@@ -13,8 +13,7 @@ import Typography from '@mui/material/Typography';
 import Iconify from 'src/components/iconify';
 import { useEffect, useState } from 'react';
 import { listClasses } from '@mui/material/List';
-
-
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 const SORT_OPTIONS = [
@@ -27,16 +26,27 @@ const SORT_OPTIONS = [
   // { value: 'future_daily', label: 'Future Daily Consumption' },
   // { value: 'future_annual', label: 'Future Annual Consumption' },
 ];
-export default function AppWebsiteVisits({ handleTankData, title, subheader, chart, tankFarms, getTankFormData,getTanksData,tanks, ...other }) {
+export default function AppWebsiteVisits({
+  handleTankData,
+  title,
+  subheader,
+  chart,
+  tankFarms,
+  getTankFormData,
+  getTanksData,
+  tanks,
+  ...other
+}) {
+  const { t } = useTranslation();
   const { labels, colors, series, options } = chart;
-
-
 
   const [open, setOpen] = useState(null);
   const [openTankFarms, setOpenTankFarms] = useState(null);
 
-  const [selected, setSelected] = useState(SORT_OPTIONS[0])
-  const [selectedFarm, setSelectedFarm] = useState(tankFarms && tankFarms.length > 0 ? tankFarms[0] : null)
+  const [selected, setSelected] = useState(SORT_OPTIONS[0]);
+  const [selectedFarm, setSelectedFarm] = useState(
+    tankFarms && tankFarms.length > 0 ? tankFarms[0] : null
+  );
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
@@ -49,37 +59,24 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
   //   handleTankData(selectedFarm?.id)
   // }, [selectedFarm])
 
-
   const handleTankFarmClose = (option) => {
-
     if (option?.id) {
+      getTankFormData(option?.id, selected.value);
 
-      getTankFormData(option?.id, selected.value)
-
-      setSelectedFarm(option)
-      handleTankData(option?.id)
-
+      setSelectedFarm(option);
+      handleTankData(option?.id);
     }
     setOpenTankFarms(null);
   };
   const handleClose = (option) => {
-
     if (option.label) {
-
-
-      if(tankFarms && tankFarms.length>0)
-      {
-
-        getTankFormData(selectedFarm?.id, option.value)
+      if (tankFarms && tankFarms.length > 0) {
+        getTankFormData(selectedFarm?.id, option.value);
+      } else {
+        getTanksData(option.value);
       }
-      else
-      {
-        getTanksData(option.value)
-      }
-      
-      setSelected(option)
 
-
+      setSelected(option);
     }
     setOpen(null);
   };
@@ -113,15 +110,12 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
     ...options,
   });
 
-
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
       <Box sx={{ p: 3, pb: 1 }}>
-
-        <div >
-
+        <div>
           <div
             style={{
               display: 'flex',
@@ -129,37 +123,27 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
               marginLeft: 'auto',
               marginBottom: '1%',
               justifyContent: 'end',
-
             }}
           >
-
-
             <Button
               disableRipple
               color="inherit"
               onClick={handleOpen}
-
               sx={{
                 width: '100%',
                 border: '1px solid black',
                 padding: 1,
                 display: 'flex',
                 justifyContent: 'space-between',
-                border: '1px solid #d4d6d5'
-
+                border: '1px solid #d4d6d5',
               }}
             >
-
               <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                {
-                  selected.label
-                }
+                {t(selected.label)}
               </Typography>
 
               <Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />
             </Button>
-
-
 
             <Menu
               open={!!open}
@@ -170,105 +154,91 @@ export default function AppWebsiteVisits({ handleTankData, title, subheader, cha
               slotProps={{
                 paper: {
                   sx: {
-
                     [`& .${listClasses.root}`]: {
                       p: 0,
                     },
                     width: '20vw',
-
-
                   },
-
                 },
               }}
             >
               {SORT_OPTIONS.map((option) => (
-                <MenuItem sx={{
-                  zIndex: '100'
-                }} key={option.value} onClick={() => handleClose(option)}>
-                  {option.label}
+                <MenuItem
+                  sx={{
+                    zIndex: '100',
+                  }}
+                  key={option.value}
+                  onClick={() => handleClose(option)}
+                >
+                  {t(option.label)}
                 </MenuItem>
               ))}
             </Menu>
-
-
           </div>
 
-{
-
-tankFarms && tankFarms.length>0 &&
-
-          <div
-            style={{
-              display: 'flex',
-              width: '22%',
-              marginLeft: 'auto',
-              marginBottom: '1%',
-              justifyContent: 'end',
-
-            }}
-          >
-
-            <Button
-              disableRipple
-              color="inherit"
-              onClick={handleTankFarmOpen}
-
-              sx={{
-                width: '100%',
-                border: '1px solid black',
-                padding: 1,
+          {tankFarms && tankFarms.length > 0 && (
+            <div
+              style={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                border: '1px solid #d4d6d5'
-
+                width: '22%',
+                marginLeft: 'auto',
+                marginBottom: '1%',
+                justifyContent: 'end',
               }}
             >
+              <Button
+                disableRipple
+                color="inherit"
+                onClick={handleTankFarmOpen}
+                sx={{
+                  width: '100%',
+                  border: '1px solid black',
+                  padding: 1,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  border: '1px solid #d4d6d5',
+                }}
+              >
+                <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
+                  {selectedFarm ? selectedFarm.name : ''}
+                </Typography>
 
-              <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                {
-                  selectedFarm ? selectedFarm.name : ''
-                }
-              </Typography>
+                <Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />
+              </Button>
 
-              <Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />
-            </Button>
-
-
-            <Menu
-              open={!!openTankFarms}
-              anchorEl={openTankFarms}
-              onClose={handleTankFarmClose}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-              transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-              slotProps={{
-                paper: {
-                  sx: {
-
-                    [`& .${listClasses.root}`]: {
-                      p: 0,
+              <Menu
+                open={!!openTankFarms}
+                anchorEl={openTankFarms}
+                onClose={handleTankFarmClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                slotProps={{
+                  paper: {
+                    sx: {
+                      [`& .${listClasses.root}`]: {
+                        p: 0,
+                      },
+                      width: '20vw',
                     },
-                    width: '20vw',
-
-
                   },
-
-                },
-              }}
-            >
-              {tankFarms && tankFarms.length > 0 && tankFarms.map((option) => (
-                <MenuItem sx={{
-                  zIndex: '100'
-                }} key={option.id} onClick={() => handleTankFarmClose(option)}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </Menu>
-
-
-          </div>
-
-              }
+                }}
+              >
+                {tankFarms &&
+                  tankFarms.length > 0 &&
+                  tankFarms.map((option) => (
+                    <MenuItem
+                      sx={{
+                        zIndex: '100',
+                      }}
+                      key={option.id}
+                      onClick={() => handleTankFarmClose(option)}
+                    >
+                      {option.name}
+                    </MenuItem>
+                  ))}
+              </Menu>
+            </div>
+          )}
         </div>
 
         <Chart

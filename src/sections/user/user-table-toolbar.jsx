@@ -8,10 +8,12 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import Iconify from 'src/components/iconify';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
 export default function UserTableToolbar({ filterName, onFilterName }) {
+  const { t } = useTranslation();
   return (
     <Toolbar
       sx={{
@@ -24,7 +26,7 @@ export default function UserTableToolbar({ filterName, onFilterName }) {
       <OutlinedInput
         value={filterName}
         onChange={onFilterName}
-        placeholder="Search Farm..."
+        placeholder={t('Search Farm...')}
         startAdornment={
           <InputAdornment position="start">
             <Iconify

@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 
 import Iconify from 'src/components/iconify';
 import Tooltip from '@mui/material/Tooltip';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +39,7 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
     setOpen(null);
     handleClose(option, name);
   };
-
+  const { t } = useTranslation();
   return (
     <div
       style={{
@@ -60,7 +61,11 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
         }}
       >
         <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-          {name === 'user_id' ? selected.username : name === 'tank_farm' ? selected.name : selected.label}
+          {name === 'user_id'
+            ? selected.username
+            : name === 'tank_farm'
+            ? selected.name
+            : t(selected.label)}
         </Typography>
 
         <Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />
@@ -82,11 +87,8 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
           },
         }}
       >
-
-        {
-          name === 'category' || name === 'user_id' || name === 'tank_farm' ?
-
-            categoryOptions &&
+        {name === 'category' || name === 'user_id' || name === 'tank_farm'
+          ? categoryOptions &&
             categoryOptions.map((option) => (
               <MenuItem
                 sx={{
@@ -103,13 +105,15 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
                 }
                 arrow
               > */}
-                {name === 'user_id' ? option.username : name === 'tank_farm' ? option.name : option.label}
+                {name === 'user_id'
+                  ? option.username
+                  : name === 'tank_farm'
+                  ? option.name
+                  : t(option.label)}
                 {/* </Tooltip> */}
               </MenuItem>
             ))
-            :
-            SORT_OPTIONS.map((option) => (
-
+          : SORT_OPTIONS.map((option) => (
               <MenuItem
                 sx={{
                   zIndex: '100',
@@ -117,13 +121,9 @@ export default function CategoryDropdown({ categoryOptions, name, handleClose })
                 key={option.value}
                 onClick={() => closeCall(option)}
               >
-
                 {option.label}
-
               </MenuItem>
-            ))
-
-        }
+            ))}
       </Menu>
     </div>
   );

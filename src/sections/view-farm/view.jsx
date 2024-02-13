@@ -6,11 +6,10 @@ import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 import 'leaflet-fullscreen/dist/Leaflet.fullscreen';
 import { GetRequest } from 'src/services/ApiService';
 import UrlService from 'src/services/UrlService';
+import { useTranslation } from 'react-i18next';
 
 const FullScreenControl = () => {
-
   const map = useMap();
-
   return (
     <div className="leaflet-control-fullscreen leaflet-bar leaflet-control">
       <a
@@ -33,21 +32,20 @@ const FullScreenControl = () => {
 };
 
 export default function ViewFarm() {
+  const { t } = useTranslation();
   const center = [7.1881, 21.0936];
-const [markers,setMarkers]=useState()
+  const [markers, setMarkers] = useState();
 
-
-  const getTanksDatabyFarm=async(id)=>
-  {
-    const res=await GetRequest(`${UrlService.getTanksByFarmId}/${id}`)
-    setMarkers(res.data)
-  }
+  const getTanksDatabyFarm = async (id) => {
+    const res = await GetRequest(`${UrlService.getTanksByFarmId}/${id}`);
+    setMarkers(res.data);
+  };
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    getTanksDatabyFarm(id)
+    getTanksDatabyFarm(id);
   }, []);
-  
+
   return (
     <div
       style={{
@@ -65,39 +63,33 @@ const [markers,setMarkers]=useState()
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
         />
-        {markers && markers.length>0 && markers.map((marker, index) => (
-          
+        {markers &&
+          markers.length > 0 &&
+          markers.map((marker, index) =>
+            marker.latitude && marker.longitude ? (
+              <Marker key={index} position={[marker.latitude, marker.longitude]}>
+                <Popup>
+                  <h5>
+                    {t('Contents')}: {marker.content}
+                  </h5>
+                  <h5>
+                    {t('Volume')}: {marker.volume}
+                  </h5>
+                  <h5>
+                    {t('Latitude')}: {marker.latitude}
+                  </h5>
 
-            marker.latitude && marker.longitude?
-            <Marker key={index} position={[marker.latitude, marker.longitude]}>
-            <Popup>  
-            
-            <h5>
-            
-            Contents: {marker.content}
-            </h5>
-            <h5>
-
-  Volume: {marker.volume}
-</h5>
-<h5>
-
-  Latitude: {marker.latitude}
-</h5>
-
-<h5>
-
-  Longitude: {marker.longitude}
-</h5>
-              
-              
-              </Popup>
+                  <h5>
+                    {t('Longitude')}: {marker.longitude}
+                  </h5>
+                </Popup>
               </Marker>
-            :''
-          ))}
-          <FullScreenControl />
+            ) : (
+              ''
+            )
+          )}
+        <FullScreenControl />
       </MapContainer>
-      
     </div>
   );
 }

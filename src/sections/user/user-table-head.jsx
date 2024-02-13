@@ -6,6 +6,7 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import { useTranslation } from 'react-i18next';
 
 import { visuallyHidden } from './utils';
 
@@ -23,7 +24,7 @@ export default function UserTableHead({
   const onSort = (property) => (event) => {
     onRequestSort(event, property);
   };
-
+  const { t } = useTranslation();
   return (
     <TableHead>
       <TableRow>
@@ -48,7 +49,7 @@ export default function UserTableHead({
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={onSort(headCell.id)}
             >
-              {headCell.label}
+              {t(headCell.label)}
               {orderBy === headCell.id ? (
                 <Box sx={{ ...visuallyHidden }}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}

@@ -24,10 +24,12 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 import TankModal from '../Modal';
 import UrlService from 'src/services/UrlService';
 import { GetRequest } from '../../../services/ApiService';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
 export default function CreatePage() {
+  const { t } = useTranslation();
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -114,7 +116,7 @@ export default function CreatePage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">All Users</Typography>
+        <Typography variant="h4">{t('All Users')}</Typography>
 
         <TankModal refreshTableData={getTableData} />
       </Stack>

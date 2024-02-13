@@ -15,6 +15,7 @@ import { GetRequest, PostRequest } from '../../services/ApiService';
 import UrlService from 'src/services/UrlService';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const style = {
   position: 'absolute',
@@ -33,6 +34,7 @@ const style = {
 };
 
 export default function TankModal({ refreshTableData }) {
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -79,11 +81,10 @@ export default function TankModal({ refreshTableData }) {
       label: 'No Dimentions',
       src: '',
     },
-
   ];
 
-  const [users, setUsers] = React.useState()
-  const [tankFarms, setTankFarms] = React.useState()
+  const [users, setUsers] = React.useState();
+  const [tankFarms, setTankFarms] = React.useState();
 
   const formFields = [
     {
@@ -121,7 +122,7 @@ export default function TankModal({ refreshTableData }) {
     {
       name: 'picture',
       id: 'picture',
-      value: formData.category
+      value: formData.category,
     },
     {
       name: 'Height',
@@ -193,15 +194,11 @@ export default function TankModal({ refreshTableData }) {
       placeholder: 'Select User',
       type: 'select',
       value: formData.user_id,
-      options: users
-    }
+      options: users,
+    },
   ];
 
-
-
-
   const handleCloseCategory = (option, name) => {
-
     setFormData({
       ...formData,
       [name]: name === 'user_id' || name === 'tank_farm' ? option.id : option.value,
@@ -233,20 +230,18 @@ export default function TankModal({ refreshTableData }) {
   };
 
   const getAllUsers = async () => {
-    const userData = await GetRequest(UrlService.getAllUsers)
-    setUsers(userData.data)
-  }
+    const userData = await GetRequest(UrlService.getAllUsers);
+    setUsers(userData.data);
+  };
   const getTankFarms = async () => {
-    const farms = await GetRequest(UrlService.getAllFarms)
-    setTankFarms(farms?.data)
-  }
+    const farms = await GetRequest(UrlService.getAllFarms);
+    setTankFarms(farms?.data);
+  };
   React.useEffect(() => {
-    getAllUsers()
-    getTankFarms()
-  }, [])
-  React.useEffect(() => {
-
-  }, [formData.category, users]);
+    getAllUsers();
+    getTankFarms();
+  }, []);
+  React.useEffect(() => {}, [formData.category, users]);
   const [tankName, setTankName] = React.useState('');
   return (
     <div>
@@ -256,7 +251,7 @@ export default function TankModal({ refreshTableData }) {
         color="inherit"
         startIcon={<Iconify icon="eva:plus-fill" />}
       >
-        New Tank
+        {t('New Tank')}
       </Button>
       <Modal
         keepMounted
@@ -267,10 +262,10 @@ export default function TankModal({ refreshTableData }) {
       >
         <Box sx={style}>
           <Typography id="keep-mounted-modal-title" variant="h4" component="h2">
-            Add Tank
+            {t('Add Tank')}
           </Typography>
           <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-            Fill in the tank name and click on add button in order to add the tank.
+            {t('Add Tank Description')}
           </Typography>
           <div
             style={{
@@ -295,7 +290,7 @@ export default function TankModal({ refreshTableData }) {
                         marginBottom: 1,
                       }}
                     >
-                      {item.name}
+                      {t(item.name)}
                     </Typography>
                     <CategoryDropdown
                       categoryOptions={item.options}
@@ -319,7 +314,54 @@ export default function TankModal({ refreshTableData }) {
                         marginTop: 2,
                       }}
                     >
-                      {item.name}
+                      {t(item.name)}
+                    </Typography>
+                    <OutlinedInput
+                      id={item.id}
+                      value={item.value}
+                      onChange={(event) => handleFormdata(event)}
+                      placeholder={t(item.placeholder)}
+                      type={item.type}
+                      sx={{
+                        marginTop: 1,
+                        width: '100%',
+                        height: '42px',
+                      }}
+                    />
+                  </div>
+                ) : item.id === 'picture' &&
+                  formData.category &&
+                  formData.category !== 'no_dimensions' ? (
+                  <div>
+                    <img
+                      src={
+                        categoryOptions.find((option) => option.value === formData.category)?.src ||
+                        '/assets/tanks-img/default.jpg'
+                      }
+                      alt="Tank"
+                      height={120}
+                    />
+                  </div>
+                ) : item.property?.includes(formData.category) ? (
+                  <div>
+                    <Typography
+                      sx={{
+                        textAlign: 'start',
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        marginTop: 2,
+                      }}
+                    >
+                      <Tooltip
+                        title={
+                          <>
+                            <img src="https://cdn1.byjus.com/wp-content/uploads/2022/10/Rectangle-1.png" />
+                          </>
+                        }
+                        arrow
+                      >
+                        {t(item.name)}
+                      </Tooltip>
                     </Typography>
                     <OutlinedInput
                       id={item.id}
@@ -334,56 +376,9 @@ export default function TankModal({ refreshTableData }) {
                       }}
                     />
                   </div>
-                ) : item.id === 'picture' && formData.category && formData.category !== 'no_dimensions' ?
-
-                  <div >
-                    <img
-                      src={
-                        categoryOptions.find(option => option.value === formData.category)?.src ||
-                        '/assets/tanks-img/default.jpg'
-                      }
-                      alt="Tank"
-                      height={120}
-
-                    />
-
-                  </div> : item.property?.includes(formData.category) ? (
-                    <div>
-                      <Typography
-                        sx={{
-                          textAlign: 'start',
-                          fontSize: '16px',
-                          fontWeight: 'bold',
-                          marginTop: 2,
-                        }}
-                      >
-                        <Tooltip
-                          title={
-                            <>
-                              <img src="https://cdn1.byjus.com/wp-content/uploads/2022/10/Rectangle-1.png" />
-                            </>
-                          }
-                          arrow
-                        >
-                          {item.name}
-                        </Tooltip>
-                      </Typography>
-                      <OutlinedInput
-                        id={item.id}
-                        value={item.value}
-                        onChange={(event) => handleFormdata(event)}
-                        placeholder={item.placeholder}
-                        type={item.type}
-                        sx={{
-                          marginTop: 1,
-                          width: '100%',
-                          height: '42px',
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    ''
-                  );
+                ) : (
+                  ''
+                );
               }
             })}
           </div>
@@ -406,7 +401,7 @@ export default function TankModal({ refreshTableData }) {
               color="inherit"
               onClick={handleClose}
             >
-              Cancel
+              {t('Cancel')}
             </LoadingButton>
 
             <LoadingButton
@@ -417,7 +412,7 @@ export default function TankModal({ refreshTableData }) {
               color="inherit"
               onClick={handleAddTankClick}
             >
-              Add Tank
+              {t('Add Tank')}
             </LoadingButton>
           </div>
         </Box>

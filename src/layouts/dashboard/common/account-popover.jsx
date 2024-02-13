@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 
 import kc from 'src/services/Keycloack';
 import { account } from 'src/_mock/account';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(null);
 
   const handleOpen = (event) => {
@@ -42,8 +44,8 @@ export default function AccountPopover() {
     setOpen(null);
   };
   const handleLogout = () => {
-    kc.logout()
-  }
+    kc.logout();
+  };
 
   return (
     <>
@@ -112,7 +114,7 @@ export default function AccountPopover() {
           onClick={handleLogout}
           sx={{ typography: 'body2', color: 'error.main', py: 1.5 }}
         >
-          Logout
+          {t('Logout')}
         </MenuItem>
       </Popover>
     </>

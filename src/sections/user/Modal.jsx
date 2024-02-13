@@ -13,6 +13,7 @@ import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 import { PostRequest } from '../../services/ApiService';
 import UrlService from 'src/services/UrlService';
+import { useTranslation } from 'react-i18next';
 
 const style = {
   position: 'absolute',
@@ -20,7 +21,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height: 350,
+  height: 380,
   borderRadius: 1,
   bgcolor: 'background.paper',
   border: '2px solid #000',
@@ -30,6 +31,7 @@ const style = {
 };
 
 export default function TankModal({ refreshTableData }) {
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -73,7 +75,7 @@ export default function TankModal({ refreshTableData }) {
         color="inherit"
         startIcon={<Iconify icon="eva:plus-fill" />}
       >
-        New Farm
+        {t('New Farm')}
       </Button>
       <Modal
         keepMounted
@@ -84,10 +86,10 @@ export default function TankModal({ refreshTableData }) {
       >
         <Box sx={style}>
           <Typography id="keep-mounted-modal-title" variant="h4" component="h2">
-            Add Farm
+            {t('Add Farm')}
           </Typography>
           <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-            Fill in the tank name and click on add button in order to add the tank.
+            {t('Add Farm Description')}
           </Typography>
 
           <Typography
@@ -98,12 +100,12 @@ export default function TankModal({ refreshTableData }) {
               marginTop: 2,
             }}
           >
-            Add Farm
+            {t('Add Farm')}
           </Typography>
           <OutlinedInput
             value={tankName}
             onChange={(e) => setTankName(e.target.value)}
-            placeholder="Tank Name"
+            placeholder={t('Tank Name')}
             sx={{
               marginTop: 1,
               width: '100%',
@@ -137,7 +139,7 @@ export default function TankModal({ refreshTableData }) {
               }}
               onClick={handleClose}
             >
-              Cancel
+              {t('Cancel')}
             </LoadingButton>
 
             <LoadingButton
@@ -151,7 +153,7 @@ export default function TankModal({ refreshTableData }) {
               }}
               onClick={handleAddFarmClick}
             >
-              Add Farm
+              {t('Add Farm')}
             </LoadingButton>
           </div>
         </Box>

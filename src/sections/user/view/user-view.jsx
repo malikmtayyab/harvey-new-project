@@ -24,7 +24,7 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 import TankModal from '../Modal';
 import UrlService from 'src/services/UrlService';
 import { GetRequest } from '../../../services/ApiService';
-
+import { useTranslation } from 'react-i18next';
 // ----------------------------------------------------------------------
 
 export default function UserPage() {
@@ -112,16 +112,15 @@ export default function UserPage() {
 
   const notFound = !dataFiltered.length && !!filterName;
 
-  const role = localStorage.getItem('roles')
+  const role = localStorage.getItem('roles');
 
+  const { t } = useTranslation();
 
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">All Farms</Typography>
-        {role != 'user' && role != 'manager' &&
-          <TankModal refreshTableData={getTableData} />
-        }
+        <Typography variant="h4">{t('All Farms')}</Typography>
+        {role != 'user' && role != 'manager' && <TankModal refreshTableData={getTableData} />}
       </Stack>
 
       <Card>

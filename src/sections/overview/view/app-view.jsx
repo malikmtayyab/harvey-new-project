@@ -167,7 +167,6 @@ export default function AppView() {
 
   return (
     <Container maxWidth="xl">
- 
       <Typography variant="h4" sx={{ mb: 5 }}>
         {t('Hi, Welcome back')} 👋
       </Typography>
@@ -212,7 +211,7 @@ export default function AppView() {
           <Grid xs={12} md={12} lg={12}>
             <AppWebsiteVisits
               handleTankData={tankData}
-              title="Capacity History"
+              title={t('Capacity History')}
               subheader=""
               tankFarms={tankFarms}
               getTankFormData={getTankFormData}
