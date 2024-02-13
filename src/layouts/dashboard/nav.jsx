@@ -24,6 +24,7 @@ import { NAV } from './config-layout';
 import navConfig from './config-navigation';
 import Accordion from './Accordian';
 import logo from '../../assets/fleemoo.png'
+import { useTranslation } from 'react-i18next';
 /* eslint-enable */
 
 // ----------------------------------------------------------------------
@@ -150,6 +151,7 @@ function NavItem({ item,roles,authenticatedRole }) {
 
   const active = item.path === pathname;
 
+  const { t} = useTranslation();
   
   return (
     <ListItemButton
@@ -176,7 +178,8 @@ function NavItem({ item,roles,authenticatedRole }) {
         {item.icon}
       </Box>
 
-      <Box component="span">{item.title} </Box>
+
+      <Box component="span">{t(item.title)} </Box>
     </ListItemButton>
   );
 }

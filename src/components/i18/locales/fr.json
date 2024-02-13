@@ -1,8 +1,26 @@
 {
-    "Welcome to my app": "Bienvenue dans mon application",
-    "Hello": "Bonjour",
-    "Goodbye": "Au revoir",
-    "Settings": "Paramètres",
-    "Language": "Langue"
+    
+
+  "Dashboard":"Tableau de bord",
+  "Tank Farm":"Parc de stockage",
+    "All Farms":"Toutes les fermes",
+    "Tanks":"Réservoirs",
+    "All Tanks":"Tous les chars",
+    "Create":"Créer",
+
+    
+    "Hi, Welcome back":"Bonjour, bon retour",
+    "Number of Tanks":"Nombre de réservoirs",
+    "Farm Tank":"Réservoir de ferme",
+    "Total Capacity (Litres)":"Capacité totale (litres)",
+    "Total Users":"Nombre d'utilisateurs",
+    "Tank Level":"Niveau du réservoir",
+    "Change":"Changement",
+    "Since Last Reading":"Depuis la dernière lecture",
+    "Contents":"Contenu",
+    "Tank Capacity":"Capacité du réservoir",
+    "Tank Status":"Statut du réservoir",
+    "Tank Temperature":"Température du réservoir"
+   
   }
   

@@ -13,10 +13,15 @@ import farmTank from '../../assets/oil-tank.png'
 import increase from '../../assets/charts.png'
 import group from '../../assets/group.png'
 
+import { useTranslation } from 'react-i18next';
+
 
 // ----------------------------------------------------------------------
 
 export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx, ...other }) {
+
+  const { t } = useTranslation();
+
   return (
     <Card
       component={Stack}
@@ -37,7 +42,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         <Typography variant="h4">{total > 1000 ? fShortenNumber(total) : total}</Typography>
 
         <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-          {title}
+          {t(title)}
         </Typography>
       </Stack>
     </Card>

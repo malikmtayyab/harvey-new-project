@@ -1,9 +1,25 @@
 
 {
-    "Welcome to my app": "Welcome to my app",
-    "Hello": "Hello",
-    "Goodbye": "Goodbye",
-    "Settings": "Settings",
-    "Language": "Language"
+ 
+  "Dashboard":"Dashboard",
+  "Tank Farm":"Tank Farm",
+  "All Farms":"All Farms",
+  "Tanks":"Tanks",
+    "All Tanks":"All Tanks",
+    "Create":"Create",
+
+    
+    "Hi, Welcome back":"Hi, Welcome back",
+    "Number of Tanks":"Number of Tanks",
+    "Farm Tank":"Farm Tank",
+    "Total Capacity (Litres)":"Total Capacity (Litres)",
+    "Total Users":"Total Users",
+    "Tank Level":"Tank Level",
+    "Change":"Change",
+    "Since Last Reading":"Since Last Reading",
+    "Contents":"Contents",
+    "Tank Capacity":"Tank Capacity",
+    "Tank Status":"Tank Status",
+    "Tank Temperature":"Tank Temperature"
   }
   

@@ -9,9 +9,11 @@ import { fShortenNumber } from 'src/utils/format-number';
 import CircleMotion from './CircleMotion';
 import Grid from '@mui/material/Unstable_Grid2';
 
+
 // ----------------------------------------------------------------------
 
 export default function StatsTile({ title, total, icon, color = 'primary', sx, ...other }) {
+
   return (
 
 <Card 

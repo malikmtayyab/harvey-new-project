@@ -9,10 +9,14 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { usePathname } from 'src/routes/hooks';
 import { alpha } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
+
 
 
 export default function NavAccordion({accordionItems}) {
   const pathname = usePathname();
+
+  const { t} = useTranslation();
 
   
   return (
@@ -22,7 +26,7 @@ export default function NavAccordion({accordionItems}) {
     }}>
       {
         accordionItems.heading?
-        <h3>{accordionItems.heading}</h3>
+        <h3>{t(accordionItems.heading)}</h3>
         :''
       }
    <Accordion sx={{
@@ -49,7 +53,7 @@ export default function NavAccordion({accordionItems}) {
           </div>
          <div>
 
-         {accordionItems.title}
+         {t(accordionItems.title)}
 </div>
           </div>
      
@@ -87,7 +91,7 @@ export default function NavAccordion({accordionItems}) {
         fontSize:'14px',
         color:'black'
        }}
-       to={item.path}>{item.title}</Link>
+       to={item.path}>{t(item.title)}</Link>
         </AccordionDetails>
     })
    }

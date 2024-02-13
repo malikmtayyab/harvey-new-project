@@ -7,10 +7,12 @@ import Typography from '@mui/material/Typography';
 
 import CircleMotion from './CircleMotion';
 import Grid from '@mui/material/Unstable_Grid2';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
 export default function StatsTile({ tank, title, total, icon, color = 'primary', sx, level, ...other }) {
+  const { t } = useTranslation();
   return (
     <Card
       style={{
@@ -35,7 +37,7 @@ export default function StatsTile({ tank, title, total, icon, color = 'primary',
           >
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Tank Level
+                {t('Tank Level')}
               </Typography>
             </p>
             {/* <p>
@@ -46,36 +48,36 @@ export default function StatsTile({ tank, title, total, icon, color = 'primary',
 
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Change
+                {t('Change')}
               </Typography>
             </p>
 
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Since Last Reading
+                {t('Since Last Reading')}
               </Typography>
             </p>
 
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Contents
+                {t('Contents')}
               </Typography>
             </p>
 
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Tank Capacity
+                {t('Tank Capacity')}
               </Typography>
             </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Tank Status
+                {t('Tank Status')}
               </Typography>
             </p>
 
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-                Tank Temperature
+                {t('Tank Temperature')}
               </Typography>
             </p>
           </div>

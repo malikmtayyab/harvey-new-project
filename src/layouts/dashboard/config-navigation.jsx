@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { IconBuildingCottage, IconStack } from '@tabler/icons-react';
 import SvgColor from 'src/components/svg-color';
+
 // ----------------------------------------------------------------------
 
 const icon = (name) => (
@@ -9,7 +10,7 @@ const icon = (name) => (
 
 const navConfig = [
   {
-    title: 'dashboard',
+    title: 'Dashboard',
     path: '/',
     icon: icon('ic_analytics'),
     type: 'single',
