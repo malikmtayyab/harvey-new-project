@@ -44,6 +44,7 @@ export default function AccountPopover() {
     setOpen(null);
   };
   const handleLogout = () => {
+    localStorage.clear()
     kc.logout();
   };
 

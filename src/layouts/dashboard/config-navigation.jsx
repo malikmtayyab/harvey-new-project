@@ -71,7 +71,7 @@ const navConfig = [
 
   // },
   {
-    title: 'Create',
+    title: 'Users',
     path: '/create',
     icon: icon('ic_user'),
     type: 'single',

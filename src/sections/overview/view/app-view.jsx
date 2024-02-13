@@ -163,12 +163,13 @@ export default function AppView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
   const { t } = useTranslation();
 
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
-        {t('Hi, Welcome back')} 👋
+        {t('Hi, Welcome back')} {localStorage.getItem('loggedName')} 👋
       </Typography>
       {dashboardData?.data && (
         <Grid container spacing={3}>

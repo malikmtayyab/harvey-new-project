@@ -39,9 +39,9 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
       <img src={title==='Number of Tanks'?tankIcon:title==='Farm Tank'?farmTank:title==='Total Capacity (Litres)'?increase:group} alt=""  style={{width:'25px',height:'25px'}}/>
 
       <Stack spacing={0.5}>
-        <Typography variant="h4">{total > 1000 ? fShortenNumber(total) : total}</Typography>
+        <Typography variant="h4" sx={{color:'#2f83f4'}}>{total > 1000 ? fShortenNumber(total) : total}</Typography>
 
-        <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+        <Typography variant="subtitle2" sx={{ color: '#73acf4' }}>
           {t(title)}
         </Typography>
       </Stack>

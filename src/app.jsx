@@ -45,6 +45,8 @@ export default function App() {
         }
         localStorage.setItem('roles',roles)
 
+      
+        localStorage.setItem('loggedName',kc.tokenParsed.name)
 
         setAuthentication(true)
         kc.onTokenExpired = () => {

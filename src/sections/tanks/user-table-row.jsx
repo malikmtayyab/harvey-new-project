@@ -69,6 +69,25 @@ export default function UserTableRow({
         >
           {category}
         </TableCell>
+            <TableCell
+              sx={{
+                paddingLeft: 5,
+              }}
+            >
+              <Button
+                variant="outlined"
+                color={status === 'NORMAL' ? 'success' : status === 'WARNING' ? 'warning' : 'error'}
+              >
+                {t(status)}
+              </Button>
+            </TableCell>
+        <TableCell
+          sx={{
+            paddingLeft: 5,
+          }}
+        >
+          {temperatur}
+        </TableCell>
         <TableCell
           sx={{
             paddingLeft: 5,
@@ -76,6 +95,7 @@ export default function UserTableRow({
         >
           {coneHeigth}
         </TableCell>
+        
         <TableCell
           sx={{
             paddingLeft: 5,
@@ -104,25 +124,7 @@ export default function UserTableRow({
         >
           {forecastYear}
         </TableCell>
-        <TableCell
-          sx={{
-            paddingLeft: 5,
-          }}
-        >
-          {temperatur}
-        </TableCell>
-        <TableCell
-          sx={{
-            paddingLeft: 5,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color={status === 'NORMAL' ? 'success' : status === 'WARNING' ? 'warning' : 'error'}
-          >
-            {t(status)}
-          </Button>
-        </TableCell>
+     
 
         {/* <TableCell>{role}</TableCell> */}
 

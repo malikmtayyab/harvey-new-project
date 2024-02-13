@@ -7,8 +7,8 @@ import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
 
-import { visuallyHidden } from './utils';
 import { useTranslation } from 'react-i18next';
+import { visuallyHidden } from './utils';
 
 // ----------------------------------------------------------------------
 

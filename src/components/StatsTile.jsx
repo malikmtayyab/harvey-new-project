@@ -26,7 +26,7 @@ export default function StatsTile({ tank, title, total, icon, color = 'primary',
           marginBottom: 10,
         }}
       >
-        <CircleMotion innerCircleSize={(tank?.filledDepth / tank?.heigth) * 100} />
+        <CircleMotion innerCircleSize={Number(tank?.heigth)>0? ((tank?.filledDepth / tank?.heigth) * 100):0} />
       </div>
       <Grid container xs={12}>
         <Grid xs={6}>
@@ -35,6 +35,13 @@ export default function StatsTile({ tank, title, total, icon, color = 'primary',
               marginLeft: 5,
             }}
           >
+
+
+            <p>
+              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+                {t('Tank Name')}
+              </Typography>
+            </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
                 {t('Tank Level')}
@@ -89,6 +96,11 @@ export default function StatsTile({ tank, title, total, icon, color = 'primary',
               marginRight: 10,
             }}
           >
+            <p>
+              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+                {tank.name}
+              </Typography>
+            </p>
             <p>
               <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
                 {tank?.volume?.toFixed(2)}

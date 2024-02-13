@@ -28,6 +28,29 @@ export default function UserTableRow({
   month,
   year,
 }) {
+
+  const formatDate=(dateTimeString)=>
+  {
+    if(!dateTimeString)
+    {
+      return '';
+    }
+    const dateObj = new Date(dateTimeString);
+
+const options = {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+  timeZone: 'UTC'
+};
+
+const formattedDateTime = dateObj.toLocaleDateString('en-US', options);
+return formattedDateTime
+  }
   const [open, setOpen] = useState(null);
 
   const handleOpenMenu = (event) => {
@@ -64,28 +87,28 @@ export default function UserTableRow({
             paddingLeft: 5,
           }}
         >
-          {creatTime}
+          {formatDate(creatTime)}
         </TableCell>
         <TableCell
           sx={{
             paddingLeft: 5,
           }}
         >
-          {updateTime}
+          {formatDate(updateTime)}
         </TableCell>
         <TableCell
           sx={{
             paddingLeft: 5,
           }}
         >
-          {filled}
+          {(Number(filled)).toFixed(2)}
         </TableCell>
         <TableCell
           sx={{
             paddingLeft: 5,
           }}
         >
-          {totalVolumn}
+          {(Number(totalVolumn).toFixed(2))}
         </TableCell>
         <TableCell
           sx={{

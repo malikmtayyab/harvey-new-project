@@ -142,13 +142,13 @@ export default function TanksPage() {
                 headLabel={[
                   { id: 'name', label: 'Name', align: 'left' },
                   { id: 'category', label: 'Category', align: 'left' },
+                  { id: 'status', label: 'Status', align: 'left' },
+                  { id: 'temperature', label: 'Temperature', align: 'left' },
                   { id: 'coneHeigth', label: 'Cone Height', align: 'left' },
                   { id: 'nextday_forecast', label: 'Nextday Forecast', align: 'left' },
                   { id: 'week_forecast', label: 'Week Forecast', align: 'left' },
                   { id: 'month_forecast', label: 'Month Forecast', align: 'left' },
                   { id: 'year_forecast', label: 'Year Forecast', align: 'left' },
-                  { id: 'temperature', label: 'Temperature', align: 'left' },
-                  { id: 'status', label: 'Status', align: 'left' },
                   { id: '' },
                 ]}
               />
