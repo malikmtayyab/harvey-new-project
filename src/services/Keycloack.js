@@ -3,7 +3,7 @@ import Keycloak from 'keycloak-js';
 export const initOptions = {
     url: 'https://sec.trackafrik.com/',
     realm: 'sec-tm',
-    clientId: 'tank-monitoring-development',
+    clientId: 'tank-management',
     onLoad: 'login-required', // check-sso | login-required
     KeycloakResponseType: 'code',
 }

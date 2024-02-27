@@ -9,17 +9,15 @@ import Typography from '@mui/material/Typography';
 
 import { fShortenNumber } from 'src/utils/format-number';
 import tankIcon from '../../assets/water-tank.png';
-import farmTank from '../../assets/oil-tank.png'
-import increase from '../../assets/charts.png'
-import group from '../../assets/group.png'
+import farmTank from '../../assets/oil-tank.png';
+import increase from '../../assets/charts.png';
+import group from '../../assets/group.png';
 
 import { useTranslation } from 'react-i18next';
-
 
 // ----------------------------------------------------------------------
 
 export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx, ...other }) {
-
   const { t } = useTranslation();
 
   return (
@@ -31,17 +29,39 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         px: 3,
         py: 5,
         borderRadius: 2,
-        gap:8,
+        gap: 8,
+        backgroundColor:
+          title === 'Number of Tanks'
+            ? '#b39fd6'
+            : title === 'Farm Tank'
+            ? '#a49fd6'
+            : title === 'Total Capacity (Litres)'
+            ? '#d6d19f'
+            : '#d69f9f',
         ...sx,
       }}
       {...other}
     >
-      <img src={title==='Number of Tanks'?tankIcon:title==='Farm Tank'?farmTank:title==='Total Capacity (Litres)'?increase:group} alt=""  style={{width:'25px',height:'25px'}}/>
+      <img
+        src={
+          title === 'Number of Tanks'
+            ? tankIcon
+            : title === 'Farm Tank'
+            ? farmTank
+            : title === 'Total Capacity (Litres)'
+            ? increase
+            : group
+        }
+        alt=""
+        style={{ width: '25px', height: '25px' }}
+      />
 
       <Stack spacing={0.5}>
-        <Typography variant="h4" sx={{color:'#2f83f4'}}>{total > 1000 ? fShortenNumber(total) : total}</Typography>
+        <Typography variant="h4" sx={{ color: 'white' }}>
+          {total > 1000 ? fShortenNumber(total) : total}
+        </Typography>
 
-        <Typography variant="subtitle2" sx={{ color: '#73acf4' }}>
+        <Typography variant="subtitle2" sx={{ color: 'white' }}>
           {t(title)}
         </Typography>
       </Stack>

@@ -38,12 +38,12 @@ export default function StatsTile({ tank, title, total, icon, color = 'primary',
 
 
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Tank Name')}
               </Typography>
             </p>
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Tank Level')}
               </Typography>
             </p>
@@ -54,36 +54,36 @@ export default function StatsTile({ tank, title, total, icon, color = 'primary',
             </p> */}
 
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Change')}
               </Typography>
             </p>
 
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Since Last Reading')}
               </Typography>
             </p>
 
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Contents')}
               </Typography>
             </p>
 
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Tank Capacity')}
               </Typography>
             </p>
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Tank Status')}
               </Typography>
             </p>
 
             <p>
-              <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+              <Typography variant="subtitle2" sx={{ color: '#85c1e9' }}>
                 {t('Tank Temperature')}
               </Typography>
             </p>

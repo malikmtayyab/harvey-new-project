@@ -107,7 +107,6 @@ export default function AppView() {
     //  farmStats.data.map(obj=>obj.)
     setTankFarmsStats(dataArray);
     setTankFarmsStatsLabels(dataArray2);
-    console.log(dataArray);
 
     setDashboardData(res);
   };
