@@ -162,7 +162,6 @@ export default function AppView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   const { t } = useTranslation();
 
   return (
@@ -207,7 +206,37 @@ export default function AppView() {
               icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
             />
           </Grid>
+          <Grid xs={0} sm={0} md={1}/>
 
+          <Grid xs={12} sm={6} md={3}>
+            <AppWidgetSummary
+              title="Normal"
+              total={dashboardData?.data?.status?.NORMAL ? dashboardData?.data?.status?.NORMAL : 0}
+              color="error"
+              icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+            />
+          </Grid>
+
+          <Grid xs={12} sm={6} md={3}>
+            <AppWidgetSummary
+              title="Critical"
+              total={
+                dashboardData?.data?.status?.CRITICAL ? dashboardData?.data?.status?.CRITICAL : 0
+              }
+              color="error"
+              icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+            />
+          </Grid>
+          <Grid xs={12} sm={6} md={3}>
+            <AppWidgetSummary
+              title="Warning"
+              total={
+                dashboardData?.data?.status?.WARNING ? dashboardData?.data?.status?.WARNING : 0
+              }
+              color="error"
+              icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+            />
+          </Grid>
           <Grid xs={12} md={12} lg={12}>
             <AppWebsiteVisits
               handleTankData={tankData}

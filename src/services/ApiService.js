@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import kc from './Keycloack';
 
-// axios.defaults.baseURL = 'https://tm-ws.trackafrik.com/tank-ws/api';
-axios.defaults.baseURL = 'http://localhost:8999/tank-ws/api';
+axios.defaults.baseURL = 'https://tm-ws.trackafrik.com/tank-ws/api';
+// axios.defaults.baseURL = 'http://localhost:8999/tank-ws/api';
 
 const accessToken = kc.token;
 const headers = {

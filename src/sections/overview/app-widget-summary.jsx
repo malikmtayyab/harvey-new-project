@@ -37,7 +37,13 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
             ? '#a49fd6'
             : title === 'Total Capacity (Litres)'
             ? '#d6d19f'
-            : '#d69f9f',
+            : title === 'Total Users'
+            ? '#d69f9f'
+            : title === 'Normal'
+            ? '#77c78d'
+            : title === 'Critical'
+            ? '#942626'
+            : '#aba118',
         ...sx,
       }}
       {...other}
