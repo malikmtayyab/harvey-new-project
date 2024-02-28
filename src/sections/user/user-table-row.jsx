@@ -178,6 +178,7 @@ return formattedDateTime
 }
 
 UserTableRow.propTypes = {
+  index:PropTypes.any,
   id: PropTypes.any,
   name: PropTypes.any,
   creatTime: PropTypes.any,

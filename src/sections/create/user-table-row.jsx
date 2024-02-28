@@ -163,6 +163,7 @@ export default function UserTableRow({
 }
 
 UserTableRow.propTypes = {
+  index:PropTypes.any,
   name: PropTypes.any,
   category: PropTypes.any,
   coneHeigth: PropTypes.any,
