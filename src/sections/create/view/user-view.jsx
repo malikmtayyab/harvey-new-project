@@ -154,9 +154,10 @@ export default function CreatePage() {
               <TableBody>
                 {dataFiltered
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
+                  .map((row,index) => (
                     <UserTableRow
                       key={row.id}
+                      index={index}
                       name={row.username}
                       category={row.firstname}
                       coneHeigth={row.lastname}

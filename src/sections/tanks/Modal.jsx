@@ -67,6 +67,7 @@ export default function TankModal({ refreshTableData }) {
     diameter: '',
     tank_farm: '', // Assuming it's a string for the dropdown value
     user_id: '',
+    side_length:''
   });
 
   const categoryOptions = [
@@ -77,10 +78,47 @@ export default function TankModal({ refreshTableData }) {
       src: '/assets/tanks-img/horizontal_cylinder.jpg',
     },
     {
+      value: 'horizontal_oval',
+      label: 'Horizontal Oval',
+      src: '/assets/tanks-img/horizontal_oval.jpg',
+    },
+    {
+      value: 'horizontal_capsule',
+      label: 'Horizontal Capsule',
+      src: '/assets/tanks-img/horizontal_capsule.jpg',
+    },
+    {
+      value: 'horizontal_eliptical',
+      label: 'Horizontal 2:1 Eliptical',
+      src: '/assets/tanks-img/horizontal_21_eliptical.png',
+    },
+    {
+      value: 'horizontal_dish_ends',
+      label: 'Horizontal Dish Ends',
+      src: '/assets/tanks-img/horizontal_dish_ends.png',
+    },
+    {
+      value: 'vertical_cylinder',
+      label: 'Vertical Cylender',
+      src: '/assets/tanks-img/vertical_cylinder.jpg',
+    },
+    {
+      value: 'vertical_oval',
+      label: 'Vertical Oval',
+      src: '/assets/tanks-img/vertical_oval.jpg',
+    },
+    {
+      value: 'vertical_capsule',
+      label: 'Vertical Capsule',
+      src: '/assets/tanks-img/vertical_capsule.jpg',
+    },
+    {
       value: 'no_dimensions',
       label: 'No Dimentions',
       src: '',
     },
+    
+    
   ];
 
   const [users, setUsers] = React.useState();
@@ -117,7 +155,7 @@ export default function TankModal({ refreshTableData }) {
       placeholder: 'Enter Length',
       type: 'number',
       value: formData.length,
-      property: ['rectangle', 'horizontal_cylinder'],
+      property: ['rectangle', 'horizontal_cylinder','horizontal_oval','vertical_oval'],
     },
     {
       name: 'picture',
@@ -130,7 +168,7 @@ export default function TankModal({ refreshTableData }) {
       placeholder: 'Enter Height',
       type: 'number',
       value: formData.height,
-      property: ['rectangle'],
+      property: ['rectangle','vertical_cylinder','horizontal_oval','vertical_oval'],
     },
     {
       name: 'Width',
@@ -138,15 +176,23 @@ export default function TankModal({ refreshTableData }) {
       placeholder: 'Enter Width',
       type: 'number',
       value: formData.width,
-      property: ['rectangle'],
+      property: ['rectangle','horizontal_oval','vertical_oval'],
     },
+    {
+      name: 'Side Length',
+      id: 'side_length',
+      placeholder: 'Enter side length',
+      type: 'number',
+      value: formData.side_length,
+      property: ['horizontal_capsule','vertical_capsule','horizontal_eliptical','horizontal_dish_ends'],
+    },,
     {
       name: 'Diameter',
       id: 'diameter',
       placeholder: 'Enter diameter',
       type: 'number',
       value: formData.diameter,
-      property: ['horizontal_cylinder'],
+      property: ['horizontal_cylinder','vertical_cylinder','horizontal_capsule','vertical_capsule','horizontal_eliptical','horizontal_dish_ends'],
     },
     {
       name: 'Fill Depth',
@@ -154,7 +200,7 @@ export default function TankModal({ refreshTableData }) {
       placeholder: 'Enter depth',
       type: 'number',
       value: formData.filledDepth,
-      property: ['rectangle', 'horizontal_cylinder'],
+      property: ['rectangle', 'horizontal_cylinder','vertical_cylinder','horizontal_oval','vertical_oval','horizontal_capsule','vertical_capsule','horizontal_eliptical','horizontal_dish_ends'],
     },
     {
       name: 'Latitude',

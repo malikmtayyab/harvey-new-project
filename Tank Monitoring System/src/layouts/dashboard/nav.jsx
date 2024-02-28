@@ -90,7 +90,7 @@ export default function Nav({ openNav, onCloseNav }) {
       {renderMenu}
 
       <Box sx={{ flexGrow: 1 }} />
-
+<h1>ldkwj</h1>
     </Scrollbar>
   );
 
@@ -111,6 +111,7 @@ export default function Nav({ openNav, onCloseNav }) {
           }}
         >
           {renderContent}
+    ljakd
         </Box>
       ) : (
         <Drawer
@@ -123,6 +124,7 @@ export default function Nav({ openNav, onCloseNav }) {
           }}
         >
           {renderContent}
+          an
         </Drawer>
       )}
     </Box>

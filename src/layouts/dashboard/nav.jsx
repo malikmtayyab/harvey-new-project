@@ -25,6 +25,7 @@ import navConfig from './config-navigation';
 import Accordion from './Accordian';
 import logo from '../../assets/fleemoo.png'
 import { useTranslation } from 'react-i18next';
+import { Typography } from '@mui/material';
 /* eslint-enable */
 
 // ----------------------------------------------------------------------
@@ -100,6 +101,19 @@ export default function Nav({ openNav, onCloseNav }) {
       {renderMenu}
 
       <Box sx={{ flexGrow: 1 }} />
+       <div style={{
+        marginBottom:2,
+        display:'flex',
+        justifyContent:'center'
+       }}>
+        <div style={{
+          textAlign:'center'
+        }}>
+
+<h4>All Rights Reserved</h4>
+<h3 >	&#169; Fleemoo</h3>
+       </div>
+       </div>
 
     </Scrollbar>
   );

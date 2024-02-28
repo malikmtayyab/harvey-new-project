@@ -156,9 +156,10 @@ export default function UserPage() {
               <TableBody>
                 {dataFiltered
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
+                  .map((row,index) => (
                     <UserTableRow
                       key={row.id}
+                      index={index}
                       id={row.id}
                       name={row.name}
                       creatTime={row.createTime}

@@ -17,6 +17,7 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
+  index,
   id,
   name,
   creatTime,
@@ -63,7 +64,9 @@ return formattedDateTime
 
   return (
     <>
-      <TableRow hover tabIndex={-1}>
+      <TableRow hover tabIndex={-1} sx={{
+        background:index%2===1?'#f4f6f8':'white'
+      }} >
         <TableCell
           component="th"
           scope="row"

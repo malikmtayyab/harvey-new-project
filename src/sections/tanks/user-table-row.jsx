@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
+  index,
   id,
   name,
   category,
@@ -45,7 +46,9 @@ export default function UserTableRow({
 
   return (
     <>
-      <TableRow hover tabIndex={-1} role="checkbox">
+      <TableRow hover tabIndex={-1} role="checkbox"  sx={{
+        background:index%2===1?'#f4f6f8':'white'
+      }} >
         <TableCell
           sx={{
             paddingLeft: 5,
