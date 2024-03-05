@@ -24,8 +24,8 @@ const style = {
 
 export default function ChartView({ name, id }) {
   const [open, setOpen] = React.useState(false);
-  const [tankStats, setTankStats] = useState(null)
-  const [tankStatsLabels, setTankStatsLabels] = useState(null)
+  const [tankStats, setTankStats] = useState(null);
+  const [tankStatsLabels, setTankStatsLabels] = useState(null);
   const handleOpen = () => {
     setOpen(true);
     getTanksStats();
@@ -96,14 +96,26 @@ export default function ChartView({ name, id }) {
     );
     setTanksData(tanksStats.data);
 
-    const dataArray = []
-    const dataArray2 = []
+    const dataArray = [];
+    const dataArray2 = [];
     // Create an array to store total volumes
-    tanksStats.data.map(obj => dataArray.push(Math.round(obj.volumeFilledAvg)));
-    tanksStats.data.map(obj => dataArray2.push(JSON.stringify(filter==='daily'? obj.dayOfYear:filter==='weekly'?obj.week:filter==='monthly'?obj.month:obj.year)));
+    tanksStats.data.map((obj) => dataArray.push(Math.round(obj.volumeFilledAvg)));
+    tanksStats.data.map((obj) =>
+      dataArray2.push(
+        JSON.stringify(
+          filter === 'daily'
+            ? obj.dayOfYear
+            : filter === 'weekly'
+            ? obj.week
+            : filter === 'monthly'
+            ? obj.month
+            : obj.year
+        )
+      )
+    );
     //  farmStats.data.map(obj=>obj.)
-    setTankStats(dataArray)
-    setTankStatsLabels(dataArray2)
+    setTankStats(dataArray);
+    setTankStatsLabels(dataArray2);
   };
 
   return (

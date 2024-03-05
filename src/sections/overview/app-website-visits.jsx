@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 const SORT_OPTIONS = [
-  { value: 'daily', label: 'Daily' },
+  { value: 'hourly', label: 'Daily' },
   { value: 'weekly', label: 'Weekly' },
   { value: 'monthly', label: 'Monthly' },
   { value: 'yearly', label: 'Yearly' },
@@ -27,6 +27,7 @@ const SORT_OPTIONS = [
   // { value: 'future_annual', label: 'Future Annual Consumption' },
 ];
 export default function AppWebsiteVisits({
+  type,
   handleTankData,
   title,
   subheader,
@@ -93,7 +94,7 @@ export default function AppWebsiteVisits({
     },
     labels,
     xaxis: {
-      type: 'datetime',
+      type: type == 'hourly' ? 'category' : 'datetime',
     },
     tooltip: {
       shared: true,
@@ -255,6 +256,7 @@ export default function AppWebsiteVisits({
 }
 
 AppWebsiteVisits.propTypes = {
+  type: PropTypes.string,
   chart: PropTypes.object,
   subheader: PropTypes.string,
   title: PropTypes.string,

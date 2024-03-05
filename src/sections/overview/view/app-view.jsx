@@ -32,17 +32,18 @@ export default function AppView() {
   const [tanks, setTanks] = useState([]);
   const [tankFarmsStats, setTankFarmsStats] = useState(null);
   const [tankFarmsStatsLabels, setTankFarmsStatsLabels] = useState(null);
+  const [currentFilter, setCurrentFilter] = useState('hourly');
 
   function getStartEndDate(frequency) {
     const currentDate = new Date();
     let startDate = null;
     let endDate = null;
 
-    if (frequency === 'daily') {
+    if (frequency === 'hourly') {
       startDate = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth(),
-        currentDate.getDate(),
+        currentDate.getDate() - 1,
         0,
         0,
         0
@@ -53,7 +54,7 @@ export default function AppView() {
       startDate = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth(),
-        currentDate.getDate() - dayOfWeek,
+        currentDate.getDate() - 7,
         0,
         0,
         0
@@ -90,9 +91,9 @@ export default function AppView() {
   const getDashboardData = async () => {
     const farms = await GetRequest(UrlService.getAllFarms);
 
-    const { startDate, endDate } = getStartEndDate('daily');
+    const { startDate, endDate } = getStartEndDate('hourly');
     const farmStats = await GetRequest(
-      `${UrlService.getDataByTankFarm}/${farms.data[0].id}/daily?startDate=${startDate}&endDate=${endDate}`
+      `${UrlService.getDataByTankFarm}/${farms.data[0].id}/hourly?startDate=${startDate}&endDate=${endDate}`
     );
     const res = await GetRequest(UrlService.getDashboardData);
     await tankData(farms.data[0].id);
@@ -103,7 +104,7 @@ export default function AppView() {
     const dataArray2 = [];
     // Create an array to store total volumes
     farmStats.data.map((obj) => dataArray.push(Math.round(obj.totalVolume)));
-    farmStats.data.map((obj) => dataArray2.push(obj.dayOfYear));
+    farmStats.data.map((obj) => dataArray2.push(obj.hour));
     //  farmStats.data.map(obj=>obj.)
     setTankFarmsStats(dataArray);
     setTankFarmsStatsLabels(dataArray2);
@@ -128,10 +129,10 @@ export default function AppView() {
     farmStats.data.map(
       (obj) => {
         let value;
-        if (filter === 'daily') {
-          value = obj.dayOfYear;
+        if (filter === 'hourly') {
+          value = obj.hour;
         } else if (filter === 'weekly') {
-          value = obj.weeku;
+          value = obj.week;
         } else if (filter === 'monthly') {
           value = obj.month;
         } else {
@@ -155,6 +156,7 @@ export default function AppView() {
     setTankFarmsStatsLabels(dataArray2);
     //  farmStats.data.map(obj=>obj.)
     setTankFarmsStats(dataArray);
+    setCurrentFilter(filter);
   };
 
   useEffect(() => {
@@ -206,7 +208,7 @@ export default function AppView() {
               icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
             />
           </Grid>
-          <Grid xs={0} sm={0} md={1}/>
+          <Grid xs={0} sm={0} md={1} />
 
           <Grid xs={12} sm={6} md={3}>
             <AppWidgetSummary
@@ -239,6 +241,7 @@ export default function AppView() {
           </Grid>
           <Grid xs={12} md={12} lg={12}>
             <AppWebsiteVisits
+              type={currentFilter}
               handleTankData={tankData}
               title={t('Capacity History')}
               subheader=""
