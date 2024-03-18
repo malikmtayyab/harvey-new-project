@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -12,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 // import kc from 'src/services/Keycloack';
 import { account } from 'src/_mock/account';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'src/routes/hooks';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +35,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const router = useRouter();
   const { t } = useTranslation();
   const [open, setOpen] = useState(null);
 
@@ -44,7 +47,8 @@ export default function AccountPopover() {
     setOpen(null);
   };
   const handleLogout = () => {
-    localStorage.clear()
+    localStorage.clear();
+    router.push('/login');
     // kc.logout();
   };
 

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -22,6 +23,9 @@ import Iconify from 'src/components/iconify';
 import axios from 'axios';
 import { PostRequest } from 'src/services/ApiService';
 import UrlService from 'src/services/UrlService';
+import initializeI18n from 'src/components/i18/i18n';
+import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 // ----------------------------------------------------------------------
 
@@ -36,10 +40,24 @@ export default function LoginView() {
 
   const handleClick = async () => {
     const data = { userEmail: email, userPassword: password };
-    const response = await PostRequest(UrlService.login, data);
-    if (response.status) {
-      router.push('/dashboard');
-    }
+    await PostRequest(UrlService.login, data)
+      .then((response) => {
+        localStorage.setItem('token', response.data.token);
+        var roles = response.data.roles;
+        const locale = response.data.locale;
+        if (locale !== undefined) {
+          initializeI18n(locale);
+        } else {
+          initializeI18n('en');
+        }
+        localStorage.setItem('roles', roles);
+
+        localStorage.setItem('loggedName', response.data.name);
+        router.push('/dashboard');
+      })
+      .catch((err) => {
+        toast.error('Could not authenticate');
+      });
   };
 
   const handleEmailChange = (event) => {
@@ -93,16 +111,17 @@ export default function LoginView() {
   );
 
   return (
-    <Box
-      sx={{
-        ...bgGradient({
-          color: alpha(theme.palette.background.default, 0.9),
-          imgUrl: '/assets/background/overlay_4.jpg',
-        }),
-        height: 1,
-      }}
-    >
-      {/* <Logo
+    <>
+      <Box
+        sx={{
+          ...bgGradient({
+            color: alpha(theme.palette.background.default, 0.9),
+            imgUrl: '/assets/background/overlay_4.jpg',
+          }),
+          height: 1,
+        }}
+      >
+        {/* <Logo
         sx={{
           position: 'fixed',
           top: { xs: 16, md: 24 },
@@ -110,15 +129,15 @@ export default function LoginView() {
         }}
       /> */}
 
-      <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
-        <Card
-          sx={{
-            p: 5,
-            width: 1,
-            maxWidth: 420,
-          }}
-        >
-          {/* <Typography variant="h4">Sign in to Minimal</Typography>
+        <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
+          <Card
+            sx={{
+              p: 5,
+              width: 1,
+              maxWidth: 420,
+            }}
+          >
+            {/* <Typography variant="h4">Sign in to Minimal</Typography>
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Don’t have an account?
@@ -127,7 +146,7 @@ export default function LoginView() {
             </Link>
           </Typography> */}
 
-          {/* <Stack direction="row" spacing={2}>
+            {/* <Stack direction="row" spacing={2}>
             <Button
               fullWidth
               size="large"
@@ -165,9 +184,11 @@ export default function LoginView() {
             </Typography>
           </Divider> */}
 
-          {renderForm}
-        </Card>
-      </Stack>
-    </Box>
+            {renderForm}
+          </Card>
+        </Stack>
+      </Box>
+      <Toaster position="top-right" reverseOrder={false} />
+    </>
   );
 }

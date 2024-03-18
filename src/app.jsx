@@ -31,22 +31,22 @@ export default function App() {
   //       window.location.reload();
   //     } else {
   //       console.info("Authenticated");
-  //       localStorage.setItem("token", kc.token)
-  //       var roles = kc.tokenParsed.realm_access.roles;
+        // localStorage.setItem("token", kc.token)
+        // var roles = kc.tokenParsed.realm_access.roles;
    
-  //       const locale=kc.tokenParsed.locale
-  //       if(locale!==undefined)
-  //       {
-  //         initializeI18n(locale);
-  //       }
-  //       else
-  //       {
-  //         initializeI18n("en");
-  //       }
-  //       localStorage.setItem('roles',roles)
+        // const locale=kc.tokenParsed.locale
+        // if(locale!==undefined)
+        // {
+        //   initializeI18n(locale);
+        // }
+        // else
+        // {
+        //   initializeI18n("en");
+        // }
+        // localStorage.setItem('roles',roles)
 
       
-  //       localStorage.setItem('loggedName',kc.tokenParsed.name)
+        // localStorage.setItem('loggedName',kc.tokenParsed.name)
 
   //       setAuthentication(true)
   //       kc.onTokenExpired = () => {
