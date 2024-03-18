@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
-import kc from 'src/services/Keycloack';
+// import kc from 'src/services/Keycloack';
 import { account } from 'src/_mock/account';
 import { useTranslation } from 'react-i18next';
 
@@ -45,7 +45,7 @@ export default function AccountPopover() {
   };
   const handleLogout = () => {
     localStorage.clear()
-    kc.logout();
+    // kc.logout();
   };
 
   return (

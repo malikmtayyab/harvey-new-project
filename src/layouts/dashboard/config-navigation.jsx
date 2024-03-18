@@ -14,7 +14,7 @@ const navConfig = [
     path: '/',
     icon: icon('ic_analytics'),
     type: 'single',
-    role:['admin','system']
+    role: ['admin', 'system'],
   },
   {
     // heading:'Tank Management',
@@ -31,8 +31,7 @@ const navConfig = [
       //   path: '/view-farms',
       // },
     ],
-    role:['admin','system']
-
+    role: ['admin', 'system'],
   },
   {
     title: 'Tanks',
@@ -48,10 +47,9 @@ const navConfig = [
       //   path: '/',
       // },
     ],
-    role:['user','manager','admin','system']
-
+    role: ['user', 'manager', 'admin', 'system'],
   },
-  
+
   // {
   //   // heading:'Settings',
   //   title: 'Sensors',
@@ -75,8 +73,7 @@ const navConfig = [
     path: '/create',
     icon: icon('ic_user'),
     type: 'single',
-    role:['manager','admin','system']
-
+    role: ['manager', 'admin', 'system'],
   },
   // {
   //   title: 'Tank',
@@ -118,11 +115,11 @@ const navConfig = [
   //   path: '/blog',
   //   icon: icon('ic_blog'),
   // },
-  // {
-  //   title: 'login',
-  //   path: '/login',
-  //   icon: icon('ic_lock'),
-  // },
+  {
+    title: 'login',
+    path: '/login',
+    icon: icon('ic_lock'),
+  },
   // {
   //   title: 'Not found',
   //   path: '/404',
